@@ -1,6 +1,10 @@
 Argmap Project News
 ===================
 
+# argmap 1.0.5
+- Add [CONTRIBUTING.md](CONTRIBUTING.md).
+- Update [README](README.markdown).
+
 # argmap 1.0.4
 - Minor NEWS.md fix.
 

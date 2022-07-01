@@ -642,6 +642,16 @@ generates individual pdf files for each map, and then converts them to png
 using ImageMagick's `convert` command. It replaces the code block with a
 paragraph containing the generated image, linked to the mindmup file.
 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+## Contributing
+
+I could use all the help I can get :)
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
 TODO
 ----
 
@@ -663,3 +673,4 @@ TODO
     offer embeddable output (i.e., code block with both name and gid
     attributes)
 
+Uses Semantic Versioning: http://semver.org/
