@@ -28,7 +28,7 @@ module.exports = function DomMapController(mapModel, stageElement, touchEnabled,
 	let stageMargin = (options && options.stageMargin),
 		stageVisibilityMargin = (options && options.stageVisibilityMargin),
 		currentDroppable = false,
-		stats = false,
+		stats = {},
 		viewPortDimensions;
 
 	const self = this,
@@ -557,9 +557,11 @@ module.exports = function DomMapController(mapModel, stageElement, touchEnabled,
 			})
 			.catch(function () {
 				mapModel.setInputEnabled(true);
-				if (editingNew) {
-					mapModel.undo('internal');
-				}
+				// We don't cancel creation upon cancelling edit of new node
+				// if (editingNew) {
+				// 	mapModel.undo('internal');
+				// }
+				mapModel.updateTitle(nodeId, editingElement.data('title'), editingNew);
 				editingElement.focus();
 			});
 		});
@@ -579,7 +581,9 @@ module.exports = function DomMapController(mapModel, stageElement, touchEnabled,
 		});
 	});
 	['nodeTitleChanged', 'nodeAttrChanged', 'nodeLabelChanged', 'nodeMoved', 'nodeRemoved', 'nodeCreated', 'connectorCreated', 'connectorRemoved', 'linkCreated', 'linkRemoved', 'linkAttrChanged', 'connectorAttrChanged'].forEach(evt => {
-		mapModel.addEventListener(evt, () => record(evt));
+		mapModel.addEventListener(evt, () => {
+			record(evt);
+		});
 	});
 };
 

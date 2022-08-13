@@ -1,0 +1,66 @@
+{
+  "name": "@mindmup/mapjs",
+  "license": "MIT",
+  "description": "Mind mapping visualisation library, using SVG, developed for MindMup",
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mindmup/mapjs.git"
+  },
+  "keywords": [
+    "mindmup",
+    "svg"
+  ],
+  "files": [
+    "src",
+    "packages"
+  ],
+  "bugs": {
+    "url": "https://github.com/mindmup/mapjs/issues"
+  },
+  "homepage": "https://www.mindmup.com",
+  "version": "4.1.0",
+  "scripts": {
+    "pack-js": "webpack",
+    "pretest": "eslint specs src && rm -rf testem/compiled",
+    "test-core": "node specs/support/jasmine-runner.js",
+    "pretest-browser": "rm -rf testem/compiled",
+    "test-browser": "testem ci -R dot",
+    "debug-core": "node debug specs/support/jasmine-runner.js",
+    "test": "npm run test-core && npm run test-browser",
+    "test-watch": "npm run pretest && testem dev -R dot",
+    "pretest-dev": "npm run pretest",
+    "test-dev": "testem -l Chrome",
+    "sourcemap": "sourcemap-lookup",
+    "server": "webpack-dev-server",
+    "appraise": "appraise run --initial-width 500 --initial-height 300",
+    "preappraise": "webpack --config webpack.appraise.config.js",
+    "approve": "appraise approve"
+  },
+  "main": "src/npm-main.js",
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "jquery.hotkeys": "git://github.com/jeresig/jquery.hotkeys",
+    "hammerjs": "^1.1.3",
+    "jquery-hammerjs": "^1.1.3",
+    "underscore": "^1.8.3",
+    "monotone-convex-hull-2d": "^1.0.1",
+    "polybooljs": "^1.1.1"
+  },
+  "devDependencies": {
+    "appraise": "^0.4.0",
+    "eslint": "^5.4.0",
+    "eslint-config-crockford": "^1.0.0",
+    "eslint-config-defaults": "^9.0.0",
+    "exports-loader": "^0.6.3",
+    "fs-readdir-recursive": "^1.0.0",
+    "imports-loader": "^0.7.1",
+    "jasmine": "^2.7.0",
+    "jasmine-spec-reporter": "^4.2.1",
+    "sourcemap-lookup": "0.0.3",
+    "testem": "^2.9.2",
+    "webpack": "^2.2.1",
+    "webpack-dev-middleware": "^1.10.0",
+    "webpack-dev-server": "^3.1.10"
+  }
+}

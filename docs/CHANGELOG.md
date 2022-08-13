@@ -7,6 +7,14 @@
   - Add note about linking/using templates (html and latex) with pandoc.
 - Add references to argmap specs?
 
+## argmap 4.2.10
+
+- Import commits from: garlic0708/mapjs.git
+  - Modified attach, delete and rename actions to require 'standard' source
+  - 45ce477c400d5d8a67c86758bc8d0643e2f8828b
+- Restore package.json
+- Add package_garlic.json for reference.
+
 ## argmap 4.2.9
 
 - `mapjs/`:
