@@ -238,12 +238,11 @@ local function CodeBlock(block)
                     "/pandoc-templates/mapjs/mapjs-testcontrols.html"
                 local _, argmap_controls_html_raw = pandoc.mediabag.fetch(argmap_controls_path)
 
-                -- %% is escaped %
-                local argmap_controls_html = argmap_controls_html_raw:gsub("%%BLOCK_ID%%", block_id)
-
+                -- Gives each control a unique id aligned with the container.
+                local argmap_controls_html = argmap_controls_html_raw:gsub("%$BLOCK_ID%$", block_id)
 
                 local rawhtml = argmap_controls_html ..
-                    "<div id=\"container_"
+                    "\n<div id=\"container_"
                     .. block_id .. "\" class=\"container_argmapjs\">\n"
                     .. "  <script type=\"application/json\" "
                     -- .. " id=\"" .. block_id .. ".json\" "

@@ -115,6 +115,7 @@
         "FORMAT",
         "PANDOC_STATE",
         "Logger",
-        "DIR_MJS_JSON"
+        "DIR_MJS_JSON",
+        "PATH_MJS_JSON",
     ]
 }

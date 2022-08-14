@@ -62,15 +62,14 @@ __build_mapjs() {
 
 alias bmj='__build_mapjs'
 
-# Convert to map.js
-# lua argmap2mup test/input/Example1_ClearlyFalse_WhiteSwan_simplified.yml > test/output/Example1_ClearlyFalse_WhiteSwan_simplified.mup
+# Convert to map.json, writes it to test/output/mapjs-json/
+# lua argmap2mup test/input/Example1_ClearlyFalse_WhiteSwan_simplified.yml > test/output/mapjs-json/Example1_ClearlyFalse_WhiteSwan_simplified.json
 # TODO add option for .mup vs .json output
-a2m() {                                    # a2m test/output/Example1_simple.yml
+a2m() {                                    # a2m test/input/Example1_ClearlyFalse_WhiteSwan_simplified.yml
   NAME=$(basename --suffix=".yml" "$1") && # && ensures error failure stops remaining commands.
-    OUTPUT=${2:-$DIR_HTML_OUTPUT/$NAME.mup} &&
+    OUTPUT=${2:-$PATH_MJS_JSON/$NAME.json} &&
     argmap2mup "$1" >"$OUTPUT" &&
-    # TODO: Should return $2 value so can be used by calling app e.g. a2mo or a2mj.
-    echo "Generated: $OUTPUT"
+    echo "$OUTPUT" # Output path can be piped
 }
 
 # Convert to map.js and upload
@@ -81,18 +80,19 @@ a2mu() { # a2mu test/output/Example1_simple.yml
 }
 
 # Convert map.js to argmap yaml format
+# TODO add option for .mup vs .json output
 m2a() { # m2a test/output/Example1_simple.mup
-  NAME=$(basename --suffix=".mup" "$1")
+  NAME=$(basename --suffix=".json" "$1")
   OUTPUT=${2:-$DIR_HTML_OUTPUT/$NAME.yml}
   mup2argmap "$1" >"$OUTPUT" &&
-    echo "Generated: $OUTPUT"
+    echo "$OUTPUT" # Output path can be piped
 }
 
 # Convert to tikz
 a2t() { # a2t test/output/Example1_simple.yml
   NAME=$(basename --suffix=".yml" "$1") &&
     argmap2tikz "$1" >"${2:-$DIR_HTML_OUTPUT/$NAME.tex}" &&
-    echo "Generated: ${2:-$DIR_HTML_OUTPUT/$NAME.tex}"
+    echo "${2:-$DIR_HTML_OUTPUT/$NAME.tex}"
 }
 
 # Convert markdown to full page html
@@ -105,10 +105,25 @@ md2hf() { # md2h test/input/example.md
   # css here overrides the template value, which may not be what I want. Not sure best way to handle.
   # https://workflowy.com/#/ee624e71f40c
   pandoc "$1" --template "$WORKSPACE/pandoc-templates/mapjs/mapjs-main-html5.html" --metadata=mapjs-output-js:"$FILE_MJS_JS" --metadata=css:"$MJS_CSS" -o "$OUTPUT" --lua-filter="$WORKSPACE/src/pandoc-argmap.lua" --data-dir="$PANDOC_DATA_DIR" >/dev/null &&
-    echo "Generated: $OUTPUT"
+    echo "$OUTPUT"
   wait # waits for png to appear
   mv ./*.png "$(dirname "$OUTPUT")"
   __open-mapjs "$OUTPUT"
+}
+
+# shellcheck disable=SC2120 # Disables lint error
+j2hf() {             # j2hf test/output/mapjs-json/Example1_ClearlyFalse_WhiteSwan_simplified_1mapjs_argmap2.json
+  INPUT=${1:-$(cat)} # If there is an argument, use it as input file, else use stdin (expecting piped input)
+  NAME=$(basename --suffix=".json" "$INPUT")
+  OUTPUT=${2:-$DIR_HTML_OUTPUT/$NAME.html}
+  PATH_OUTPUT_JSON=$PATH_MJS_JSON/$NAME.json # Assumes file is in the JSON output folder
+  echo "" | pandoc --template "$WORKSPACE/pandoc-templates/mapjs/mapjs-quick-json.html" --metadata=BLOCK_ID:"1" --metadata title="$NAME" --metadata=path-json-source:"$PATH_OUTPUT_JSON" --metadata=mapjs-output-js:"$FILE_MJS_JS" --metadata=css:"$MJS_CSS" -o "$OUTPUT" --data-dir="$PANDOC_DATA_DIR" >/dev/null &&
+    echo "$OUTPUT"
+  __open-mapjs "$OUTPUT"
+}
+
+a2hf() { # a2hf test/input/Example1_ClearlyFalse_WhiteSwan_simplified.yml
+  a2m "$1" | j2hf
 }
 
 # Convert markdown to html fragment
@@ -121,7 +136,7 @@ md2htm() { # md2htm test/input/example-updated.md
   # Or use a defaults file:
   # https://workflowy.com/#/ee624e71f40c
   pandoc "$1" -o "$OUTPUT" --lua-filter="$WORKSPACE/src/pandoc-argmap.lua" --data-dir="$PANDOC_DATA_DIR" >/dev/null &&
-    echo "Generated: $OUTPUT"
+    echo "$OUTPUT"
   wait # waits for png to appear
   mv ./*.png "$DIR_HTML_OUTPUT/"
   __open-mapjs "$OUTPUT"
@@ -132,7 +147,7 @@ md2pdf() { # md2pdf test/input/example.md
   NAME=$(basename --suffix=".md" "$1")
   OUTPUT=${2:-$DIR_HTML_OUTPUT/$NAME.pdf}
   pandoc "$1" -o "$OUTPUT" --lua-filter="$WORKSPACE/src/pandoc-argmap.lua" --pdf-engine lualatex --template "$WORKSPACE/examples/example-template.latex" --data-dir="$PANDOC_DATA_DIR" >/dev/null &&
-    echo "Generated: $OUTPUT"
+    echo "$OUTPUT"
   __open-mapjs "$OUTPUT"
 }
 
@@ -152,4 +167,4 @@ a2mo() {
 
 ## Mark functions for export to use in other scripts:
 export -f __reset_repo __clean_repo __check_repo __open-mapjs __save_env __build_mapjs
-export -f a2m m2a a2t a2mu md2htm md2hf md2pdf
+export -f a2m m2a a2t a2mu md2htm md2hf md2pdf j2hf a2hf

@@ -5,10 +5,24 @@
 - [README.md](../README.md):
   - Add note about linking/using templates (html and latex) with pandoc.
 - Add references to argmap specs?
+- Update `src/pandoc-argmap.lua` to substitute template variable
 
-## argmap 4.2.13
+## argmap 4.3.0
 
-- `scripts/bash_aliases_argmap.sh`: Delete `mapjs/site/js` before building.
+- `scripts/bash_aliases_argmap.sh`:
+  - Delete `mapjs/site/js` before building.
+  - Update functions generating files to echo the file path and nothing else, so file output can be used in pipe or by calling function with $().
+  - Update `a2m()` to output `.json` and write it to JSON output folder.
+    - Update `m2a()` to read `.json` files too.
+    - Change test mup input file to `.json` input.
+  - Add `j2hf()` for creating simple html page from `.json` input file.
+  - Add `a2hf()` for creating simple html page from `.yml` input file.
+- `pandoc-templates/mapjs`:
+  - Add `mapjs-quick-json` template for simply showing mapjs, primarily for new `j2hf()` function.
+  - Add template variables to partial templates, including JSON input file.
+  - Update `src/pandoc-argmap.lua` to substitute template variable.
+  - Add draft markdown file: `test/input/general_mapjs_viewer.md` for alternative solution to showing json easily.
+  - Fix out of date debug profile parameters in `.vscode/launch.json`.
 
 ## argmap 4.2.12
 

@@ -11,8 +11,8 @@ echo "Running ${BASH_SOURCE[0]}"
 # 1uU7_yfAwMPV3a0lxpiXoVR-m0hbX2Pzs
 # Though may not be consistently same name anyway, would need to create with fixed name
 
-alias argmm='rm $INPUT_FILE_MUP; a2m $INPUT_FILE_YML'
-alias argmy='rm $DIR_HTML_OUTPUT/Example1_ClearlyFalse_WhiteSwan_simplified.yml; m2a $INPUT_FILE_MUP'
+alias argmm='rm $INPUT_FILE_JSON; a2m $INPUT_FILE_YML'
+alias argmy='rm $DIR_HTML_OUTPUT/Example1_ClearlyFalse_WhiteSwan_simplified.yml; m2a $INPUT_FILE_JSON'
 alias argmt='rm $DIR_HTML_OUTPUT/Example1_ClearlyFalse_WhiteSwan_simplified.tex; a2t $INPUT_FILE_YML'
 alias argmu='a2mu $INPUT_FILE_YML'
 

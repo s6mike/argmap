@@ -91,11 +91,11 @@
                 "--template ${workspaceFolder}/pandoc-templates/mapjs/mapjs-main-html5.html",
                 "${workspaceFolder}/test/input/Example1_ClearlyFalse_WhiteSwan_simplified_1mapjs.md",
                 "-o",
-                "${workspaceFolder}/mapjs-example/index.html",
+                "${workspaceFolder}/test/output/Example1_ClearlyFalse_WhiteSwan_simplified_1mapjs_debug.html",
                 "--lua-filter pandoc-argmap.lua",
                 "--data-dir=${config:lua.debug.settings.system_root}/share/pandoc",
-                "--metadata=mapjs-output-js:${workspaceFolder}/mapjs-example/site/main.js",
-                "--metadata=css:mapjs-default-styles.css"
+                "--metadata=mapjs-output-js:${workspaceFolder}/mapjs/site/js/bundle.js",
+                "--metadata=css:../../mapjs/site/mapjs-default-styles.css"
             ],
             "env": {
                 "PATH": "${config:lua.debug.settings.env.path}",
@@ -115,11 +115,11 @@
                 "--template ${workspaceFolder}/pandoc-templates/mapjs/mapjs-main-html5.html",
                 "${workspaceFolder}/test/input/Example1_ClearlyFalse_WhiteSwan_simplified_meta_mapjs.md",
                 "-o",
-                "${workspaceFolder}/mapjs-example/index.html",
+                "${workspaceFolder}/test/output/Example1_ClearlyFalse_WhiteSwan_simplified_meta_mapjs_debug.html",
                 "--lua-filter pandoc-argmap.lua",
                 "--data-dir=${config:lua.debug.settings.system_root}/share/pandoc",
-                "--metadata=mapjs-output-js:${workspaceFolder}/mapjs-example/site/main.js",
-                "--metadata=css:mapjs-default-styles.css"
+                "--metadata=mapjs-output-js:${workspaceFolder}/mapjs/site/js/bundle.js",
+                "--metadata=css:../../mapjs/site/mapjs-default-styles.css"
             ],
             "env": {
                 "PATH": "${config:lua.debug.settings.env.path}",
@@ -136,14 +136,14 @@
                 "command": "pandoc"
             },
             "args": [
-                "examples/example.md",
+                "${workspaceFolder}/examples/example.md",
                 "-o",
-                "test/output/example.pdf",
+                "${workspaceFolder}/test/output/example.pdf",
                 "--lua-filter pandoc-argmap.lua",
                 "--pdf-engine",
                 "lualatex",
                 "--template",
-                "examples/example-template.latex",
+                "${workspaceFolder}/examples/example-template.latex",
                 "--data-dir=${config:lua.debug.settings.system_root}/share/pandoc"
             ],
             "env": {

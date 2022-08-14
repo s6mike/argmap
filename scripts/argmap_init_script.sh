@@ -56,7 +56,7 @@ eval "$(pandoc --bash-completion)"
 
 # TODO: could move to separate test/init_script_argmap_test file
 export INPUT_FILE_YML=$WORKSPACE/test/input/Example1_ClearlyFalse_WhiteSwan_simplified.yml
-export INPUT_FILE_MUP=$WORKSPACE/test/input/Example1_ClearlyFalse_WhiteSwan_simplified.mup
+export INPUT_FILE_JSON=$WORKSPACE/test/input/Example1_ClearlyFalse_WhiteSwan_simplified.json
 export INPUT_FILE_MD0=$WORKSPACE/test/input/Example1_ClearlyFalse_WhiteSwan_simplified_0mapjs.md
 export INPUT_FILE_MD=$WORKSPACE/test/input/Example1_ClearlyFalse_WhiteSwan_simplified_1mapjs.md
 export INPUT_FILE_MD2=$WORKSPACE/test/input/Example1_ClearlyFalse_WhiteSwan_simplified_2mapjs.md
