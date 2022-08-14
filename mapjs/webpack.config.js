@@ -5,10 +5,10 @@ module.exports = {
 	devtool: 'source-map',
 	output: {
 		filename: 'bundle.js',
-		path: path.resolve(__dirname, 'test/')
+		path: path.resolve(__dirname, 'site/js/')
 	},
 	devServer: {
-		contentBase: path.join(__dirname, 'test'),
+		contentBase: path.join(__dirname, 'site/js'),
 		port: 9000
 	}
 };

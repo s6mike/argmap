@@ -2,10 +2,23 @@
 
 ## TODO
 
-- Move mapjs source files to `src/`: `theme.js`.
 - [README.md](../README.md):
   - Add note about linking/using templates (html and latex) with pandoc.
 - Add references to argmap specs?
+
+## argmap 4.2.11
+
+- `mapjs/test/`:
+  - Move website dependencies to `site/`:
+    - Move `/mapjs-default-styles.css`
+      - `mapjs/scripts/mapjs.env`: Update env variable for css location.
+    - Move all svg files to `site/svg/`.
+  - Move js source files to `src/`:
+    - Move `theme.js` and `themes/`.
+      - `mapjs/src/start.js`: Update reference to `theme.js`.
+  - `mapjs/webpack.config.js`: Create bundle.js in `site/js/` instead.
+- Delete `mapjs/test/index.html` - no longer needed.
+- Update .gitignore
 
 ## argmap 4.2.10
 

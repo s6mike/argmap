@@ -5,7 +5,7 @@ argmap.code-workspace
 archived
 lua_modules/
 mapjs/node_modules
-mapjs/test
+mapjs/site
 mapjs-example/node_modules
 mapjs-example/site
 examples/*

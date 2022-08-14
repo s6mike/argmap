@@ -4,7 +4,7 @@
 
 const MAPJS = require('./npm-main'),
 	jQuery = require('jquery'),
-	themeProvider = require('../test/theme'),
+	themeProvider = require('../src/theme'),
 	content = MAPJS.content,
 
 	init = function () {
