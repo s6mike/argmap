@@ -6,6 +6,10 @@
   - Add note about linking/using templates (html and latex) with pandoc.
 - Add references to argmap specs?
 
+## argmap 4.2.13
+
+- `scripts/bash_aliases_argmap.sh`: Delete `mapjs/site/js` before building.
+
 ## argmap 4.2.12
 
 - mapjs docs:
