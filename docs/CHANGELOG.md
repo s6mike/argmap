@@ -6,6 +6,12 @@
   - Add note about linking/using templates (html and latex) with pandoc.
 - Add references to argmap specs?
 
+## argmap 4.2.12
+
+- mapjs docs:
+  - `LICENSE`: Add mapjs creator copyright.
+  - Moved some docs from `mapjs/` to `mapjs/docs`.
+
 ## argmap 4.2.11
 
 - `mapjs/test/`:
