@@ -15,6 +15,7 @@ alias argmm='rm $INPUT_FILE_JSON; a2m $INPUT_FILE_YML'
 alias argmy='rm $DIR_HTML_OUTPUT/Example1_ClearlyFalse_WhiteSwan_simplified.yml; m2a $INPUT_FILE_JSON'
 alias argmt='rm $DIR_HTML_OUTPUT/Example1_ClearlyFalse_WhiteSwan_simplified.tex; a2t $INPUT_FILE_YML'
 alias argmu='a2mu $INPUT_FILE_YML'
+alias argmup='__chrome-attach https://drive.mindmup.com/map/1FY98eeanu9vAhIqBG1rDKFs3QyM1uQyY'
 
 #TODO: need to delete previous file, best way? Separate output folder or just delete all .json in test/output folder?
 alias argmo='rm $DIR_HTML_OUTPUT/Example1_ClearlyFalse_WhiteSwan_simplified.mup; a2mo $INPUT_FILE_YML'
@@ -27,3 +28,4 @@ alias argmp='rm $DIR_HTML_OUTPUT/Example1_ClearlyFalse_WhiteSwan_simplified.pdf;
 alias argmph='rm $DIR_HTML_OUTPUT/example.pdf; rm $DIR_HTML_OUTPUT/header.tex; $WORKSPACE/src/argmap2tikz.lua -i > $DIR_HTML_OUTPUT/header.tex; pandoc $INPUT_FILE_MD -o $DIR_HTML_OUTPUT/example.pdf --lua-filter pandoc-argmap.lua --pdf-engine lualatex --include-in-header $DIR_HTML_OUTPUT/header.tex --data-dir=$CONDA_PREFIX/share/pandoc; echo "Generated: $DIR_HTML_OUTPUT/example.pdf"'
 alias argt='$WORKSPACE/test/tests.sh'
 alias argth='$WORKSPACE/test/tests.sh html'
+alias argdb='__chrome-attach $DIR_HTML_OUTPUT/Example1_ClearlyFalse_WhiteSwan_simplified_1mapjs.html'

@@ -17,6 +17,16 @@
         ]
     },
     "terminal.integrated.copyOnSelection": true,
+    "terminal.integrated.profiles.linux": {
+        "bash": {
+            "path": "bash",
+            "icon": "terminal-bash",
+            "args": [
+                "--init-file",
+                "/home/s6mike/git_projects/argmap/scripts/argmap_init_script.sh"
+            ]
+        },
+    },
     "emmet.excludeLanguages": [],
     "emmet.includeLanguages": {
         "markdown": "html"

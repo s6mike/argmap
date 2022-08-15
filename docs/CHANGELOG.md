@@ -5,7 +5,15 @@
 - [README.md](../README.md):
   - Add note about linking/using templates (html and latex) with pandoc.
 - Add references to argmap specs?
-- Update `src/pandoc-argmap.lua` to substitute template variable
+
+## argmap 4.3.1
+
+- `pandoc-templates/mapjs/mapjs-inline-styles.css`: Fix css so mapjs displays container better.
+- Add debug profile: `Attach to browser`.
+- `scripts/bash_aliases_argmap.sh`: Add `__chrome-attach()` to open browser with debug ports.
+- `test/bash_aliases_argmap_test.sh`: Add some aliases for debugging and testing scenarios.
+- `.gitignore`: Add `remote-debug-profile`.
+- `mapjs/src/start.js`: Use CommonJS instead of jQuery for some selectors etc.
 
 ## argmap 4.3.0
 

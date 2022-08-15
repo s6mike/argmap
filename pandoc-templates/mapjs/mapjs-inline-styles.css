@@ -18,6 +18,6 @@ body {
   min-height: 250px !important;
 }
 
-div[data-mapjs-role=stage] {
+/* div[data-mapjs-role=stage] {
   transform: translate3d(calc(75% - 140px), 110%, 0) !important;
-}
+} */

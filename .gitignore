@@ -2,6 +2,7 @@ argmap.code-workspace
 .vscode/*
 !.vscode/launch.json
 !.vscode/settings.json
+remote-debug-profile
 archived
 lua_modules/
 mapjs/node_modules

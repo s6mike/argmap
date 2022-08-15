@@ -13,7 +13,18 @@ __open-mapjs() {
   #     Embed JSON directly in html
   #     https://stackoverflow.com/questions/64140887/how-to-solve-cors-origin-issue-when-trying-to-get-data-of-a-json-file-from-local
   #     Set it up as a client-server app
-  google-chrome --allow-file-access-from-files --no-default-browser-check --window-size=500,720 "$1" 2>/dev/null &
+  google-chrome --disable-extensions --allow-file-access-from-files --no-default-browser-check --window-size=500,720 "$1" 2>/dev/null &
+  disown # stops browser blocking terminal and allows all tabs to open in single window.
+}
+
+# For opening html pages with debug port open
+__chrome-attach-mapjs() { # __chrome-attach https://drive.mindmup.com/map/1FY98eeanu9vAhIqBG1rDKFs3QyM1uQyY
+  # QUESTION: Is --allow-file-access-from-files a temp solution?
+  #   Alternatives:
+  #     Embed JSON directly in html
+  #     https://stackoverflow.com/questions/64140887/how-to-solve-cors-origin-issue-when-trying-to-get-data-of-a-json-file-from-local
+  #     Set it up as a client-server app
+  google-chrome --disable-extensions --allow-file-access-from-files --no-default-browser-check --remote-debugging-port=9222 --user-data-dir=remote-debug-profile "$1" 2>/dev/null &
   disown # stops browser blocking terminal and allows all tabs to open in single window.
 }
 

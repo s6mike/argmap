@@ -12,22 +12,25 @@ const MAPJS = require('./npm-main'),
 		let domMapController = false;
 
 		// Looks for class not id, so can capture a number of containers each with own id.
-		const containers = jQuery('.container_argmapjs');
+		const containers = document.getElementsByClassName("container_argmapjs");
 
 		if (containers.length > 0) { // Checks there are mapjs requests
-			jQuery(containers).each(function (container) {
+			// jQuery(containers).each(function (container) {
+			for (let container of containers) {
+				// containers.foreach(function (container) {
 				// TODO: check for 0 > script > 1
 				//	See https://stackoverflow.com/questions/1474089/how-to-select-a-single-child-element-using-jquery#answer-1474103
-				const script_src = jQuery(this).children('script.argmap_json').attr('src');
+				// const script_src = jQuery(this).children('script.argmap_json').attr('src');
+				const script_src = container.getElementsByClassName("argmap_json")[0].getAttribute('src');
 				console.debug("script_src: ", script_src);
 
 				// TODO: switch to await/async for simpler code and debugging.
 				fetch(script_src)
 					.then(response => response.json())
-					.then(data => addMap(jQuery(this), data))
+					.then(data => addMap(jQuery(container), data))
 					// .then((data) => console.debug(data))
 					.catch(error => console.log(error));
-			})
+			}
 
 		} else { // If no mapjs requests:
 			console.debug('No requests for mapjs detected.')
