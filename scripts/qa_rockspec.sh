@@ -8,7 +8,7 @@ ROCKSPEC_FILE=$(find ~+ -type f -name "argmap-*.rockspec") # Gets absolute path
 
 echo "*** Checking: $ROCKSPEC_FILE ***"
 
-INSTALL_DIR="$PROJECT_DIR/argmap"
+INSTALL_DIR="$DIR_PROJECTS/argmap"
 LUA_FOLDER="lua_modules"
 
 luarocks lint "$ROCKSPEC_FILE"

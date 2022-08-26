@@ -55,12 +55,13 @@
         "testcontrols"
     ],
     "cSpell.ignoreWords": [
+        "Libes",
         "Ybuv",
         "argm",
         "argmaplua",
+        "argth",
         "mappack",
         "muplua",
-        "themecss",
         "tikzlua"
     ],
     "argdown.configFile": "argdown.config.json",

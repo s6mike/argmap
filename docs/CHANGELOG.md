@@ -2,12 +2,20 @@
 
 ## TODO
 
-- Review `/home/s6mike/scripts/bash_aliases.sh` and rationalise `scripts/bash_aliases_argmap.sh`.
-  - Don't forget relative folder is different, but try and keep aliases consistent.
-  - Missing install shortcut.
+- Start to use - not _ in filenames. Change auto generation e.g. output folder since web stuff is better with -.
+- Move `mapjs/site/mapjs-default-styles.css` to `mapjs/site/css`?
 - [README.md](../README.md):
   - Add note about linking/using templates (html and latex) with pandoc.
 - Add references to argmap specs?
+
+## argmap 4.6.4
+
+- Rationalise various aliases and functions in argmap scripts and elsewhere.
+  - Create `scripts/argmap.env` to store env variables instead of `scripts/init_script.sh`.
+  - Separate mapjs related matter for easier sharing and re-use:
+    - aliases and function into `scripts/bash_aliases_mapjs.sh`
+    - env variables into existing `mapjs/scripts/mapjs.env`
+- `scripts/bash_aliases_mapjs.sh`: Fix incorrect path in `__reset_repo()`.
 
 ## argmap 4.6.3
 

@@ -3,7 +3,7 @@
 # Functions beginning with __ are not considered part of a public API, and therefore updates may change them without warning.
 
 # Ensure Dev server running for tests. Start early since it takes a little while to get going.
-__restart_mapjs_webserver
+__start_mapjs_webserver
 
 echo 'Attempting to delete old test outputs.'
 

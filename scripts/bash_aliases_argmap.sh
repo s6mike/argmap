@@ -1,68 +1,17 @@
 #!/usr/bin/env bash
 
-# Functions beginning with __ are for other scripts. They are not considered part of a public API, and therefore updates may change them without warning.
+# argmap functions
+
+## Functions beginning with __ are for other scripts. They are not considered part of a public API, and therefore updates may change them without warning.
 
 echo "Running ${BASH_SOURCE[0]}"
 
-# argmap aliases
+## browser functions
 
-## browser aliases
+# TODO try shortcut to run test with chrome headless and check that it's correct: https://workflowy.com/#/8aac548986a4
+#   Maybe review mapjs tests.
 
-alias argdb='__open-chrome-debug'
-alias argdb1='__open-chrome-debug $DIR_HTML_SERVER_OUTPUT/Example1_ClearlyFalse_WhiteSwan_simplified_1mapjs.html'
-alias argdbe='__open-chrome-debug output/example-map.html'
-
-## webpack aliases
-
-alias smj='__stop_mapjs_webserver'
-alias rmj='__restart_mapjs_webserver'
-alias bmj='__build_mapjs'
-alias rml='__run_mapjs_legacy'
-
-# argmap Functions
-
-# TODO try combining with bash_aliases functions
-# TODO try chrome headless: https://workflowy.com/#/8aac548986a4
-__open-chrome-debug() { # argdb, argdb1, argdbe
-  google-chrome --user-data-dir="$DIR_CHROME_PROFILE_TEMP" --hide-crash-restore-bubble --remote-debugging-port=9221 --no-default-browser-check "http://localhost:$PORT_DEV_SERVER/$1" 2>/dev/null &
-  disown # so browser stays open independent of vscode
-  # echo "Temp dir: $DIR_CHROME_PROFILE_TEMP"
-}
-
-# TODO try combining with bash_aliases functions
-__open-server() {
-  # npm --prefix "$PATH_MJS_HOME" run start &
-  # PAGE="$1"
-  # Opens in chromeos browser
-  xdg-open "http://localhost:$PORT_DEV_SERVER/$1"
-}
-
-# QUESTION: Still needed? Use __open-server instead?
-# TODO try combining with bash_aliases functions
-# For opening html pages in linux browser containing mapjs files
-__open-mapjs() {
-  # QUESTION: Is --allow-file-access-from-files a temp solution?
-  #   Alternatives:
-  #     Embed JSON directly in html
-  #     https://stackoverflow.com/questions/64140887/how-to-solve-cors-origin-issue-when-trying-to-get-data-of-a-json-file-from-local
-  # --user-data-dir=/dev/null
-  google-chrome --disable-extensions --hide-crash-restore-bubble --allow-file-access-from-files --no-default-browser-check --window-size=500,720 "http://localhost:$PORT_DEV_SERVER/$1" 2>/dev/null &
-  disown # stops browser blocking terminal and allows all tabs to open in single window.
-}
-
-#  QUESTION: Still needed? Use __open-chrome-debug instead?
-# TODO try combining with bash_aliases functions
-# For opening html pages with debug port open
-# TODO try chrome headless: https://workflowy.com/#/8aac548986a4
-__chrome-attach-mapjs() { # __chrome-attach https://drive.mindmup.com/map/1FY98eeanu9vAhIqBG1rDKFs3QyM1uQyY
-  # QUESTION: Is --allow-file-access-from-files a temp solution?
-  # Run page from dev server instead?
-  #   Alternatives:
-  #     Embed JSON directly in html
-  #     https://stackoverflow.com/questions/64140887/how-to-solve-cors-origin-issue-when-trying-to-get-data-of-a-json-file-from-local
-  google-chrome --remote-debugging-port=9221 --user-data-dir=remote-debug-profile --disable-extensions --allow-file-access-from-files --no-default-browser-check "http://localhost:$PORT_DEV_SERVER/$1" 2>/dev/null &
-  # disown # stops browser blocking terminal and allows all tabs to open in single window.
-}
+## version control functions
 
 # Checks `src/` for lua files with leftover test/debug code.
 # Used by pre-commit hook
@@ -74,7 +23,7 @@ __check_repo() {
 __reset_repo() {
   echo 'Restoring output folder to match remote.'
   git checkout -- "$WORKSPACE/examples/"
-  git checkout -- "$WORKSPACE/output/"
+  git checkout -- "$WORKSPACE/test/output/"
   git checkout -- "$DIR_HTML_OUTPUT"
 }
 
@@ -98,41 +47,7 @@ __save_env() {
   # https://workflowy.com/#/b0011d3b3ba1
 }
 
-__stop_mapjs_webserver() { #smj
-  npm --prefix "$PATH_MJS_HOME" run stop
-}
-
-# If I want to turn off the dev server, call smj
-__start_mapjs_webserver() {
-  npm --prefix "$PATH_MJS_HOME" run start &
-  disown # stops server blocking terminal and ensures that it stays running even after terminal closes.
-}
-
-__restart_mapjs_webserver() { #rmj
-  __stop_mapjs_webserver
-  __start_mapjs_webserver
-}
-
-__run_mapjs_legacy() { #rml
-  echo "Installing and running legacy mapjs"
-  npm --prefix "$PROJECT_DIR/mapjs" run stop
-  npm --prefix "$PROJECT_DIR/mapjs" install
-  npm --prefix "$PROJECT_DIR/mapjs" run pack
-  npm --prefix "$PROJECT_DIR/mapjs" run start &
-  disown # stops server blocking terminal and ensures that it stays running even after terminal closes.
-  wait
-  xdg-open "http://localhost:9000/$1"
-}
-
-__build_mapjs() { # bmj
-  # Deletes webconfig output
-  # Convoluted solution, but means I can use relative path from mapjs.env to delete the correct output js directory regardless of mapjs repo used.
-  # QUESTION: Better to build delete into package.json script?
-  # rm -R "$PATH_MJS_HOME/src/$(dirname "$FILE_MJS_JS")" # Don't think this is necessary
-  # TODO - adding --inspect should enable debug mode - but can't get to work.
-  npm --prefix "$PATH_MJS_HOME" install
-  npm --prefix "$PATH_MJS_HOME" run pack
-}
+## argmap functions
 
 # Convert to map.json, writes it to test/output/mapjs-json/
 # lua argmap2mup test/input/Example1_ClearlyFalse_WhiteSwan_simplified.yml > test/output/mapjs-json/Example1_ClearlyFalse_WhiteSwan_simplified.json
@@ -178,7 +93,7 @@ md2hf() { # md2h test/input/example.md
   # https://workflowy.com/#/ee624e71f40c
   pandoc "$1" --template "$WORKSPACE/pandoc-templates/mapjs/mapjs-main-html5.html" --metadata=mapjs-output-js:"$FILE_MJS_JS" --metadata=css:"$MJS_CSS" -o "$OUTPUT" --lua-filter="$WORKSPACE/src/pandoc-argmap.lua" --data-dir="$PANDOC_DATA_DIR" >/dev/null &&
     echo "$OUTPUT"
-  __open-server "$DIR_HTML_SERVER_OUTPUT/$NAME.html"
+  open-server "$DIR_HTML_SERVER_OUTPUT/$NAME.html"
 }
 
 # shellcheck disable=SC2120 # Disables lint error
@@ -189,7 +104,7 @@ j2hf() {             # j2hf test/output/mapjs-json/Example1_ClearlyFalse_WhiteSw
   PATH_OUTPUT_JSON=$DIR_MJS_JSON/$NAME.json # Assumes file is in the JSON output folder
   echo "" | pandoc --template "$WORKSPACE/pandoc-templates/mapjs/mapjs-quick-json.html" --metadata=BLOCK_ID:"1" --metadata title="$NAME" --metadata=path-json-source:"$PATH_OUTPUT_JSON" --metadata=mapjs-output-js:"$FILE_MJS_JS" --metadata=css:"$MJS_CSS" -o "$OUTPUT" --data-dir="$PANDOC_DATA_DIR" >/dev/null &&
     echo "$OUTPUT"
-  __open-server "$DIR_HTML_SERVER_OUTPUT/$NAME.html"
+  open-server "$DIR_HTML_SERVER_OUTPUT/$NAME.html"
 }
 
 a2hf() { # a2hf test/input/Example1_ClearlyFalse_WhiteSwan_simplified.yml
@@ -207,7 +122,7 @@ md2htm() { # md2htm test/input/example-updated.md
   # https://workflowy.com/#/ee624e71f40c
   pandoc "$1" -o "$OUTPUT" --lua-filter="$WORKSPACE/src/pandoc-argmap.lua" --data-dir="$PANDOC_DATA_DIR" >/dev/null &&
     echo "$OUTPUT"
-  __open-server "$DIR_HTML_SERVER_OUTPUT/$NAME.html"
+  open-server "$DIR_HTML_SERVER_OUTPUT/$NAME.html"
 }
 
 # Convert markdown to pdf
@@ -216,18 +131,19 @@ md2pdf() { # md2pdf test/input/example.md
   OUTPUT=${2:-$DIR_HTML_OUTPUT/$NAME.pdf}
   pandoc "$1" -o "$OUTPUT" --lua-filter="$WORKSPACE/src/pandoc-argmap.lua" --pdf-engine lualatex --template "$WORKSPACE/examples/example-template.latex" --data-dir="$PANDOC_DATA_DIR" >/dev/null &&
     echo "$OUTPUT"
-  # __open-mapjs "$OUTPUT"
-  __open-server "$DIR_HTML_SERVER_OUTPUT/$NAME.pdf"
+  open-server "$DIR_HTML_SERVER_OUTPUT/$NAME.pdf"
 }
 
-# Deprecated, use a2m() for converting argmap to .mup/.json and use __build_mapjs to rebuild app
+# Deprecated
+
+## Deprecated, use a2m() for converting argmap to .mup/.json and use __build_mapjs to rebuild app
 a2jo() { # m2a output/mapjs-json-input/Example1_simple.yml
   NAME=$(basename --suffix=".yml" "$1")
   OUTPUT=${2:-$DIR_HTML_OUTPUT/$NAME.json}
   a2m "$1" "$OUTPUT"
 }
 
-# Deprecated, use a2jo instead.
+## Deprecated, use a2jo instead.
 a2mo() {
   NAME=$(basename --suffix=".yml" "$1") &&
     OUTPUT=${2:-$DIR_HTML_OUTPUT/$NAME.json} &&
@@ -235,5 +151,5 @@ a2mo() {
 }
 
 ## Mark functions for export to use in other scripts:
-export -f __reset_repo __clean_repo __check_repo __open-mapjs __save_env __build_mapjs __open-server __start_mapjs_webserver __stop_mapjs_webserver __restart_mapjs_webserver __run_mapjs_legacy __open-chrome-debug
+export -f __reset_repo __clean_repo __check_repo __save_env
 export -f a2m m2a a2t a2mu md2htm md2hf md2pdf j2hf a2hf

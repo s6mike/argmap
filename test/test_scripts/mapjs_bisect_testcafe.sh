@@ -12,7 +12,8 @@
 # QUESTION can I move these two commands outside of this script into calling function?
 export PATH_REPLAY_SCRIPT=$DIR_PROJECTS/argmap/test/devtools-recordings/add_idea.json
 
-source /home/s6mike/scripts/bash_aliases.sh # Functions to ensure clean build.
+source /home/s6mike/scripts/bash_aliases.sh                      # Functions to ensure clean build.
+source /home/s6mike/scripts/argmap_scripts/bash_aliases_mapjs.sh # Function to test rendering.
 
 # Add Hotfixes
 # ------------
@@ -45,7 +46,7 @@ echo "'git stash apply' successful."
 # wait
 
 # webpack_build
-npm install --legacy-peer-deps
+npm install --prefix "$PATH_MJS_HOME" --legacy-peer-deps
 
 # webpack_server_start # Dev server should already be started
 # wait
@@ -70,10 +71,10 @@ npm install --legacy-peer-deps
 # Pre-test: Does page load?
 
 # Check url:
-# check_url '' || status=125
+# check_url '' || exit_status=125
 
-# if [ $status == 125 ]; then
-#   echo "Page unavailable, setting exit status to 125"
+# if [ $exit_status == 125 ]; then
+#   echo "Page unavailable, setting exit exit_status to 125"
 # else
 
 # Pre-test: Do any elements render?
@@ -83,19 +84,13 @@ npm install --legacy-peer-deps
 
 # if [ $renders != 0 ]; then
 
-# echo a$("$HOME/scripts/argmap_test_scripts/headless_chrome_repl_mapjs_is_rendered.exp")
-RENDERS=$("$HOME/scripts/argmap_test_scripts/headless_chrome_repl_mapjs_is_rendered.exp")
-# RENDERS text value is not normal: for some reason text coming after it gets moved to the start. Think it was trailing \r I added.
-# TODO: test, then update comments, but leave trailing wildcard.
-# e.g. echo "RENDERS: $RENDERS." = .ENDERS: true
-# Using trailing wildcard match in case any newline characters accidentally captured, like I did before, so they don't breka match.
-if [[ "$RENDERS" == "true"* ]]; then
-  # Main test
-  # Better to use exec so not dependent on package.json
+__test_mapjs_renders ""
+render_status=$?
+if [ $render_status == 0 ]; then
   npm exec testcafe 'chrome:headless --no-default-browser-check' "$PATH_REPLAY_SCRIPT" >>"../git-bisect-logs/$BISECT_START_TIMESTAMP-testcafe-output.txt"
-  status=$?
+  exit_status=$?
 else # if headless chrome fails to render any map nodes
-  status=125
+  exit_status=125
   echo "Map not rendered, setting exit status to 125 (bisect skip)."
 fi
 
@@ -111,8 +106,8 @@ fi
 git reset --hard
 
 # Return test result
-echo "bisect exit status: $status"
-exit "$status"
+echo "bisect exit status: $exit_status"
+exit "$exit_status"
 
 # After fix:
 # ----------

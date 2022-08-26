@@ -29,16 +29,8 @@ fi
 # using init_script to set up variables.
 source scripts/argmap_init_script.sh
 
-#testing
-source scripts/bash_aliases_argmap.sh
-
 # Once conda env activated, $CONDA_PREFIX/bin will be sufficient.
 export PATH=$CONDA_PREFIX/envs/$CONDA_ENV_ARGMAP/bin:$PATH
-
-# Needed for tests.sh to work.
-# TODO: Can I source another file for this? ideally environment.yml exported in next section.
-export LUA_PATH="$WORKSPACE/lua_modules/share/lua/5.3/?.lua;$WORKSPACE/lua_modules/share/lua/5.3/?/init.lua;./?.lua;./?/init.lua;/usr/local/share/lua/5.3/?/init.lua;/usr/local/share/lua/5.3/?.lua;"
-export LUA_CPATH="$WORKSPACE/lua_modules/lib/lua/5.3/?.so;"
 
 # Export conda environment argmap to yaml file
 conda env export --from-history --name "$CONDA_ENV_ARGMAP" >"$ENV_FILE"
@@ -59,9 +51,6 @@ __save_env
 
 #     exit 1
 # fi
-
-# Rebuild webpack just in case
-__build_mapjs
 
 # Run test script tests.sh
 test/test_scripts/tests.sh
