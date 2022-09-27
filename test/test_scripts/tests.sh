@@ -88,6 +88,7 @@ __test testcafe_run "$PATH_REPLAY_SCRIPT_ADD_IDEA"         #10 add child button 
 __test testcafe_run "$PATH_REPLAY_SCRIPT_NODE_CLICK"       #11 left click works
 __test testcafe_run "$PATH_REPLAY_SCRIPT_BUTTON_UNDO_REDO" #12 undo/redo button works
 # __test testcafe_run "$PATH_REPLAY_SCRIPT_BUTTON_ADD_LINK"  #13 add link works
+# __test testcafe_run "$PATH_REPLAY_SCRIPT_EDIT_FIRST_CHILD" #14 edit first child node
 
 if [ "$1" != html ]; then
     __test md2pdf "$INPUT_FILE_MD0" #14

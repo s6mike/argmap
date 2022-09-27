@@ -1,0 +1,94 @@
+{
+  "title": "argmap-edit-first-child",
+  "steps": [
+    {
+      "type": "navigate",
+      "assertedEvents": [
+        {
+          "type": "navigation",
+          "url": "http://localhost:9001/",
+          "title": "Example 1.1 - All swans are white."
+        }
+      ],
+      "url": "http://localhost:9001/"
+    },
+    {
+      "type": "waitForExpression",
+      "expression": "document.getElementsByClassName('mapjs-node').length==6"
+    },
+    {
+      "type": "click",
+      "target": "main",
+      "selectors": [
+        [
+          "#node_3 > span"
+        ]
+      ],
+      "offsetX": 54,
+      "offsetY": 11.872528076171875,
+      "deviceType": "pen"
+    },
+    {
+      "type": "waitForExpression",
+      "expression": "document.getElementsByClassName('selected')[0].id=='node_3'"
+    },
+    {
+      "type": "keyDown",
+      "target": "main",
+      "key": "Tab"
+    },
+    {
+      "type": "keyUp",
+      "target": "main",
+      "key": "Tab"
+    },
+    {
+      "type": "keyDown",
+      "target": "main",
+      "key": "t"
+    },
+    {
+      "type": "keyUp",
+      "target": "main",
+      "key": "t"
+    },
+    {
+      "type": "keyDown",
+      "target": "main",
+      "key": "Tab"
+    },
+    {
+      "type": "keyUp",
+      "target": "main",
+      "key": "Tab"
+    },
+    {
+      "type": "keyDown",
+      "target": "main",
+      "key": "e"
+    },
+    {
+      "type": "keyUp",
+      "target": "main",
+      "key": "e"
+    },
+    {
+      "type": "keyDown",
+      "target": "main",
+      "key": "Tab"
+    },
+    {
+      "type": "keyUp",
+      "target": "main",
+      "key": "Tab"
+    },
+    {
+      "type": "waitForExpression",
+      "expression": "document.getElementsByClassName('mapjs-node').length>=8"
+    },
+    {
+      "type": "waitForExpression",
+      "expression": "document.getElementById('node_7').textContent=='t'"
+    }
+  ]
+}

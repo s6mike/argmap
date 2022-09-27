@@ -25,6 +25,12 @@
     - `mapjs/test/index.html`
 - Using VSCode defaults for file formatting: many whitespace changes.
 
+## mapjs 3.3.22
+
+- `src/core/content/content.js`: Fix bug causing error when adding node's first child.
+  - This is because this code used to add a new child node `parentIdea.ideas[rank] = subIdea` needs to have rank 0 with new arrays, but was being given rank 0, corrupting array structure.
+  - This code is used instead of push because it needs to work with both arrays and associative arrays.
+
 ## mapjs 3.3.21
 
 - Fix `src/browser/link-edit-widget.js` so that widget correctly shows when links are dashed, and can be changed to solid lines again, by using line style val, rather than text.

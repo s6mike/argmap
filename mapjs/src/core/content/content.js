@@ -151,7 +151,11 @@ module.exports = function content(contentAggregate, initialSessionId) {
 					childRankSign = -1;
 				}
 			}
-			newRank = maxKey(parentIdea.ideas, childRankSign) + childRankSign;
+			if (parentIdea.ideas.length == 0) { // This ensures that rank of empty arrays is always 0, which means index starts correctly with new children.
+				newRank = 0
+			} else {
+				newRank = maxKey(parentIdea.ideas, childRankSign) + childRankSign;
+			}
 			return newRank;
 		},
 		appendSubIdea = function (parentIdea, subIdea) {

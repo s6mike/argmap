@@ -8,6 +8,17 @@
   - Add note about linking/using templates (html and latex) with pandoc.
 - Add references to argmap specs?
 
+## argmap 4.7.22
+
+- `mapjs/src/core/content/content.js`: Fix bug causing error when adding node's first child.
+  - This is because this code used to add a new child node `parentIdea.ideas[rank] = subIdea` needs to have rank 0 with new arrays, but was being given rank 0, corrupting array structure.
+  - This code is used instead of push because it needs to work with both arrays and associative arrays.
+- Add regression test:
+  - `test/devtools-recordings/argmap-edit-first-child.json`: Add devtools recording.
+  - `mapjs/scripts/mapjs.env`: Add path variable to recording.
+  - `test/test_scripts/tests.sh`: Add regression test to call recording.
+- [CHANGELOG-mapjs.md](../mapjs/docs/CHANGELOG-mapjs.md): Update with latest mapjs fix.
+
 ## argmap 4.7.21
 
 - `scripts/bash_aliases_mapjs.sh`: Fix `__run_mapjs_legacy` to open chrome using debug profile (no chrome extensions).
