@@ -2,14 +2,21 @@
 
 -- a pipe that parses a yaml argument map and generates a JSON encoded mindmup map.
 
--- Sets up shared 'environment' variables:
-local config_argmap = require 'config_argmap'
+-- Checks whether this is main script or an imported package
+if pcall(debug.getlocal, 4, 1) then
+  -- print("in package")
+else -- These aren't called when used clientside:
+  -- print("in main script")
+  -- Sets up shared 'environment' variables:
+  local config_argmap = require 'config_argmap'
+  -- uses pl.app.parse_args() to parse cli options
+  local pl = require 'pl.import_into' ()
+end
 
--- uses pl.app.parse_args() to parse cli options
-local pl = require 'pl.import_into' ()
+
 
 -- uses lyaml to parse yaml
-local lyaml = require 'lyaml'
+-- local lyaml = require 'lyaml'
 local json = require 'rxi-json-lua'
 
 -- initialize the output map
@@ -29,7 +36,10 @@ local public = ""
 
 -- a long string containing all the styling needed for argument maps
 -- TODO: move this yaml template into a file and load the file. Will make code more readable and better for version control.
-local template = lyaml.load([=[
+local yaml_path = "/home/s6mike/git_projects/argmap/lua_modules/lib/lua/5.3/yaml.so"
+local lyaml_load = assert(package.loadlib(yaml_path, "load"))
+-- local template = lyaml.load([=[
+local template = lyaml_load([=[
 ---
 formatVersion: 3
 id: root

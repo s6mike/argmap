@@ -25,3 +25,4 @@ SpecRunner.html
 .sublime*
 .tern-port
 npm-debug.log
+node_modules

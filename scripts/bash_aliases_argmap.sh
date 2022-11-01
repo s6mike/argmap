@@ -117,6 +117,25 @@ a2t() { # a2t test/output/example1-simple.yml
 }
 
 # Convert markdown to full page html
+mdhello() { # md2h test/input/example.md
+  # TODO: Use realpath to simplify relative path juggling
+  #   e.g. PATH_OUTPUT_JSON=/$(realpath --no-symlinks --relative-to=mapjs/site "$1")
+  NAME=$(basename --suffix=".md" "$1")
+  OUTPUT=${2:-$DIR_HTML_OUTPUT/$NAME.html}
+  mkdir --parent "$(dirname "$OUTPUT")" # Ensures output folder exists
+  # QUESTION: Is it worth putting some of these settings into a metadata or defaults file?
+  # If so, how would I easily update it?
+  # Useful? --metadata=curdir:X
+  # css here overrides the template value, which may not be what I want. Not sure best way to handle.
+  # https://workflowy.com/#/ee624e71f40c
+  pandoc "$1" --lua-filter="$WORKSPACE/src/pandoc-hello.lua" --template "$WORKSPACE/pandoc-templates/mapjs/mapjs-main-html5.html" --metadata=mapjs-output-js:"$FILE_MJS_JS" --metadata=css:"$MJS_CSS" -o "$OUTPUT" --data-dir="$PANDOC_DATA_DIR" >/dev/null &&
+    echo "$OUTPUT"
+  # QUESTION: Change to open-debug? Might want to make debug default, but with test option for normal.
+  open-server "$DIR_HTML_SERVER_OUTPUT/$NAME.html"
+  # TODO construct link from server details and output it?
+}
+
+# Convert markdown to full page html
 md2hf() { # md2h test/input/example.md
   # TODO: Use realpath to simplify relative path juggling
   #   e.g. PATH_OUTPUT_JSON=/$(realpath --no-symlinks --relative-to=mapjs/site "$1")

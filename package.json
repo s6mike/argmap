@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "fengari-loader": "^0.0.1",
+    "fengari-web": "^0.1.4",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^4.10.0"
+  },
+  "scripts": {
+    "pack": "webpack"
+  }
+}
