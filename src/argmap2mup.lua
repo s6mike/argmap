@@ -2,15 +2,29 @@
 
 -- a pipe that parses a yaml argument map and generates a JSON encoded mindmup map.
 
--- Sets up shared 'environment' variables:
-local config_argmap = require 'config_argmap'
-
--- uses pl.app.parse_args() to parse cli options
-local pl = require 'pl.import_into' ()
--- uses lyaml to parse yaml
--- local lyaml = require 'lyaml'
-local tyaml = require 'tinyyaml'
+-- Needed for both client and serverside:
 local json = require 'rxi-json-lua'
+local tyaml = require 'tinyyaml' -- QUESTION: Switch back to lyaml for serverside?
+
+-- Will define later based on requirements
+local script_context, pl --, tyaml lyaml
+
+-- Checks whether this is main script or an imported package
+if pcall(debug.getlocal, 4, 1) then
+  script_context = 'client'
+  -- For when used clientside:
+  Logger:debug("Hello web!")
+  -- local yaml_load = tyaml.parse
+else -- Only called serverside:
+  script_context = 'server'
+  -- Sets up shared 'environment' variables and requires Logger:
+  local config_argmap = require 'config_argmap'
+  Logger:debug("Hello terminal!")
+  -- uses pl.app.parse_args() to parse cli options
+  pl = require 'pl.import_into' ()
+  -- uses lyaml to parse yaml
+  -- local lyaml = require 'lyaml'
+end
 
 -- initialize the output map
 local output = { ["ideas"] = {} }
@@ -589,10 +603,10 @@ function parse_options(a)
 end
 
 function main()
+  -- print(args) -- What is this line for? Debugging?
   Logger:debug("arg: ")
   Logger:debug(arg)
 
-  -- print(args) -- What is this line for? Debugging? In which case, is there a log function?
   local opts = parse_options(arg)
 
   if opts["help"] then
@@ -660,4 +674,6 @@ function main()
   end
 end
 
-print(main())
+if script_context == 'server' then
+  print(main())
+end

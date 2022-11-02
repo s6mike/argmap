@@ -199,3 +199,12 @@ npm --prefix "$PATH_MJS_HOME" install
 npm audit fix --prefix "$PATH_MJS_HOME" --legacy-peer-deps >npm_audit_output.txt
 
 __build_mapjs
+
+# SECTION 5: Clientside Lua
+# ---------------------------------------------------
+
+# Ensures fengari script available to site
+ln -s "$WORKSPACE/src/js/fengari-web.js" "$PATH_MJS_SITE/js/fengari-web.js"
+# Ensure lua dependencies available to site
+ln -s "$WORKSPACE/src" "$PATH_MJS_SITE/lua"
+ln -s "$WORKSPACE/lua_modules" "$PATH_MJS_SITE/lua_modules"

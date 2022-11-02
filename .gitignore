@@ -5,10 +5,10 @@ argmap.code-workspace
 archived
 lua_modules/
 mapjs/node_modules
-mapjs/site/js
 mapjs/site/output
 mapjs-example/node_modules
 mapjs-example/site
+mapjs/site/js/bundle.js
 examples/*
 test/output*/*
 tmp/
