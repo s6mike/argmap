@@ -125,10 +125,9 @@ if [ "$1" == 'conda' ]; then
 
   # Add config_argmap file to standard LUA_PATH so easy to update LUA_PATH etc for lua scripts
   # Need to use sudo for both:
-  mkdir --parents /usr/local/share/lua/5.3/
-
   # Uninstalling the main (apt-get) lua might have removed /usr/local.. from LUA_PATH, since vscode-pandoc was suddenly throwing errors.
-  # So this might not be needed any longer:
+  # So these shouldn't be needed any longer:
+  # mkdir --parents /usr/local/share/lua/5.3/
   # ln -s "$WORKSPACE/src/config_argmap.lua" /usr/local/share/lua/5.3/
 
   # Fixed issue with vscode-pandoc not finding config_argmap with this link:
@@ -136,7 +135,6 @@ if [ "$1" == 'conda' ]; then
 
   # latex templates e.g. examples/example-template.latex need to go here:
   mkdir --parent "$CONDA_PREFIX/share/pandoc/templates/examples/"
-
   ln -s "$WORKSPACE/examples/example-template.latex" "$CONDA_PREFIX/share/pandoc/templates/examples/example-template.latex"
 
   # Connects legacy data-folder to conda env:

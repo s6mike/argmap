@@ -23,7 +23,7 @@
             "icon": "terminal-bash",
             "args": [
                 "--init-file",
-                "/home/s6mike/git_projects/argmap/scripts/argmap_init_script.sh"
+                "${workspaceFolder}/scripts/argmap_init_script.sh",
             ]
         },
     },
@@ -41,6 +41,7 @@
         "argmap2tikz",
         "argmapjs",
         "argmh",
+        "argumend",
         "asinum",
         "Brunellus",
         "ClientRects",

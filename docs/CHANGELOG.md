@@ -10,6 +10,10 @@
   - Add note about linking/using templates (html and latex) with pandoc.
 - Add references to argmap specs?
 
+## argmap 4.13.22
+
+- Fix small things, update comments.
+
 ## argmap 4.13.21
 
 - Argmap uses local lua files only:
