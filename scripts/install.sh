@@ -174,10 +174,11 @@ fi
 # Create json and png output folders otherwise pandoc-argmap.lua won't work
 mkdir --parent "$WORKSPACE/test/output/mapjs-json"
 mkdir --parent "$WORKSPACE/test/output/png"
+mkdir --parent "$WORKSPACE/test/output/html"
 
 # For dev web server:
 # Link up test/output and test/input with mapjs/site
-ln -s "$DIR_HTML_OUTPUT" "$PATH_MJS_SITE/."
+ln -s "$DIR_PUBLIC_OUTPUT" "$PATH_MJS_SITE/."
 ln -s "$DIR_HTML_INPUT" "$PATH_MJS_SITE/."
 
 # Add index.html

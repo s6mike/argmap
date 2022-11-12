@@ -8,6 +8,13 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
+## argmap 4.16.6
+
+- Add `test/output/html` so all html output files in one place.
+  - Rename env variable `DIR_HTML_OUTPUT` to `DIR_PUBLIC_OUTPUT`.
+  - Update env variable and folder dependencies.
+- Add `test/devtools-recordings/argmap-load-new-map.json`.
+
 ## argmap 4.16.5
 
 - `mapjs/src/argmapjs-utilities.js`: Comment out `mergeObjects()` since no longer needed.

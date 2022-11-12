@@ -54,20 +54,20 @@ __reset_repo() {
   echo 'Restoring output folder to match remote.'
   git checkout -- "$WORKSPACE/examples/"
   git checkout -- "$WORKSPACE/test/output/"
-  git checkout -- "$DIR_HTML_OUTPUT"
+  git checkout -- "$DIR_PUBLIC_OUTPUT"
 }
 
 __clean_repo() {
-  rm "$DIR_HTML_OUTPUT/example1-clearly-false-white-swan-simplified.yml"
-  # rm "$DIR_HTML_OUTPUT/example1-clearly-false-white-swan-simplified.mup"
+  rm "$DIR_PUBLIC_OUTPUT/example1-clearly-false-white-swan-simplified.yml"
+  # rm "$DIR_PUBLIC_OUTPUT/example1-clearly-false-white-swan-simplified.mup"
   rm "$PATH_MJS_JSON/example1-clearly-false-white-swan-simplified.json"
-  rm "$DIR_HTML_OUTPUT/example1-clearly-false-white-swan-simplified.tex"
-  rm "$DIR_HTML_OUTPUT/example1-clearly-false-white-swan-simplified-0mapjs.pdf"
-  rm "$DIR_HTML_OUTPUT/example1-clearly-false-white-swan-simplified-0mapjs.html"
-  rm "$DIR_HTML_OUTPUT/example1-clearly-false-white-swan-simplified-1mapjs.html"
-  rm "$DIR_HTML_OUTPUT/example1-clearly-false-white-swan-simplified-2mapjs.html"
-  rm "$DIR_HTML_OUTPUT/example1-clearly-false-white-swan-simplified-meta-mapjs.html"
-  rm "$DIR_HTML_OUTPUT/png/f54eea6ed0c060c9d27e1fe3507bfdd75e3e60d4.png"
+  rm "$DIR_PUBLIC_OUTPUT/example1-clearly-false-white-swan-simplified.tex"
+  rm "$DIR_PUBLIC_OUTPUT/example1-clearly-false-white-swan-simplified-0mapjs.pdf"
+  rm "$DIR_PUBLIC_OUTPUT/html/example1-clearly-false-white-swan-simplified-0mapjs.html"
+  rm "$DIR_PUBLIC_OUTPUT/html/example1-clearly-false-white-swan-simplified-1mapjs.html"
+  rm "$DIR_PUBLIC_OUTPUT/html/example1-clearly-false-white-swan-simplified-2mapjs.html"
+  rm "$DIR_PUBLIC_OUTPUT/html/example1-clearly-false-white-swan-simplified-meta-mapjs.html"
+  rm "$DIR_PUBLIC_OUTPUT/png/f54eea6ed0c060c9d27e1fe3507bfdd75e3e60d4.png"
   rm "$PATH_TEST_LOG"
   # rm "$INPUT_FILE_JSON"
 }
@@ -102,7 +102,7 @@ a2mu() { # a2mu test/output/example1-simple.yml
 # TODO add option for .mup vs .json output
 m2a() { # m2a test/output/example1-simple.mup
   NAME=$(basename --suffix=".json" "$1")
-  OUTPUT=${2:-$DIR_HTML_OUTPUT/$NAME.yml}
+  OUTPUT=${2:-$DIR_PUBLIC_OUTPUT/$NAME.yml}
   mkdir --parent "$(dirname "$OUTPUT")" # Ensures output folder exists
   lua "$WORKSPACE/src/mup2argmap.lua" "$1" >"$OUTPUT" &&
     echo "$OUTPUT" # Output path can be piped
@@ -112,8 +112,8 @@ m2a() { # m2a test/output/example1-simple.mup
 a2t() { # a2t test/output/example1-simple.yml
   NAME=$(basename --suffix=".yml" "$1") &&
     mkdir --parent "$(dirname "$OUTPUT")" && # Ensures output folder exists
-    lua "$WORKSPACE/src/argmap2tikz.lua" "$1" >"${2:-$DIR_HTML_OUTPUT/$NAME.tex}" &&
-    echo "${2:-$DIR_HTML_OUTPUT/$NAME.tex}"
+    lua "$WORKSPACE/src/argmap2tikz.lua" "$1" >"${2:-$DIR_PUBLIC_OUTPUT/$NAME.tex}" &&
+    echo "${2:-$DIR_PUBLIC_OUTPUT/$NAME.tex}"
 }
 
 # Convert markdown to full page html
@@ -121,7 +121,7 @@ md2hf() { # md2h test/input/example.md
   # TODO: Use realpath to simplify relative path juggling
   #   e.g. PATH_OUTPUT_JSON=/$(realpath --no-symlinks --relative-to=mapjs/site "$1")
   NAME=$(basename --suffix=".md" "$1")
-  OUTPUT=${2:-$DIR_HTML_OUTPUT/$NAME.html}
+  OUTPUT=${2:-$DIR_PUBLIC_OUTPUT/html/$NAME.html}
   mkdir --parent "$(dirname "$OUTPUT")" # Ensures output folder exists
   # QUESTION: Is it worth putting some of these settings into a metadata or defaults file?
   # If so, how would I easily update it?
@@ -131,7 +131,7 @@ md2hf() { # md2h test/input/example.md
   pandoc "$1" --template "$WORKSPACE/pandoc-templates/mapjs/mapjs-main-html5.html" --metadata=mapjs-output-js:"$FILE_MJS_JS" --metadata=css:"$MJS_CSS" -o "$OUTPUT" --lua-filter="$WORKSPACE/src/pandoc-argmap.lua" --data-dir="$PANDOC_DATA_DIR" >/dev/null &&
     echo "$OUTPUT"
   # QUESTION: Change to open-debug? Might want to make debug default, but with test option for normal.
-  open-server "$DIR_HTML_SERVER_OUTPUT/$NAME.html"
+  open-server "$DIR_HTML_SERVER_OUTPUT/html/$NAME.html"
   # TODO construct link from server details and output it?
 }
 
@@ -145,7 +145,7 @@ j2hf() { # j2hf site/output/mapjs-json/example1-clearly-false-white-swan-simplif
   # Removes either suffix:
   NAME=$(basename --suffix=".json" "$SITE_PATH")
   NAME=$(basename --suffix=".mup" "$NAME")
-  HTML_OUTPUT=${2:-$DIR_HTML_OUTPUT/$NAME.html}
+  HTML_OUTPUT=${2:-$DIR_PUBLIC_OUTPUT/html/$NAME.html}
   #  TODO: Check and copy to input folder?
   PATH_OUTPUT_JSON=/$(realpath --no-symlinks --relative-to=mapjs/site "$SITE_PATH")
   mkdir --parent "$(dirname "$HTML_OUTPUT")" # Ensures output folder exists
@@ -163,20 +163,20 @@ a2hf() { # a2hf test/input/example1-clearly-false-white-swan-simplified.yml
 # TODO: lua filter should include main.js etc even for fragment
 md2htm() { # md2htm test/input/example-updated.md
   NAME=$(basename --suffix=".md" "$1")
-  OUTPUT=${2:-$DIR_HTML_OUTPUT/$NAME.html}
+  OUTPUT=${2:-$DIR_PUBLIC_OUTPUT/html/$NAME.html}
   mkdir --parent "$(dirname "$OUTPUT")" # Ensures output folder exists
   # TODO: Put this into new function?
   # Or use a defaults file:
   # https://workflowy.com/#/ee624e71f40c
   pandoc "$1" -o "$OUTPUT" --lua-filter="$WORKSPACE/src/pandoc-argmap.lua" --data-dir="$PANDOC_DATA_DIR" >/dev/null &&
     echo "$OUTPUT"
-  open-debug "$DIR_HTML_SERVER_OUTPUT/$NAME.html"
+  open-debug "$DIR_HTML_SERVER_OUTPUT/html/$NAME.html"
 }
 
 # Convert markdown to pdf
 md2pdf() { # md2pdf test/input/example.md
   NAME=$(basename --suffix=".md" "$1")
-  OUTPUT=${2:-$DIR_HTML_OUTPUT/$NAME.pdf}
+  OUTPUT=${2:-$DIR_PUBLIC_OUTPUT/$NAME.pdf}
   mkdir --parent "$(dirname "$OUTPUT")" # Ensures output folder exists
   pandoc "$1" -o "$OUTPUT" --lua-filter="$WORKSPACE/src/pandoc-argmap.lua" --pdf-engine lualatex --template "$WORKSPACE/examples/example-template.latex" --data-dir="$PANDOC_DATA_DIR" >/dev/null &&
     echo "$OUTPUT"
@@ -188,14 +188,14 @@ md2pdf() { # md2pdf test/input/example.md
 ## Deprecated, use a2m() for converting argmap to .mup/.json and use __build_mapjs to rebuild app
 a2jo() { # m2a output/mapjs-json-input/example1-simple.yml
   NAME=$(basename --suffix=".yml" "$1")
-  OUTPUT=${2:-$DIR_HTML_OUTPUT/$NAME.json}
+  OUTPUT=${2:-$DIR_PUBLIC_OUTPUT/$NAME.json}
   a2m "$1" "$OUTPUT"
 }
 
 ## Deprecated, use a2jo instead.
 a2mo() {
   NAME=$(basename --suffix=".yml" "$1") &&
-    OUTPUT=${2:-$DIR_HTML_OUTPUT/$NAME.json} &&
+    OUTPUT=${2:-$DIR_PUBLIC_OUTPUT/$NAME.json} &&
     a2m "$1" "$OUTPUT"
 }
 

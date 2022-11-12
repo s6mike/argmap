@@ -111,7 +111,7 @@
         "--lua-filter=/home/s6mike/git_projects/argmap/src/pandoc-argmap.lua", // Variables don't work in this field
         // "--lua-filter=/home/s6mike/git_projects/argmap/src/pandoc-hello.lua", // Variables don't work in this field
         "--data-dir=${config:lua.debug.settings.system_root}/share/pandoc", // Don't think variable is working in this field either
-        // "--output=/home/s6mike/git_projects/argmap/test/output/test.html",
+        // "--output=/home/s6mike/git_projects/argmap/test/output/html/test.html",
     ],
     "launch": {
         "env": {

@@ -18,8 +18,8 @@ echo 'Attempting to delete old test outputs.'
 
 __clean_repo
 
-# rm "$DIR_HTML_OUTPUT/example1-clearly-false-white-swan-simplified.yml"
-# rm "$DIR_HTML_OUTPUT/example1-clearly-false-white-swan-simplified.mup"
+# rm "$DIR_PUBLIC_OUTPUT/example1-clearly-false-white-swan-simplified.yml"
+# rm "$DIR_PUBLIC_OUTPUT/example1-clearly-false-white-swan-simplified.mup"
 
 # todo Delete old gdrive file
 # 1uU7_yfAwMPV3a0lxpiXoVR-m0hbX2Pzs

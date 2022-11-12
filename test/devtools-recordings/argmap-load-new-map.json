@@ -1,0 +1,55 @@
+{
+  "title": "argmap-load-new-map",
+  "steps": [
+    {
+      "type": "setViewport",
+      "width": 695,
+      "height": 776,
+      "deviceScaleFactor": 1,
+      "isMobile": false,
+      "hasTouch": false,
+      "isLandscape": false
+    },
+    {
+      "type": "navigate",
+      "assertedEvents": [
+        {
+          "type": "navigation",
+          "url": "http://localhost:9001/output/example1-clearly-false-white-swan-simplified.html",
+          "title": "example1-clearly-false-white-swan-simplified"
+        }
+      ],
+      "url": "http://localhost:9001/input/html/example1-clearly-false-white-swan-simplified.html"
+    },
+    {
+      "type": "click",
+      "target": "main",
+      "selectors": [
+        [
+          "aria/No file chosen, Choose File"
+        ],
+        [
+          "#file_picker_argmap1"
+        ]
+      ],
+      "offsetX": 52,
+      "offsetY": 11.23529052734375,
+      "deviceType": "pen"
+    },
+    {
+      "type": "click",
+      "target": "main",
+      "selectors": [
+        [
+          "aria/Submit"
+        ],
+        [
+          "#submit_input_argmap1"
+        ]
+      ],
+      "offsetX": 36,
+      "offsetY": 7.54901123046875,
+      "deviceType": "pen"
+    }
+  ]
+}
