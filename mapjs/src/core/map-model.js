@@ -505,23 +505,23 @@ module.exports = function MapModel(selectAllTitles, clipboardProvider, defaultRe
 		}
 
 	};
-	this.insertIntermediateGroup = function (source, options) {
-		const activeNodes = [],
-			group = (options && options.group) || true;
-		if (!isEditingEnabled) {
-			return false;
-		}
-		// This line stops parent reason being added to root node:
-		// if (!isInputEnabled || idea.isRootNode(currentlySelectedIdeaId)) {
-		if (!isInputEnabled) {
-			return false;
-		}
-		analytic('insertIntermediate', source);
-		self.applyToActivated(function (i) {
-			activeNodes.push(i);
-		});
-		insertIntermediateMultiple(activeNodes, { title: 'group', attr: { group: group, contentLocked: true } });
-	};
+	// this.insertIntermediateGroup = function (source, options) {
+	// 	const activeNodes = [],
+	// 		group = (options && options.group) || true;
+	// 	if (!isEditingEnabled) {
+	// 		return false;
+	// 	}
+	// 	// This line stops parent reason being added to root node:
+	// 	// if (!isInputEnabled || idea.isRootNode(currentlySelectedIdeaId)) {
+	// 	if (!isInputEnabled) {
+	// 		return false;
+	// 	}
+	// 	analytic('insertIntermediate', source);
+	// 	self.applyToActivated(function (i) {
+	// 		activeNodes.push(i);
+	// 	});
+	// 	insertIntermediateMultiple(activeNodes, { title: 'group', attr: { group: group, contentLocked: true } });
+	// };
 	this.insertIntermediate = function (source) {
 		const activeNodes = [];
 		let newId = false;

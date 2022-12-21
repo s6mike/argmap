@@ -51,9 +51,8 @@
 
 ## argmap 5.0.1
 
-- Rename `mapjs/site` folder as `mapjs/public`.
 - Rename container template partial as `pandoc-templates/mapjs/mapjs-map-container.html`
-- Update everything impacted by these changes.
+- Rename `mapjs/site` folder as `mapjs/public`.
 
 ## argmap 5.0.0
 
@@ -64,13 +63,14 @@ BREAKING
   - Update `test/devtools-recordings/argmap-edit-first-child.json` to use new keyboard shortcuts.
 - `pandoc-templates/mapjs/mapjs-testcontrols.html`: Remove buttons from toolbar:
   - `Export to image`, 'Frames' and 'Cycle': Since I can't find their functionality.
-  - Also remove `editIcon()` related functionality and keyboard shortcut: `mapjs/src/core/map-model.js`
+  - `Parent reason`: Since it's not really useful:
+    - `mapjs/src/browser/map-toolbar-widget.js`: Remove from clickMethodNames array.
+    - `mapjs/src/core/map-model.js`: Remove functionality.
+  - Also remove `editIcon()` related functionality and keyboard shortcut.
 - Remove legacy / deprecated functions and scripts:
   - `mapjs/package.json`
   - `scripts/bash_aliases_argmap.sh`
   - `scripts/bash_aliases_mapjs.sh`
-  - `test/test_scripts/bash_aliases_argmap_test.sh`
-  - `test/test_scripts/tests.sh`
 
 ## argmap 4.21.43
 
