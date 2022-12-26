@@ -1,13 +1,15 @@
 /*global require, mapInstance, getContainerID*/
 const $ = require('jquery'),
 	// Moved exports-loader call to webpack.config.js
-	Hammer = require('jquery-hammerjs/jquery.hammer-full.js'),
+	// Hammer = require('jquery-hammerjs/jquery.hammer-full.js'),
+	Hammer = require('hammerjs'),
 	// mapModel = mapInstance[getContainerID(this)].mapModel,
 
 	onDrag = function (e) {
 		'use strict';
-		$(this).trigger(
-			$.Event('mm:start-dragging', {
+		this.dispatchEvent(
+			// $(this).trigger(
+			new Event('mm:start-dragging', {
 				relatedTarget: this,
 				gesture: e.gesture
 			})
@@ -24,8 +26,10 @@ const $ = require('jquery'),
 		// TODO: Move mapModel definition to outer scope if possible:
 		const mapModel = mapInstance[getContainerID(this)].mapModel;
 		if (mapModel.getInputEnabled()) {
-			$(this).trigger(
-				$.Event('mm:start-dragging-shadow', {
+			this.dispatchEvent(
+				new Event('mm:start-dragging-shadow', {
+				// $(this).trigger(
+				// $.Event('mm:start-dragging-shadow', {
 					relatedTarget: this,
 					gesture: e.gesture
 				})
@@ -44,7 +48,7 @@ $.fn.simpleDraggableContainer = function () {
 	'use strict';
 	let currentDragObject,
 		originalDragObjectPosition;
-	const container = this,
+	const container = this[0],
 		drag = function (event) {
 
 			if (currentDragObject && event.gesture) {
@@ -52,7 +56,8 @@ $.fn.simpleDraggableContainer = function () {
 					top: Math.round(parseInt(originalDragObjectPosition.top, 10) + event.gesture.deltaY),
 					left: Math.round(parseInt(originalDragObjectPosition.left, 10) + event.gesture.deltaX)
 				};
-				currentDragObject.css(newpos).trigger($.Event('mm:drag', {currentPosition: newpos, gesture: event.gesture}));
+				// currentDragObject.css(newpos).trigger($.Event('mm:drag', {currentPosition: newpos, gesture: event.gesture}));
+				currentDragObject.css(newpos).dispatchEvent(new Event('mm:drag', { currentPosition: newpos, gesture: event.gesture }));
 				if (event.gesture) {
 					event.gesture.preventDefault();
 				}
@@ -64,25 +69,28 @@ $.fn.simpleDraggableContainer = function () {
 			if (target.attr('mapjs-drag-role') !== 'shadow') {
 				target.animate(originalDragObjectPosition, {
 					complete: function () {
-						target.trigger($.Event('mm:cancel-dragging', {gesture: e.gesture}));
+						// target.trigger($.Event('mm:cancel-dragging', {gesture: e.gesture}));
+						target.dispatchEvent(new Event('mm:cancel-dragging', { gesture: e.gesture }));
 					},
 					progress: function () {
-						target.trigger('mm:drag');
+						// target.trigger('mm:drag');
+						target.dispatchEvent(new Event('mm:drag'));
 					}
 				});
 			} else {
-				target.trigger($.Event('mm:cancel-dragging', {gesture: e.gesture}));
+				// target.trigger($.Event('mm:cancel-dragging', {gesture: e.gesture}));
+				target.dispatchEvent(new Event('mm:cancel-dragging', { gesture: e.gesture }));
 			}
-		};
-	Hammer(this, {'drag_min_distance': 2}); //eslint-disable-line new-cap
-	return this.on('mm:start-dragging', function (event) {
+		},
+		hammer_container = Hammer(container, { 'drag_min_distance': 2 }); //eslint-disable-line new-cap
+	hammer_container.on('mm:start-dragging', function (event) {
 		if (!currentDragObject) {
 			currentDragObject = $(event.relatedTarget);
 			originalDragObjectPosition = {
 				top: currentDragObject.css('top'),
 				left: currentDragObject.css('left')
 			};
-			$(this).on('drag', drag);
+			hammer_container.on('drag', drag);
 		}
 	}).on('mm:start-dragging-shadow', function (event) {
 		const target = $(event.relatedTarget),
@@ -107,24 +115,28 @@ $.fn.simpleDraggableContainer = function () {
 				this.remove();
 				e.stopPropagation();
 				e.stopImmediatePropagation();
-				const evt = $.Event(e.type, {
+				const evt = new Event(e.type, {
 					gesture: e.gesture,
 					finalPosition: e.finalPosition
 				});
-				target.trigger(evt);
+				// target.trigger(evt);
+				target.dispatchEvent(evt);
 			}).on('mm:drag', function (e) {
-				target.trigger(e);
+				// target.trigger(e);
+				target.dispatchEvent(e);
 			});
 			$(this).on('drag', drag);
 		}
 	}).on('dragend', function (e) {
 		$(this).off('drag', drag);
 		if (currentDragObject) {
-			const evt = $.Event('mm:stop-dragging', {
+			// const evt = $.Event('mm:stop-dragging', {
+			const evt = new Event('mm:stop-dragging', {
 				gesture: e.gesture,
 				finalPosition: currentDragObject.offset()
 			});
-			currentDragObject.trigger(evt);
+			// currentDragObject.trigger(evt);
+			currentDragObject.dispatchEvent(evt);
 			if (evt.result === false) {
 				rollback(e);
 			}
@@ -136,7 +148,8 @@ $.fn.simpleDraggableContainer = function () {
 			rollback(e);
 			currentDragObject = undefined;
 		}
-	}).attr('data-drag-role', 'container');
+	});
+	return container.setAttribute('data-drag-role', 'container');
 };
 
 $.fn.simpleDraggable = function (options) {

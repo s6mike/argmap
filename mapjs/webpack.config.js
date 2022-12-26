@@ -54,17 +54,17 @@ module.exports = {
 	},
 	module: {
 		rules: [
-			{
-				test: require.resolve('jquery-hammerjs/jquery.hammer-full.js'),
-				loader: 'exports-loader',
-				options: {
-					type: 'commonjs',
-					exports: {
-						syntax: 'single',
-						name: 'Hammer',
-					},
-				},
-			},
+			// {
+			// 	test: require.resolve('jquery-hammerjs/jquery.hammer-full.js'),
+			// 	loader: 'exports-loader',
+			// 	options: {
+			// 		type: 'commonjs',
+			// 		exports: {
+			// 			syntax: 'single',
+			// 			name: 'Hammer',
+			// 		},
+			// 	},
+			// },
 			{
 				test: require.resolve('jquery.hotkeys'),
 				use: [
