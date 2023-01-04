@@ -169,7 +169,8 @@ end
 local function CodeBlock(block)
     -- ISSUE: only detects argmap block if it's first class in list.
     --  For iterating through classes, see https://github.com/pandoc/lua-filters/blob/master/revealjs-codeblock/revealjs-codeblock.lua
-    if block.classes[1] == class_argmap then
+    
+    -- if block.classes[1] == class_argmap then
         -- TODO: lua filter should include main.js etc even for fragment
         -- Might also simplify logic for leaving JS out of template when no argmap.
 
@@ -294,12 +295,18 @@ local function CodeBlock(block)
                          html_raw_argmap_controls)
                     :gsub("%$BLOCK_ID%$", block_id):gsub("%$path%-json%-source%$", mapjs_url)
 
-                return pandoc.RawBlock(format, rawhtml)
+                block.text="Hello World the Revenge"
+                return block
+
+                -- return pandoc.RawBlock(format, rawhtml)
             elseif format == "html5" then
                 -- convert mup to raw svg
                 local rawsvg = argmap2image(original, filetype, nil)
                 local rawhtml = "<a href=\"" .. mupLink .. "\">" .. rawsvg .. "</a>"
-                return pandoc.RawBlock(format, rawhtml)
+                
+                block.text="Hello World the Revenge"
+                return block
+                -- return pandoc.RawBlock(format, rawhtml)
             else
                 -- Check to see if the images need to be regenerated (borrowed from pandoc lua filter docs: each image name is a hash of the yaml map.)
                 -- Writes to server output folder, subfolder determined by filetype.
@@ -321,7 +328,7 @@ local function CodeBlock(block)
                 return pandoc.Para(pandoc.Link(linkContent, mupLink))
             end
         end
-    end
+    -- end
 end
 
 -- QUESTION: Once using pandoc 2.17, would it be better to change traversal order to topdown instead?

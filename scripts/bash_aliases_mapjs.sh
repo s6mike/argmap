@@ -16,6 +16,7 @@ source "$DIR_PROJECTS/mapjs-git-bisect/scripts/git-bisect.env"
 # mapjs aliases
 
 ## browser aliases
+alias omj='open-mapjs'
 alias argdb='open-debug $DIR_HTML_SERVER_OUTPUT/html/example1-clearly-false-white-swan-simplified-1mapjs.html'
 alias argdb2='open-debug $DIR_HTML_SERVER_OUTPUT/html/example1-clearly-false-white-swan-simplified-2mapjs.html'
 alias argdbe='open-debug input/html/legacy-mapjs-example-map.html'
@@ -68,6 +69,15 @@ __run_mapjs_legacy() { #rml
   PORT_DEV_SERVER=9000
   open-debug "$1"
   PORT_DEV_SERVER=$REMEMBER_SERVER_PORT
+}
+
+# For opening html pages in linux browser containing mapjs files
+open-mapjs() { # omj
+  #   Alternatives:
+  #     Embed JSON directly in html
+  #     https://stackoverflow.com/questions/64140887/how-to-solve-cors-origin-issue-when-trying-to-get-data-of-a-json-file-from-local
+  google-chrome --disable-extensions --hide-crash-restore-bubble --allow-file-access-from-files --no-default-browser-check --window-size=500,720 "$1" 2>/dev/null &
+  disown # stops browser blocking terminal and allows all tabs to open in single window.
 }
 
 # mapjs tests
@@ -158,7 +168,7 @@ webpack_server_start() { # wss
 }
 
 ## Mark functions for export to use in other scripts:
-export -f __check_server_on __build_mapjs __run_mapjs_legacy
+export -f __check_server_on __build_mapjs __run_mapjs_legacy open-mapjs
 export -f webpack_install webpack_pack webpack_server_start # webpack_pack_open webpack_build_open
 export -f open-debug
 export -f testcafe_run __test_mapjs_renders
