@@ -506,23 +506,24 @@ module.exports = function MapModel(selectAllTitles, clipboardProvider, defaultRe
 		}
 
 	};
-	this.insertIntermediateGroup = function (source, options) {
-		const activeNodes = [],
-			group = (options && options.group) || true;
-		if (!isEditingEnabled) {
-			return false;
-		}
-		// This line stops parent reason being added to root node:
-		// if (!isInputEnabled || idea.isRootNode(currentlySelectedIdeaId)) {
-		if (!isInputEnabled) {
-			return false;
-		}
-		analytic('insertIntermediate', source);
-		self.applyToActivated(function (i) {
-			activeNodes.push(i);
-		});
-		insertIntermediateMultiple(activeNodes, { title: 'group', attr: { group: group, contentLocked: true } });
-	};
+	// Button removed since current functionality not very useful
+	// this.insertIntermediateGroup = function (source, options) {
+	// 	const activeNodes = [],
+	// 		group = (options && options.group) || true;
+	// 	if (!isEditingEnabled) {
+	// 		return false;
+	// 	}
+	// 	// This line stops parent reason being added to root node:
+	// 	// if (!isInputEnabled || idea.isRootNode(currentlySelectedIdeaId)) {
+	// 	if (!isInputEnabled) {
+	// 		return false;
+	// 	}
+	// 	analytic('insertIntermediate', source);
+	// 	self.applyToActivated(function (i) {
+	// 		activeNodes.push(i);
+	// 	});
+	// 	insertIntermediateMultiple(activeNodes, { title: 'group', attr: { group: group, contentLocked: true } });
+	// };
 	this.insertIntermediate = function (source) {
 		const activeNodes = [];
 		let newId = false;
@@ -792,23 +793,24 @@ module.exports = function MapModel(selectAllTitles, clipboardProvider, defaultRe
 			mapOutput = JSON.stringify(mapJson);
 		Utilities.downloadToFile(mapOutput, mapJson.title + '.json', 'application/json');
 	};
-	this.openAttachment = function (source, nodeId) {
-		analytic('openAttachment', source);
-		nodeId = nodeId || currentlySelectedIdeaId;
-		const node = layoutModel.getNode(nodeId),
-			attachment = node && node.attr && node.attr.attachment;
-		if (node) {
-			self.dispatchEvent('attachmentOpened', nodeId, attachment);
-		}
-	};
-	this.setAttachment = function (source, nodeId, attachment) {
-		const hasAttachment = !!(attachment && (attachment.content || attachment.goldAssetId));
-		if (!isEditingEnabled) {
-			return false;
-		}
-		analytic('setAttachment', source);
-		idea.updateAttr(nodeId, 'attachment', hasAttachment && attachment);
-	};
+	// Not currently very useful, so removed button:
+	// this.openAttachment = function (source, nodeId) {
+	// 	analytic('openAttachment', source);
+	// 	nodeId = nodeId || currentlySelectedIdeaId;
+	// 	const node = layoutModel.getNode(nodeId),
+	// 		attachment = node && node.attr && node.attr.attachment;
+	// 	if (node) {
+	// 		self.dispatchEvent('attachmentOpened', nodeId, attachment);
+	// 	}
+	// };
+	// this.setAttachment = function (source, nodeId, attachment) {
+	// 	const hasAttachment = !!(attachment && (attachment.content || attachment.goldAssetId));
+	// 	if (!isEditingEnabled) {
+	// 		return false;
+	// 	}
+	// 	analytic('setAttachment', source);
+	// 	idea.updateAttr(nodeId, 'attachment', hasAttachment && attachment);
+	// };
 	this.toggleLink = function (source, nodeIdTo) {
 		const exists = _.find(idea.links, function (link) {
 			return (String(link.ideaIdFrom) === String(nodeIdTo) && String(link.ideaIdTo) === String(currentlySelectedIdeaId)) || (String(link.ideaIdTo) === String(nodeIdTo) && String(link.ideaIdFrom) === String(currentlySelectedIdeaId));

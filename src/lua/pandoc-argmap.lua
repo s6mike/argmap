@@ -1,3 +1,6 @@
+-- Copyright 2019 David Sanson; 2022 Michael Hayes; and the argmap contributors
+-- SPDX-License-Identifier: MIT
+
 -- A pandoc lua filter that replaces yaml encoded argument maps with tikz maps linked to generated mindmup maps.
 -- Modified to alternatively replace the argument maps with mapjs representation.
 --

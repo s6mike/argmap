@@ -1,5 +1,8 @@
 #!/usr/bin/env lua
 
+-- Copyright 2019 David Sanson; 2022 Michael Hayes; and the argmap contributors
+-- SPDX-License-Identifier: MIT
+
 -- a pipe that parses a yaml argument map and generates a JSON encoded mindmup map.
 
 -- Set which yaml library is used

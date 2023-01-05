@@ -19,3 +19,6 @@ module.exports = {
 	formatNoteToHtml: require('./core/content/format-note-to-html'),
 	version: 4
 };
+
+/* Copyright 2013 Damjan Vujnovic, David de Florinier, Gojko Adzic; 2022 Michael Hayes; and the mapjs contributors
+	 SPDX - License - Identifier: MIT */

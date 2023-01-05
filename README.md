@@ -822,3 +822,6 @@ Uses [Semantic Versioning 2.0.0](https://semver.org/) and [Conventional Commits 
 Though documentation is not yet precise and comprehensive! Lua code is well documented, but the bash scripts still need to be properly documented.
 
 Note that test files, and bash script functions beginning with __ are not considered part of a public API, and therefore may change during patch updates without warning.
+
+Copyright 2019 David Sanson; 2022 Michael Hayes; and the argmap contributors
+SPDX-License-Identifier: MIT

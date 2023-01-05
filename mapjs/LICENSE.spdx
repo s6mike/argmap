@@ -1,0 +1,10 @@
+SPDXVersion: SPDX-2.2
+DataLicense: CC0-1.0
+PackageName: mapjs
+PackageOriginator: Michael Hayes
+PackageLicenseDeclared: MIT
+PackageHomePage: https://github.com/s6mike/mapjs
+PackageDownloadLocation: git+ssh://git@github.com/s6mike/mapjs.git
+PackageCopyrightText: <text>Copyright 2022 Michael Hayes
+  Copyright (c) 2013 Damjan Vujnovic, David de Florinier, Gojko Adzic
+</text>

@@ -69,8 +69,8 @@ $.fn.domMapWidget = function (activityLog, mapModel, touchEnabled, imageInsertCo
 			'=': 'activateSiblingNodes',
 			'.': 'activateSelectedNode',
 			'/': 'toggleCollapse',
-			'a': 'openAttachment',
-			// 'i': 'editIcon',
+			// 'a': 'openAttachment', // Removed since not currently very useful
+			// 'i': 'editIcon', // Can't find any functionality
 		},
 		// Bad practice: self = this
 		// 	QUESTION: try removing?

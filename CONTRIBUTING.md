@@ -105,3 +105,6 @@ I have also set these up to be called from a pre-commit hook.
 ---------------------------
 
 This file was adapted from: [minimal/CONTRIBUTING.md at master · pages-themes/minimal](https://github.com/pages-themes/minimal/blob/master/docs/CONTRIBUTING.md) :)
+
+Copyright 2022 Michael Hayes and the argmap contributors
+SPDX-License-Identifier: MIT

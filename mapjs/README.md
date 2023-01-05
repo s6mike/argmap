@@ -96,6 +96,8 @@ As of 23 Nov 22, it runs with the latest versions of all of these, except [Hamme
 
 ## Keyboard Shortcuts
 
+The map must have keyboard focus for these to work:
+
 | Key Combination | Normal Horizontal Maps | Top-Down Maps |
 |-----------------|----------------------------|---|
 `return`  | Add sibling node after | Add child node after
@@ -108,7 +110,7 @@ As of 23 Nov 22, it runs with the latest versions of all of these, except [Hamme
 `shift+return` *while editing node text* | Start new line of text
 `f2` `space` | Edit text of currently selected node (space also selects all)
 `del` `backspace` | Delete active nodes
-`alt+click` | Add link between clicked node and selected node.
+`alt+click` | Add link between clicked node and selected node
 `down` | Select node below
 `up` | Select node above
 `left` | Select node left
@@ -139,5 +141,7 @@ As of 23 Nov 22, it runs with the latest versions of all of these, except [Hamme
 `esc` `0` | Activate root node of current selected tree, centre screen on it and reset zoom
 `alt+o` | Open a JSON file as a new map
 `alt+s` | Download current map as a JSON file
-`a` `click on paperclip icon` | Add / Open attachment
 `click on link icon` | Open url
+
+Copyright 2013 Damjan Vujnovic, David de Florinier, Gojko Adzic; 2022 Michael Hayes; and the mapjs contributors
+SPDX-License-Identifier: MIT

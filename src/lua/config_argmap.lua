@@ -1,3 +1,6 @@
+-- Copyright 2022 Michael Hayes and the argmap contributors
+-- SPDX-License-Identifier: MIT
+
 -- Configures global variables for lua files.
 
 -- If this file showing up as not found, then in calling file add:
