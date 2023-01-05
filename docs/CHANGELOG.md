@@ -10,6 +10,10 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
+## argmap 9.0.1
+
+- `mapjs/README.md`: Minor improvement for clarity.
+
 ## argmap 9.0.0
 
 - Rename `saveMap()` to `downloadMap()` since it's better description, and to avoid clashing with possible future functionality.
