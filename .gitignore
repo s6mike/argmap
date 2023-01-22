@@ -1,4 +1,4 @@
-PRIVATE*
+*PRIVATE*
 !PRIVATE-environment-argmap-sample.yml
 argmap.code-workspace
 .vscode/*

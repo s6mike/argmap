@@ -75,17 +75,35 @@ __test() {
   TESTNUM=$((TESTNUM + 1))
 }
 
+# TODO add function to loop through pairs
 test_getvar() {
   __init_tests
-  __test check_var_value "getvar bla" "$([[ $? -eq 1 ]])"                              #1
-  __test check_var_value "getvar bla.bla" "$([[ $? -eq 1 ]])"                          #2
-  __test check_var_value "getvar lang" en                                              #3
-  __test check_var_value "getvar node" "class: mapjs-node"                             #4
-  __test check_var_value "getvar node.class" mapjs-node                                #5
-  __test check_var_value "getvar PATH_MJS_HOME" /home/s6mike/git_projects/argmap/mapjs #6
-  __test check_var_value "getvar LIST_FILES_CONFIG" "- /home/s6mike/git_projects/argmap/environment-argmap.yml
+  func=getvar
+  test_function "$func" bla "$([[ $? -eq 1 ]])"                              #1
+  test_function "$func" bla.bla "$([[ $? -eq 1 ]])"                          #2
+  test_function "$func" DEFAULT_LANGUAGE en                                  #3
+  test_function "$func" node "class: mapjs-node"                             #4
+  test_function "$func" node.class mapjs-node                                #5
+  test_function "$func" PATH_MJS_HOME /home/s6mike/git_projects/argmap/mapjs #6
+  test_function "$func" LIST_FILES_CONFIG "- /home/s6mike/git_projects/argmap/environment-argmap.yml
 - /home/s6mike/git_projects/argmap/src/config-argmap.yml
-- /home/s6mike/git_projects/argmap/mapjs/src/config-mapjs.yml" #7
+- /home/s6mike/git_projects/argmap/mapjs/src/config-mapjs.yml
+- /home/s6mike/git_projects/argmap/mapjs/environment-mapjs.yml
+- /home/s6mike/git_projects/argmap/PRIVATE-environment-argmap.yml" #7
 }
 
-export -f __init_tests check_var_value __test test_getvar
+test_function() {
+  func="$1"
+  __test check_var_value "$func $2" "$3"
+}
+
+test_get_site_path() {
+  __init_tests
+  func=__get_site_path
+  test_function "$func" test/input/markdown/2-maps-swan-donkey.md input/markdown/2-maps-swan-donkey.md
+  test_function "$func" /home/s6mike/git_projects/argmap/test/input/markdown/2-maps-swan-donkey.md input/markdown/2-maps-swan-donkey.md
+  test_function "$func" test/output/html/example1-clearly-false-white-swan-simplified-1mapjs-fragment.html output/html/example1-clearly-false-white-swan-simplified-1mapjs-fragment.html
+}
+
+export -f __init_tests check_var_value __test
+export -f test_function test_getvar test_get_site_path

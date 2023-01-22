@@ -1,0 +1,12 @@
+---
+to: plain
+from: markdown-tex_math_dollars 
+# template: /home/s6mike/git_projects/argmap/config/environment-argmap.yml
+# output-file: /home/s6mike/git_projects/argmap/config/environment-argmap-processed.yaml
+metadata-files:
+  - /home/s6mike/git_projects/argmap/config/environment-argmap.yml
+  - /home/s6mike/git_projects/argmap/mapjs/environment-mapjs.yml
+  - /home/s6mike/git_projects/argmap/config/config-argmap.yml
+  - /home/s6mike/git_projects/argmap/mapjs/src/config-mapjs.yml
+  - /home/s6mike/git_projects/argmap/config/PRIVATE-environment-argmap.yml
+...

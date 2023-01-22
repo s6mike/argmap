@@ -1,0 +1,95 @@
+---
+########
+# Argmap environment data
+# For use in scripts, layouts and lua code.
+# Copyright 2022 Michael Hayes and the mapjs contributors
+# SPDX - License - Identifier: MIT
+########
+
+# Use  for referencing other yaml variables, since this is compatible with both bash and pandoc templates.
+
+# Paths
+
+## project
+WORKSPACE: /home/s6mike/git_projects/argmap
+
+## config
+PATH_DIR_CONFIG: /home/s6mike/git_projects/argmap/config
+
+# TODO: Now could instead just check two folders
+LIST_FILES_CONFIG:
+  - ${PATH_DIR_CONFIG}/environment-argmap.yml # This file
+  - ${PATH_DIR_CONFIG}/config-argmap.yml
+  - ${PATH_DIR_MJS}/src/config-mapjs.yml
+  - ${PATH_DIR_MJS}/environment-mapjs.yml
+  - ${PATH_DIR_CONFIG}/PRIVATE-environment-argmap.yml
+  - ${PATH_DIR_CONFIG}/config/environment-argmap-processed.yaml
+  # - ${PATH_DIR_CONFIG}/environment-conda-argmap.yml
+
+## conda
+CONDA_ENV_ARGMAP: argmap
+CONDA_PREFIX: /opt/miniconda3/envs/argmap
+PATH_FILE_ENV_CONDA: ${WORKSPACE}/config/environment-conda-argmap.yml
+
+## web server
+DIR_PUBLIC: public
+PATH_DIR_PUBLIC: ${PATH_DIR_MJS}/public
+PORT_DEBUG: 9221
+PORT_DEV_SERVER: 9001
+
+## argmap
+PATH_DIR_SCRIPTS: /home/s6mike/git_projects/argmap/scripts
+PATH_DIR_ARGMAP_SRC: /home/s6mike/git_projects/argmap/src
+PATH_FILE_CONFIG_ARGMAP: ${WORKSPACE}/config/config-argmap.yml
+PATH_FILE_ENV_ARGMAP: ${WORKSPACE}/config/environment-argmap.yml # This file
+PATH_FILE_ENV_ARGMAP_PRIVATE: ${WORKSPACE}/config/PRIVATE-environment-argmap.yml
+PATH_FILE_PANDOC_DEFAULT_CONFIG_PREPROCESSOR: ${WORKSPACE}/config/pandoc-defaults-config-preprocessor.yml
+PATH_FILE_CONFIG_PROCESSED_VARIABLES: ${WORKSPACE}/config/config/environment-argmap-processed.yaml
+
+## lua
+PATH_DIR_ARGMAP_LUA: /home/s6mike/git_projects/argmap/src/lua
+LUA_CPATH: /home/s6mike/git_projects/argmap/lua_modules/lib/lua/5.3/?.so;
+LUA_PATH: /home/s6mike/git_projects/argmap/src/lua/?.lua;/home/s6mike/git_projects/argmap/lua_modules/share/lua/5.3/?.lua;/home/s6mike/git_projects/argmap/lua_modules/share/lua/5.3/?/init.lua;
+
+## mapjs
+DIR_MJS: mapjs
+PATH_DIR_MJS: /home/s6mike/git_projects/argmap/mapjs
+PATH_FILE_ENV_MAPJS: ${WORKSPACE}/${DIR_MJS}/environment-mapjs.yml
+PATH_FILE_CONFIG_MJS: ${WORKSPACE}/${DIR_MJS}/src/config-mapjs.yml
+
+## layouts
+PATH_DIR_LAYOUTS: ${WORKSPACE}/src/layouts
+PATH_DIR_INCLUDES: ${PATH_DIR_ARGMAP_SRC}/layouts/includes
+PATH_DIR_TEMPLATES: ${WORKSPACE}/src/layouts/templates
+FILE_TEMPLATE_HTML_ARGMAP_MAIN: ${PATH_DIR_ARGMAP_SRC}/layouts/templates/pandoc-mapjs-main-html5.html
+PATH_INCLUDES_ARGMAP_CONTAINER: ${PATH_DIR_LAYOUTS}/includes/mapjs-map-container.html
+PATH_INCLUDES_ARGMAP_CONTROLS: ${PATH_DIR_LAYOUTS}/includes/mapjs-widget-controls.html
+
+## pandoc
+PANDOC_DATA_DIR: /opt/miniconda3/envs/argmap/share/pandoc
+
+## Testing
+# TODO: Add variables for /home/s6mike/git_projects/argmap/test, /input, /examples, mapjs-json, markdown
+INPUT_FILE_YML: /home/s6mike/git_projects/argmap/test/input/example1-clearly-false-white-swan-simplified.yml
+INPUT_FILE_YML_NOTES: /home/s6mike/git_projects/argmap/examples/example-2.yml
+INPUT_FILE_JSON: /home/s6mike/git_projects/argmap/test/input/mapjs-json/example1-clearly-false-white-swan-simplified.json
+INPUT_FILE_MD0: /home/s6mike/git_projects/argmap/test/input/markdown/example1-clearly-false-white-swan-simplified-0mapjs.md
+INPUT_FILE_MD: /home/s6mike/git_projects/argmap/test/input/markdown/example1-clearly-false-white-swan-simplified-1mapjs.md
+INPUT_FILE_MD2: /home/s6mike/git_projects/argmap/test/input/markdown/example1-clearly-false-white-swan-simplified-2mapjs.md
+INPUT_FILE_MD_META: /home/s6mike/git_projects/argmap/test/input/markdown/example1-clearly-false-white-swan-simplified-meta-mapjs.md
+INPUT_FILE_JSON2: /home/s6mike/git_projects/argmap/test/input/mapjs-json/example2-clearly-false-white-swan-v3.mup
+INPUT_FILE_JSON_LINKS: /home/s6mike/git_projects/argmap/test/input/mapjs-json/example1-clearly-false-white-swan-simplified-with-links.json
+PATH_INPUT_FILE_HTML: ${PATH_MJS_HOME}/${DIR_PUBLIC}/input/example1-clearly-false-white-swan-simplified.html
+PATH_OUTPUT_FILE_HTML: ${PATH_MJS_HOME}/${DIR_PUBLIC}/output/html/example1-clearly-false-white-swan-simplified.html
+
+## External to project
+DIR_PROJECTS: /home/s6mike/git_projects/
+PATH_MISC_DEV: /home/s6mike/git_projects//misc
+PATH_CHROME_PROFILE_DEBUG: ${DIR_PROJECTS}/misc/chrome-debug-argmap
+PATH_TEST_LOG: "${DIR_PROJECTS}/misc/tests_output.txt"
+DEFAULT_DIFF_FILENAME: /home/s6mike/git_projects//mapjs-git-bisect/diffs/all_mapjs_fixes_latest_modified.diff
+
+# Deprecated
+PATH_MJS_HOME: ${WORKSPACE}/${DIR_MJS}
+ENV_FILE: /home/s6mike/git_projects/argmap/environment.yml
+PATH_FILE_CONDA_ENV: /home/s6mike/git_projects/argmap/environment-conda-argmap.yml

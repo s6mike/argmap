@@ -7,14 +7,17 @@
 ########
 
 # Argmap document metadata
-
-lang: en
+DEFAULT_LANGUAGE: en
 MJS_CSS: &MJS_CSS /mapjs-default-styles.css
 
 # All CSS files used by html output.
 #   However, pandoc templates won't expand the variables
 #   , so need to reference anchor earlier in same doc instead.
 css: # Default pandoc template value
-  - *MJS_CSS 
+  - ${MJS_CSS}
+
+# DEPRECATED
+
+lang: en
 
 ...

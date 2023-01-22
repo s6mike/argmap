@@ -10,6 +10,10 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
+## argmap 10.18.0
+
+- `test/test_scripts/bash_aliases_argmap_test.sh`: Update and add tests
+
 ## argmap 10.17.0
 
 - `scripts/bash_aliases_mapjs.sh`:

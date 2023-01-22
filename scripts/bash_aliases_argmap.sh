@@ -17,32 +17,37 @@ alias j2hfa='2hf test/input/mapjs-json/example1-clearly-false-white-swan-simplif
 # TODO: try shortcut to run test with chrome headless and check that it's correct: https://workflowy.com/#/8aac548986a4
 #   QUESTION: review mapjs tests?
 
+# TEST: test_get_site_path()
 __get_site_path() {
-  input_path="${1}"
+  input_path="$1"
   case $input_path in
   /*)
     full_path=$input_path
     ;;
   *)
-    full_path=$WORKSPACE/$input_path
+    full_path=$(getvar WORKSPACE)/$input_path
     ;;
   esac
   # Substitutes mapjs/public for test so it's using public folder, then removes leading part of path so its relative to public/:
-  site_path="${full_path/test/$DIR_MJS/$DIR_PUBLIC}"
-  # echo "site_path: $site_path"
-  output_path=$(realpath --no-symlinks --relative-to="$PATH_DIR_PUBLIC" "$site_path")
+  site_path="${full_path/test/$(getvar DIR_MJS)/$(getvar DIR_PUBLIC)}"
+  output_path=$(realpath --no-symlinks --relative-to="$(getvar PATH_DIR_PUBLIC)" "$site_path")
   echo "$output_path"
 }
+
+# PATH_INPUT_FILE_HTML=$(realpath --no-symlinks --relative-to="$(getvar PATH_DIR_PUBLIC)" "$(getvar PATH_DIR_PUBLIC)/input/example1-clearly-false-white-swan-simplified.html")
+# export PATH_INPUT_FILE_HTML
+# PATH_OUTPUT_FILE_HTML=$(realpath --no-symlinks --relative-to="$(getvar PATH_DIR_PUBLIC)" "$(getvar PATH_DIR_PUBLIC)/output/html/example1-clearly-false-white-swan-simplified.html")
+# export PATH_OUTPUT_FILE_HTML
 
 # For opening html pages with debug port open
 open_debug() { # odb /home/s6mike/git_projects/argmap/mapjs/public/output/html/example2-clearly-false-white-swan-v3.html
   # TODO: try chrome headless: https://workflowy.com/#/8aac548986a4
   # TODO: user data dir doesn't seem to work, showing normal linux browser
   webpack_server_start
-  input_path="${1:-$DIR_HTML/$PATH_OUTPUT_FILE_HTML}"
+  input_path="${1:-$(getvar DIR_HTML)/$(getvar PATH_OUTPUT_FILE_HTML)}"
   site_path=$(__get_site_path "$input_path")
   if [ "$site_path" != "" ]; then
-    google-chrome --remote-debugging-port="$PORT_DEBUG" --user-data-dir="$PATH_CHROME_PROFILE_DEBUG" --disable-extensions --hide-crash-restore-bubble --no-default-browser-check "http://localhost:$PORT_DEV_SERVER/$site_path" 2>/dev/null &
+    google-chrome --remote-debugging-port="$(getvar PORT_DEBUG)" --user-data-dir="$(getvar PATH_CHROME_PROFILE_DEBUG)" --disable-extensions --hide-crash-restore-bubble --no-default-browser-check "http://localhost:$(getvar PORT_DEV_SERVER)/$site_path" 2>/dev/null &
     disown # stops browser blocking terminal and allows all tabs to open in single window.
   fi
 }
@@ -189,9 +194,9 @@ pandoc_argmap() { # pandoc_argmap input output template extra_variables
   output_name=$(basename "$input")
   ext=${output_name#*.}
 
-  # TODO: prob better way to do this:
-  name=${output_name%%.*}
+  # Prev way:
   # name=$(basename --suffix=".$ext" "$input")
+  name=${output_name%%.*}
 
   # echo "Input: $ext"
   case $ext in
@@ -242,7 +247,7 @@ md2pdf() { # md2pdf test/input/example.md (output filename) (optional pandoc arg
   mkdir --parent "$(dirname "$output")" # Ensures output folder exists
   # Using "${@:3}" to allow 3rd argument onwards to be passed directly to pandoc.
   # QUESTION: Update to use pandoc_argmap?
-  pandoc "$1" -o "$output" "${@:3}" --metadata-file="$PATH_FILE_MJS_CONFIG" --lua-filter="$PATH_DIR_ARGMAP_LUA/pandoc-argmap.lua" --pdf-engine lualatex --template="$WORKSPACE/examples/example-template.latex" "--metadata=lang:$LANGUAGE_PANDOC" --data-dir="$PANDOC_DATA_DIR" >/dev/null &&
+  pandoc "$1" -o "$output" "${@:3}" --metadata-file="$PATH_FILE_MJS_CONFIG" --lua-filter="$PATH_DIR_ARGMAP_LUA/pandoc-argmap.lua" --pdf-engine lualatex --template="$WORKSPACE/examples/example-template.latex" --data-dir="$PANDOC_DATA_DIR" >/dev/null &&
     echo "$output"
   open_debug "$output"
   # open-server "$DIR_HTML_SERVER_OUTPUT/$name.pdf"
@@ -255,7 +260,7 @@ md2np() {
   output=$DIR_PUBLIC_OUTPUT/html/${2:-$name}.ast
   mkdir --parent "$(dirname "$output")" # Ensures output folder exists
   # QUESTION: Update to use pandoc_argmap?
-  pandoc "$input" --to=native --metadata-file="$PATH_FILE_MJS_CONFIG" --template "$FILE_TEMPLATE_HTML_ARGMAP_MAIN" --metadata=css:"$MJS_CSS" --metadata=toolbar_main:toolbar-mapjs-main -o "$output" --lua-filter="$PATH_DIR_ARGMAP_LUA/pandoc-argmap.lua" "--metadata=lang:$LANGUAGE_PANDOC" --data-dir="$PANDOC_DATA_DIR" >/dev/null
+  pandoc "$input" --to=native --metadata-file="$PATH_FILE_MJS_CONFIG" --template "$FILE_TEMPLATE_HTML_ARGMAP_MAIN" --metadata=css:"$MJS_CSS" --metadata=toolbar_main:toolbar-mapjs-main -o "$output" --lua-filter="$PATH_DIR_ARGMAP_LUA/pandoc-argmap.lua" --data-dir="$PANDOC_DATA_DIR" >/dev/null
   code "$output"
 }
 
@@ -290,7 +295,7 @@ md2htm() { # md2htm test/input/markdown/example-updated.md (output filename) (op
   mkdir --parent "$(dirname "$output")" # Ensures output folder exists
   # TODO: Would call pandoc-argument, but it was breaking, and this function is not really very useful anyway, so not bothering.
   # Using "${@:3}" to allow 3rd argument onwards to be passed directly to pandoc.
-  pandoc "$input" -o "$output" "${@:3}" --metadata-file="$PATH_FILE_MJS_CONFIG" --include-after-body="$PATH_DIR_INCLUDES/webpack-dist-tags.html" --metadata=css:"$MJS_CSS" --lua-filter="$PATH_DIR_ARGMAP_LUA/pandoc-argmap.lua" "--metadata=lang:$LANGUAGE_PANDOC" --data-dir="$PANDOC_DATA_DIR" >/dev/null &&
+  pandoc "$input" -o "$output" "${@:3}" --metadata-file="$PATH_FILE_MJS_CONFIG" --include-after-body="$PATH_DIR_INCLUDES/webpack-dist-tags.html" --metadata=css:"$MJS_CSS" --lua-filter="$PATH_DIR_ARGMAP_LUA/pandoc-argmap.lua" --data-dir="$PANDOC_DATA_DIR" >/dev/null &&
     echo "$output"
   open_debug "$output"
 }

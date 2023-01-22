@@ -11,20 +11,28 @@
 # Paths
 
 ## project
-WORKSPACE: ${WORKSPACE}
+WORKSPACE: /home/s6mike/git_projects/argmap
 
+## config
+PATH_DIR_CONFIG: ${WORKSPACE}/config
+
+# Processed config files are at top, so their results are used ahead of raw config files
+#   But since __getvar_from_yaml filters out results matching ${*}, that shouldn't matter
+# QUESTION: Just check two folders instead?
 LIST_FILES_CONFIG:
+  - ${PATH_FILE_CONFIG_PROCESSED_VARIABLES}
   - ${PATH_FILE_ENV_ARGMAP} # This file
   - ${PATH_FILE_CONFIG_ARGMAP}
   - ${PATH_FILE_CONFIG_MJS}
   - ${PATH_FILE_ENV_MAPJS}
   - ${PATH_FILE_ENV_ARGMAP_PRIVATE}
+  # - ${PATH_FILE_CONFIG_PROCESSED_VARIABLES}
   # - ${PATH_FILE_ENV_CONDA}
 
 ## conda
 CONDA_ENV_ARGMAP: argmap
 CONDA_PREFIX: /opt/miniconda3/envs/argmap
-PATH_FILE_ENV_CONDA: ${WORKSPACE}/environment-conda-argmap.yml
+PATH_FILE_ENV_CONDA: ${PATH_DIR_CONFIG}/environment-conda-argmap.yml
 
 ## web server
 DIR_PUBLIC: public
@@ -35,9 +43,11 @@ PORT_DEV_SERVER: 9001
 ## argmap
 PATH_DIR_SCRIPTS: ${WORKSPACE}/scripts
 PATH_DIR_ARGMAP_SRC: ${WORKSPACE}/src
-PATH_FILE_CONFIG_ARGMAP: ${WORKSPACE}/src/config-argmap.yml
-PATH_FILE_ENV_ARGMAP: ${WORKSPACE}/environment-argmap.yml # This file
-PATH_FILE_ENV_ARGMAP_PRIVATE: ${WORKSPACE}/PRIVATE-environment-argmap.yml
+PATH_FILE_CONFIG_ARGMAP: ${PATH_DIR_CONFIG}/config-argmap.yml
+PATH_FILE_ENV_ARGMAP: ${PATH_DIR_CONFIG}/environment-argmap.yml # This file
+PATH_FILE_ENV_ARGMAP_PRIVATE: ${PATH_DIR_CONFIG}/PRIVATE-environment-argmap.yml
+PATH_FILE_PANDOC_DEFAULT_CONFIG_PREPROCESSOR: ${PATH_DIR_CONFIG}/pandoc-defaults-config-preprocessor.yml
+PATH_FILE_CONFIG_PROCESSED_VARIABLES: ${PATH_DIR_CONFIG}/environment-argmap-processed.yaml
 
 ## lua
 PATH_DIR_ARGMAP_LUA: ${WORKSPACE}/src/lua
@@ -59,11 +69,10 @@ PATH_INCLUDES_ARGMAP_CONTAINER: ${PATH_DIR_INCLUDES}/mapjs-map-container.html
 PATH_INCLUDES_ARGMAP_CONTROLS: ${PATH_DIR_INCLUDES}/mapjs-widget-controls.html
 
 ## pandoc
-LANGUAGE_PANDOC: en
 PANDOC_DATA_DIR: ${CONDA_PREFIX}/share/pandoc
 
 ## Testing
-# TODO: Use variable for ${WORKSPACE}/test, /input, /examples, mapjs-json, markdown
+# TODO: Add variables for ${WORKSPACE}/test, /input, /examples, mapjs-json, markdown
 INPUT_FILE_YML: ${WORKSPACE}/test/input/example1-clearly-false-white-swan-simplified.yml
 INPUT_FILE_YML_NOTES: ${WORKSPACE}/examples/example-2.yml
 INPUT_FILE_JSON: ${WORKSPACE}/test/input/mapjs-json/example1-clearly-false-white-swan-simplified.json
@@ -73,20 +82,15 @@ INPUT_FILE_MD2: ${WORKSPACE}/test/input/markdown/example1-clearly-false-white-sw
 INPUT_FILE_MD_META: ${WORKSPACE}/test/input/markdown/example1-clearly-false-white-swan-simplified-meta-mapjs.md
 INPUT_FILE_JSON2: ${WORKSPACE}/test/input/mapjs-json/example2-clearly-false-white-swan-v3.mup
 INPUT_FILE_JSON_LINKS: ${WORKSPACE}/test/input/mapjs-json/example1-clearly-false-white-swan-simplified-with-links.json
-PATH_INPUT_FILE_HTML: '$(realpath --no-symlinks --relative-to: "${PATH_DIR_PUBLIC}" "${PATH_DIR_PUBLIC}/input/example1-clearly-false-white-swan-simplified.html")' # QUESTION: Does this value need double quoting because it contains : ?
-PATH_OUTPUT_FILE_HTML: '$(realpath --no-symlinks --relative-to: "${PATH_DIR_PUBLIC}" "${PATH_DIR_PUBLIC}/output/html/example1-clearly-false-white-swan-simplified.html")' # QUESTION: Does this value need double quoting because it contains : ?
+PATH_INPUT_FILE_HTML: ${PATH_DIR_PUBLIC}/input/example1-clearly-false-white-swan-simplified.html
+PATH_OUTPUT_FILE_HTML: ${PATH_DIR_PUBLIC}/output/html/example1-clearly-false-white-swan-simplified.html
 
-## external to project
+## External to project
+DIR_PROJECTS: /home/s6mike/git_projects
 PATH_MISC_DEV: ${DIR_PROJECTS}/misc
 PATH_CHROME_PROFILE_DEBUG: ${PATH_MISC_DEV}/chrome-debug-argmap
 PATH_TEST_LOG: "${PATH_MISC_DEV}/tests_output.txt"
 DEFAULT_DIFF_FILENAME: ${DIR_PROJECTS}/mapjs-git-bisect/diffs/all_mapjs_fixes_latest_modified.diff
-
-## Not used, but for reference:
-DIR_PROJECTS: $(dirname "${WORKSPACE}") # Needed for scripts/argmap.env tmp chrome profile
-
-# Automatically listed (but not complete) ()
-#   from: https://askubuntu.com/questions/1182024/how-to-display-all-new-variables-after-terminal-started#answer-1182025
 
 # Deprecated
 PATH_MJS_HOME: ${PATH_DIR_MJS}

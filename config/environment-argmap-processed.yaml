@@ -1,0 +1,48 @@
+PATH_DIR_CONFIG: /home/s6mike/git_projects/argmap/config
+LIST_FILES_CONFIG:
+  - /home/s6mike/git_projects/argmap/config/environment-argmap-processed.yaml
+  - /home/s6mike/git_projects/argmap/config/environment-argmap.yml
+  - /home/s6mike/git_projects/argmap/config/config-argmap.yml
+  - /home/s6mike/git_projects/argmap/mapjs/src/config-mapjs.yml
+  - /home/s6mike/git_projects/argmap/mapjs/environment-mapjs.yml
+  - /home/s6mike/git_projects/argmap/config/PRIVATE-environment-argmap.yml
+PATH_FILE_ENV_CONDA: /home/s6mike/git_projects/argmap/config/environment-conda-argmap.yml
+PATH_DIR_PUBLIC: /home/s6mike/git_projects/argmap/mapjs/public
+PATH_DIR_SCRIPTS: /home/s6mike/git_projects/argmap/scripts
+PATH_DIR_ARGMAP_SRC: /home/s6mike/git_projects/argmap/src
+PATH_FILE_CONFIG_ARGMAP: /home/s6mike/git_projects/argmap/config/config-argmap.yml
+PATH_FILE_ENV_ARGMAP: /home/s6mike/git_projects/argmap/config/environment-argmap.yml
+PATH_FILE_ENV_ARGMAP_PRIVATE: /home/s6mike/git_projects/argmap/config/PRIVATE-environment-argmap.yml
+PATH_FILE_PANDOC_DEFAULT_CONFIG_PREPROCESSOR: /home/s6mike/git_projects/argmap/config/pandoc-defaults-config-preprocessor.yml
+PATH_FILE_CONFIG_PROCESSED_VARIABLES: /home/s6mike/git_projects/argmap/config/environment-argmap-processed.yaml
+PATH_DIR_ARGMAP_LUA: /home/s6mike/git_projects/argmap/src/lua
+LUA_CPATH: /home/s6mike/git_projects/argmap/lua_modules/lib/lua/5.3/?.so;
+LUA_PATH: /home/s6mike/git_projects/argmap/src/lua/?.lua;/home/s6mike/git_projects/argmap/lua_modules/share/lua/5.3/?.lua;/home/s6mike/git_projects/argmap/lua_modules/share/lua/5.3/?/init.lua;
+PATH_DIR_MJS: /home/s6mike/git_projects/argmap/mapjs
+PATH_FILE_ENV_MAPJS: /home/s6mike/git_projects/argmap/mapjs/environment-mapjs.yml
+PATH_FILE_CONFIG_MJS: /home/s6mike/git_projects/argmap/mapjs/src/config-mapjs.yml
+PATH_DIR_LAYOUTS: /home/s6mike/git_projects/argmap/src/layouts
+PATH_DIR_INCLUDES: /home/s6mike/git_projects/argmap/src/layouts/includes
+PATH_DIR_TEMPLATES: /home/s6mike/git_projects/argmap/src/layouts/templates
+FILE_TEMPLATE_HTML_ARGMAP_MAIN: /home/s6mike/git_projects/argmap/src/layouts/templates/pandoc-mapjs-main-html5.html
+PATH_INCLUDES_ARGMAP_CONTAINER: /home/s6mike/git_projects/argmap/src/layouts/includes/mapjs-map-container.html
+PATH_INCLUDES_ARGMAP_CONTROLS: /home/s6mike/git_projects/argmap/src/layouts/includes/mapjs-widget-controls.html
+PANDOC_DATA_DIR: /opt/miniconda3/envs/argmap/share/pandoc
+INPUT_FILE_YML: /home/s6mike/git_projects/argmap/test/input/example1-clearly-false-white-swan-simplified.yml
+INPUT_FILE_YML_NOTES: /home/s6mike/git_projects/argmap/examples/example-2.yml
+INPUT_FILE_JSON: /home/s6mike/git_projects/argmap/test/input/mapjs-json/example1-clearly-false-white-swan-simplified.json
+INPUT_FILE_MD0: /home/s6mike/git_projects/argmap/test/input/markdown/example1-clearly-false-white-swan-simplified-0mapjs.md
+INPUT_FILE_MD: /home/s6mike/git_projects/argmap/test/input/markdown/example1-clearly-false-white-swan-simplified-1mapjs.md
+INPUT_FILE_MD2: /home/s6mike/git_projects/argmap/test/input/markdown/example1-clearly-false-white-swan-simplified-2mapjs.md
+INPUT_FILE_MD_META: /home/s6mike/git_projects/argmap/test/input/markdown/example1-clearly-false-white-swan-simplified-meta-mapjs.md
+INPUT_FILE_JSON2: /home/s6mike/git_projects/argmap/test/input/mapjs-json/example2-clearly-false-white-swan-v3.mup
+INPUT_FILE_JSON_LINKS: /home/s6mike/git_projects/argmap/test/input/mapjs-json/example1-clearly-false-white-swan-simplified-with-links.json
+PATH_INPUT_FILE_HTML: /home/s6mike/git_projects/argmap/mapjs/public/input/example1-clearly-false-white-swan-simplified.html
+PATH_OUTPUT_FILE_HTML: /home/s6mike/git_projects/argmap/mapjs/public/output/html/example1-clearly-false-white-swan-simplified.html
+PATH_MISC_DEV: /home/s6mike/git_projects/misc
+PATH_CHROME_PROFILE_DEBUG: /home/s6mike/git_projects/misc/chrome-debug-argmap
+PATH_TEST_LOG: "/home/s6mike/git_projects/misc/tests_output.txt"
+DEFAULT_DIFF_FILENAME: /home/s6mike/git_projects/mapjs-git-bisect/diffs/all_mapjs_fixes_latest_modified.diff
+PATH_MJS_HOME: /home/s6mike/git_projects/argmap/mapjs
+ENV_FILE: /home/s6mike/git_projects/argmap/environment.yml
+PATH_FILE_CONDA_ENV: /home/s6mike/git_projects/argmap/environment-conda-argmap.yml

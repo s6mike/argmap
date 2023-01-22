@@ -15,6 +15,8 @@ export PATH_DIR_SCRIPTS="$WORKSPACE/scripts"
 # shellcheck source=/home/s6mike/git_projects/argmap/scripts/init_read_config.sh
 source "$PATH_DIR_SCRIPTS/init_read_config.sh"
 
+return 1
+
 # Needed for scripts/argmap.env tmp chrome profile:
 DIR_PROJECTS=$(dirname "$WORKSPACE")
 export DIR_PROJECTS
