@@ -323,6 +323,46 @@
             "port": 9221,
             "webRoot": "${workspaceFolder}/${config:env.PATH_DIR_MAPJS_ROOT}",
             "sourceMaps": true,
-        }
+        },
+        {
+          "name": "netlify dev",
+          "type": "node",
+          "request": "launch",
+          "skipFiles": [
+            "<node_internals>/**"
+          ],
+          "outFiles": [
+            "${workspaceFolder}/mapjs/public/.netlify/functions-serve/**/*.js"
+          ],
+          "program": "${workspaceFolder}/mapjs/node_modules/.bin/netlify",
+          "args": [
+            "dev"
+          ],
+          "console": "integratedTerminal",
+          "env": {
+            "BROWSER": "none"
+          },
+          "serverReadyAction": {
+            "pattern": "Server now ready on (https?://[\\w:.-]+)",
+            "uriFormat": "%s",
+            "action": "debugWithChrome"
+          }
+        },
+        // {
+        //   "name": "netlify functions:serve",
+        //   "type": "node",
+        //   "request": "launch",
+        //   "skipFiles": [
+        //     "<node_internals>/**"
+        //   ],
+        //   "outFiles": [
+        //     "${workspaceFolder}/.netlify/functions-serve/**/*.js"
+        //   ],
+        //   "program": "${workspaceFolder}/node_modules/.bin/netlify",
+        //   "args": [
+        //     "functions:serve"
+        //   ],
+        //   "console": "integratedTerminal"
+        // }
     ]
 }

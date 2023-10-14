@@ -57,6 +57,13 @@ source "$WORKSPACE/scripts/bash_aliases_argmap.sh"
 # Add pandoc bash completions
 eval "$(pandoc --bash-completion)"
 
+# tabtab source for netlify package
+# uninstall by removing these lines
+
+# shellcheck source=/dev/null
+# shellcheck disable=SC2015
+[ -f ~/.config/tabtab/__tabtab.bash ] && . ~/.config/tabtab/__tabtab.bash || true
+
 # Add Nodejs flags:
 # Didn't fix type: json import error, leaving for reference.
 # export NODE_OPTIONS="--experimental-modules --experimental-json-modules"

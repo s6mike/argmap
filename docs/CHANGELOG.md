@@ -6,6 +6,12 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
+## argmap 22.0.1
+
+- Add netlify config changes:
+  - `.vscode/`: Add netlify integrations to `launch.json`, `settings.json`
+  - `scripts/`: Add netlify integrations to `scripts/argmap_init_script.sh`
+
 ## argmap 22.0.0
 
 - `mapjs/scripts/mapjs.env`: Remove references to old dirs. BREAKING
