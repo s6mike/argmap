@@ -6,6 +6,10 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
+## argmap 21.1.4
+
+`.gitignore`: Add .netlify/
+
 ## argmap 21.1.3
 
 - `scripts/bash_aliases_argmap.sh``: Add getvar

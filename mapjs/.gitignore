@@ -13,3 +13,6 @@ npm-debug.log
 public/js/
 test/bundle*
 mapjs/examples/assets/webpack-*.js
+
+# Local Netlify folder
+.netlify/
