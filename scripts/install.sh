@@ -231,13 +231,16 @@ ln -s "$PATH_FILE_OUTPUT_EXAMPLE" "$PATH_DIR_PUBLIC/index.html"
 
 # QUESTION: Do I need above cd if I'm using prefix?
 npm --prefix "$(getvar PATH_DIR_MAPJS_ROOT)" install
-# QUESTION: Use force instead?
+
+# ISSUE: npm audit on netlify vulnerabilities doesn't work - better to just build using package-lock?
+#   QUESTION: Use force instead?
 npm audit fix --prefix "$(getvar PATH_DIR_MAPJS_ROOT)" --legacy-peer-deps >npm_audit_output.txt
 
 __build_mapjs
 
 # SECTION 5: yq
 sudo wget -qO "$HOME/.local/bin/yq" https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+chmod u+x "$HOME/.local/bin/yq"
 
 # SECTION X: Clientside Lua
 # ---------------------------------------------------
