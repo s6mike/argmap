@@ -6,6 +6,11 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
+## argmap 22.0.2
+
+- `scripts/install.sh`: Remove  "$PATH_DIR_PUBLIC/index.html"
+symbolic link in favour of netlify redirect
+
 ## argmap 22.0.1
 
 - Add netlify config changes:

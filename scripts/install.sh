@@ -216,9 +216,10 @@ ln -s "$DIR_PUBLIC_OUTPUT" "$PATH_DIR_PUBLIC/."
 rm "$PATH_DIR_PUBLIC/$(basename "$DIR_HTML_INPUT")"
 ln -s "$DIR_HTML_INPUT" "$PATH_DIR_PUBLIC/."
 
-# Add index.html
-rm "$PATH_DIR_PUBLIC/index.html"
-ln -s "$PATH_FILE_OUTPUT_EXAMPLE" "$PATH_DIR_PUBLIC/index.html"
+# Use netlify redirect instead
+#   Add index.html
+#   rm "$PATH_DIR_PUBLIC/index.html"
+#   ln -s "$PATH_FILE_OUTPUT_EXAMPLE" "$PATH_DIR_PUBLIC/index.html"
 
 #nodejs installed with conda
 
