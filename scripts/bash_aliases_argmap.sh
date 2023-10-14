@@ -64,6 +64,7 @@ __update_repo() { # Running at end of test script
   # __clean_repo # Decided not to delete script output in case there are clues
   __check_lua_debug
   __check_js_debug
+  # TODO: npm install npm@latest
   __check_npm_updates
 }
 
@@ -125,15 +126,15 @@ __save_env() {
 # TODO add option for .mup vs .json output
 a2m() {                                     # a2m test/input/example1-clearly-false-white-swan-simplified.yaml (output path)
   name=$(basename --suffix=".yaml" "$1") && # && ensures error failure stops remaining commands.
-    output=${2:-$PATH_DIR_PUBLIC_MAPJS_JSON/$name.json} &&
+    output=${2:-$(getvar PATH_DIR_PUBLIC_MAPJS_JSON)/$name.json} &&
     mkdir --parent "$(dirname "$output")" && # Ensures output folder exists
-    lua "$PATH_DIR_ARGMAP_LUA/argmap2mup.lua" "$1" >"$output" &&
+    lua "$(getvar PATH_DIR_ARGMAP_LUA)/argmap2mup.lua" "$1" >"$output" &&
     echo "$output" "${@:2}" # Output path can be piped, along with any extra arguments
 }
 
 # Convert to map.js and upload
 # Declare function inside () to open it in subshell, to stop file_id being remembered, in case variable removed from config file
-a2mu() (# a2mu test/output/example1-simple.yaml
+a2mu() ( # a2mu test/output/example1-simple.yaml
   name=$(basename --suffix=".yaml" "$1")
   local folder_id
   folder_id=$(getvar GDRIVE_FOLDER_ID_MAPJS_DEFAULT)
