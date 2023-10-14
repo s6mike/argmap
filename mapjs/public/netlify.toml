@@ -1,0 +1,20 @@
+[[redirects]]
+  from = "/"
+  to = "/output/html/example1-clearly-false-white-swan-simplified.html"
+  status = 200
+  force = false
+
+# sample dev block in the toml
+# note: each of these fields are OPTIONAL and should only be used if you need an override
+[dev]
+  # QUESTION: Can I generate using PORT_DEV_SERVER? Best to generate netlify env variable instead of using config file - but could use pandoc template
+  #   If you would like to set environment variables for use locally with the Netlify CLI, use context.dev instead.
+  #   https://docs.netlify.com/configure-builds/file-based-configuration/#use-a-local-build-plugin
+  #   https://docs.netlify.com/configure-builds/file-based-configuration/#use-the-build-command-to-substitute-environment-variable-values
+  port = 9001 # The port that the netlify dev will be accessible on
+  # TODO how do I open in odb browser by default?
+  #   Maybe this?: https://cli.netlify.com/vscode/#add-vscode-launch-configurations
+  autoLaunch = false # a Boolean value that determines if Netlify Dev launches the local server address in your browser
+  # command = "yarn start" # Command to start your dev server
+  # publish = "public" # The path to your static content folder
+  # envFiles = [".env.development.local", ".env.local", ".env.development", ".env"] # The env files to use, ordered by priority (left - highest, right - lowest)

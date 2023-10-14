@@ -8,7 +8,7 @@
 
 ## argmap 21.1.2
 
-- config/config-argmap-paths.yaml: Add idea
+- `config/config-argmap-paths.yaml`: Add idea
 
 ## argmap 21.1.1
 

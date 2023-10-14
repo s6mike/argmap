@@ -1,0 +1,10 @@
+output/html*
+!output/html/example1-clearly-false-white-swan-simplified.html
+!output/html/example2-clearly-false-white-swan-v3.html
+output/mapjs-json*
+!output/mapjs-json/example1-clearly-false-white-swan-simplified.json
+!output/mapjs-json/example2-clearly-false-white-swan-v3.json
+index.html
+
+# Local Netlify folder
+.netlify

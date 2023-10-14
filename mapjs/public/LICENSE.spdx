@@ -1,0 +1,11 @@
+SPDXVersion: SPDX-2.2
+DataLicense: CC0-1.0
+PackageName: mapjs-argview
+PackageOriginator: Michael Hayes
+PackageLicenseDeclared: MIT
+PackageHomePage: https://github.com/s6mike/mapjs-argview
+PackageDownloadLocation: git+ssh://git@github.com/s6mike/mapjs-argview.git
+PackageCopyrightText: <text>Copyright 2022 Michael Hayes
+  Copyright (c) 2019 David Sanson (argmap)
+  Copyright (c) 2013 Damjan Vujnovic, David de Florinier, Gojko Adzic (mapjs)
+</text>
