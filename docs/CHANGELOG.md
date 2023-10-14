@@ -6,9 +6,10 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
-## argmap 21.1.5
+## argmap 22.0.0
 
-- `scripts/install.sh`: Add chmod for yq install
+- `mapjs/scripts/mapjs.env`: Remove references to old dirs. BREAKING
+- `mapjs/config/environment-mapjs-defaults.yaml`: Change from mapjs/test to mapjs/public BREAKING
 
 ## argmap 21.1.4
 

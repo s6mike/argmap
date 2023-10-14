@@ -14,7 +14,7 @@
 DIR_HTML_SERVER_OUTPUT: output
 
 ## These are absolute paths, for reading/writing to the correct directory
-DIR_HTML: ${PATH_DIR_ARGMAP_ROOT}/test
+DIR_HTML: ${PATH_DIR_MAPJS_ROOT}/public
 DIR_PUBLIC_OUTPUT: ${DIR_HTML}/${DIR_HTML_SERVER_OUTPUT} # Test output folder
 DIR_HTML_INPUT: ${DIR_HTML}/input                      # Test input folder
 
