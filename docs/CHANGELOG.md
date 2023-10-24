@@ -6,6 +6,10 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
+## argmap 22.24.11
+
+- `scripts/bash_aliases_mapjs.sh`: Ensure dev scripts aren't called with `NETLIFY=true`.
+
 ## argmap 22.24.10
 
 - `config/pandoc-defaults-config-preprocessor.yaml`: Remove reference to `config/PRIVATE-environment-argmap.yaml` which is breaking netlify build.

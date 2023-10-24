@@ -6,11 +6,18 @@ echo "Running ${BASH_SOURCE[0]}"
 
 # Functions beginning with __ are for other scripts. They are not considered part of a public API, and therefore updates may change them without warning.
 
-# shellcheck source=/home/s6mike/scripts/default_vscode_init_script.sh # Stops shellcheck lint error
-source "$HOME/scripts/default_vscode_init_script.sh"
+# TODO might more sense to detect env=vscode or build=dev
+case $NETLIFY in
 
-# shellcheck source=/home/s6mike/git_projects/mapjs-git-bisect/scripts/git-bisect.env # Stops shellcheck lint error
-source "$DIR_PROJECTS/mapjs-git-bisect/scripts/git-bisect.env"
+true) ;;
+*)
+  # shellcheck source=/home/s6mike/scripts/default_vscode_init_script.sh # Stops shellcheck lint error
+  source "$HOME/scripts/default_vscode_init_script.sh"
+
+  # shellcheck source=/home/s6mike/git_projects/mapjs-git-bisect/scripts/git-bisect.env # Stops shellcheck lint error
+  source "$DIR_PROJECTS/mapjs-git-bisect/scripts/git-bisect.env"
+  ;;
+esac
 
 # mapjs aliases
 
