@@ -6,6 +6,12 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
+## argmap 22.24.9
+
+- `config/config-argmap-paths.yaml`:
+  - Move `PATH_FILE_ENV_MAPJS_PROCESSED` here from `mapjs/config/config-mapjs-paths.yaml`.
+  - Replace hardcoded paths for this and `PATH_FILE_ENV_ARGMAP_PRIVATE_PROCESSED` with variables.
+
 ## argmap 22.24.8
 
 - `makefile`: Add rule to generate PATH_FILE_ENV_ARGMAP_PRIVATE file if missing.
