@@ -16,7 +16,6 @@ metadata-files:
   - mapjs/config/environment-mapjs.yaml
   - mapjs/config/config-mapjs-paths.yaml
   - mapjs/config/config-mapjs.yaml
-  - config/PRIVATE-environment-argmap.yaml
   - config/processed/environment-argmap-processed.yaml
 
 ...
