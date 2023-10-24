@@ -6,6 +6,10 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
+## argmap 22.24.12
+
+- `scripts/init_read_config.sh`: Remove old debug commands.
+
 ## argmap 22.24.11
 
 - `scripts/bash_aliases_mapjs.sh`: Ensure dev scripts aren't called with `NETLIFY=true`.
