@@ -6,6 +6,10 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
+## argmap 22.24.13
+
+- `.gitignore`: Exclude netlify generated sitemap.
+
 ## argmap 22.24.12
 
 - `scripts/init_read_config.sh`: Remove old debug commands.

@@ -4,7 +4,6 @@
 !*sample.yaml
 !*defaults.yaml
 argmap.code-workspace
-.netlify*
 .vscode/*
 !.vscode/launch.json
 !.vscode/settings.json
@@ -30,3 +29,10 @@ lib
 npm-debug.log
 *-processed.yaml
 mapjs/lint_errors.txt
+
+# Netlify
+
+## Local Netlify folder
+.netlify
+
+mapjs/public/sitemap.xml
