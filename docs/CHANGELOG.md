@@ -6,6 +6,10 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
+## argmap 22.24.17
+
+- `makefile`: Prefix all `mkdir` calls with `-` so errors from existing file fail silently.
+
 ## argmap 22.24.16
 
 - `scripts/bash_aliases_mapjs.sh`: Remove obsolete function export for `open-debug`.

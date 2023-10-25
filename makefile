@@ -114,16 +114,16 @@ clean: site_clean
 	rm -f ${LIST_FILES_CONFIG_PROCESSED}
 
 install: yq pandoc # npm lua
-# 	mkdir --parent "${WORKSPACE/test/output/mapjs-json}"
-# 	mkdir --parent "${WORKSPACE/test/output/png}"
-# 	mkdir --parent "${WORKSPACE/test/output/html}"
+# 	-mkdir --parent "${WORKSPACE/test/output/mapjs-json}"
+# 	-mkdir --parent "${WORKSPACE/test/output/png}"
+# 	-mkdir --parent "${WORKSPACE/test/output/html}"
 
  # netlify version 2.1.3
  #	 User data directory: /opt/buildhome/.local/share/pandoc
 pandoc: 
 	-pandoc --version
 # if this doesn't exist, create before installing pandoc, so that user data directory should be set automatically:
-# mkdir --parent ~/.local/share/pandoc/filters
+# -mkdir --parent ~/.local/share/pandoc/filters
 # Though I think I may want to install it in relevant conda env folder instead
 
 # - pandoc=2.9.2.1 
@@ -228,44 +228,44 @@ start:
 # 	QUESTION Can I combine this with first v3.html rule?
 # QUESTION Only set 2hf -s flag in production mode?
 ${PATH_DIR_ARGMAP_ROOT}/mapjs/public/output/html/%.html: ${PATH_DIR_ARGMAP_ROOT}/mapjs/public/output/mapjs-json/%.json ${PATH_FILE_MAPJS_HTML_DIST_TAGS} ${PATH_OUTPUT_JS}/main.js
-	mkdir -p "$(@D)"
+	-mkdir -p "$(@D)"
 # wait for ${PATH_FILE_MAPJS_HTML_DIST_TAGS} to be present before running next line
 	npx --prefix "${PATH_DIR_MAPJS_ROOT}" wait-on --timeout 10000 "${PATH_FILE_MAPJS_HTML_DIST_TAGS}" && 2hf -ps "$<"
 
 # Generate .json from .yaml
 ${PATH_DIR_ARGMAP_ROOT}/mapjs/public/output/mapjs-json/%.json: ${PATH_DIR_ARGMAP_ROOT}/test/input/%.yaml
-	mkdir -p "$(@D)"
+	-mkdir -p "$(@D)"
 	a2m "$<" "$@"
 
 # Copy .json from input to output, before generating html
 ${PATH_DIR_ARGMAP_ROOT}/mapjs/public/output/%.json: ${PATH_DIR_ARGMAP_ROOT}/test/input/%.json
-	mkdir -p "$(@D)"
+	-mkdir -p "$(@D)"
 	cp "$<" "$@"
 
 ${PATH_DIR_ARGMAP_ROOT}/mapjs/public/output/%.json: ${PATH_DIR_ARGMAP_ROOT}/test/output/%.json
-	mkdir -p "$(@D)"
+	-mkdir -p "$(@D)"
 	cp "$<" "$@"
 
 # Copy .mup from input to output, before generating html
 ${PATH_DIR_ARGMAP_ROOT}/mapjs/public/output/%.json: ${PATH_DIR_ARGMAP_ROOT}/test/input/%.mup
-	mkdir -p "$(@D)"
+	-mkdir -p "$(@D)"
 	cp "$<" "$@"
 
 ${PATH_DIR_ARGMAP_ROOT}/mapjs/public/output/html/%.html: ${PATH_DIR_ARGMAP_ROOT}/test/input/markdown/%.md ${PATH_FILE_MAPJS_HTML_DIST_TAGS} ${PATH_OUTPUT_JS}/main.js
 # Might be able to run pandoc_argmap instead
-	mkdir -p "$(@D)"
+	-mkdir -p "$(@D)"
 # wait for ${PATH_FILE_MAPJS_HTML_DIST_TAGS} to be present before running next line
 	npx --prefix "${PATH_DIR_MAPJS_ROOT}" wait-on --timeout 10000 "${PATH_FILE_MAPJS_HTML_DIST_TAGS}" && 2hf -ps "$<"
 
 # If building in production 
 ${PATH_OUTPUT_JS}/main.js.map: site_clean
-	mkdir -p "${@D}"
+	-mkdir -p "${@D}"
 	npm run pack:$(MODE) --prefix "${PATH_DIR_MAPJS_ROOT}"
 
 
 # Create js dependencies for html files:
 ${PATH_FILE_MAPJS_HTML_DIST_TAGS} ${PATH_OUTPUT_JS}/main.js:
-	mkdir -p "${@D}"
+	-mkdir -p "${@D}"
 	npm run pack:$(MODE) --prefix "${PATH_DIR_MAPJS_ROOT}"
 
 # ############
@@ -280,18 +280,18 @@ ${PATH_FILE_ENV_ARGMAP_PRIVATE}:
 # Process config and environment files
 # 	QUESTION: Use more variables?
 ${PATH_DIR_CONFIG_ARGMAP}/${KEYWORD_PROCESSED}/%-${KEYWORD_PROCESSED}.yaml: ${PATH_DIR_CONFIG_ARGMAP}/%.yaml
-	mkdir -p "$(@D)"
+	-mkdir -p "$(@D)"
 	preprocess_config "$<"
 
 ${PATH_DIR_CONFIG_MAPJS}/${KEYWORD_PROCESSED}/%-${KEYWORD_PROCESSED}.yaml: ${PATH_DIR_CONFIG_MAPJS}/%.yaml
-	mkdir -p "$(@D)"
+	-mkdir -p "$(@D)"
 	preprocess_config "$<"
 
 # Rule for public links
 #  after | is order only pre-requisite, doesn't update based on timestamps
 # This is static pattern rule, which restricts rule to match LINK_TARGETS_PUBLIC:
 $(LINK_TARGETS_PUBLIC_FOLDERS): ${PATH_PUBLIC}/%: | ${PATH_TEST}/%
-	mkdir -p "$(@D)"
+	-mkdir -p "$(@D)"
 	ln -s $| $@
 
 # Makes required folder if not present
@@ -299,22 +299,22 @@ $(LINK_TARGETS_PUBLIC_FOLDERS): ${PATH_PUBLIC}/%: | ${PATH_TEST}/%
 #		TODO: Replace % with $(DIRECTORIES), matching the relevant directories: input, output, mapjs-json, html, mapjs-json
 #			Chatgpt suggestion, not sure it works that way: https://chat.openai.com/c/7b2b5fd5-6431-4c16-bd49-ddba40a6df45
 # ${PATH_TEST}/%:
-# 	mkdir -p "$(@D)"
+# 	-mkdir -p "$(@D)"
 
 # Add index.html
 #	 TODO: Use netlify redirect instead
 ${PATH_PUBLIC}/index.html: | ${PATH_FILE_OUTPUT_EXAMPLE}
-	mkdir -p "$(@D)"
+	-mkdir -p "$(@D)"
 	ln -s $| $@
 
 # Rule for conda links to .local folder
 ${PATH_PROFILE_LOCAL}/%: | ${CONDA_PREFIX}/%
-	mkdir -p "$(@D)"
+	-mkdir -p "$(@D)"
 	ln -s $| $@
 
 # For calling lua functions from shell (within conda env)
 ${PATH_BIN_GLOBAL}/%: | ${PATH_LUA_ARGMAP}/%.lua
-	mkdir -p "$(@D)"
+	-mkdir -p "$(@D)"
 	ln -s $| $@
 
 # Adds .lua files to pandoc data-folder:
@@ -323,12 +323,12 @@ ${PATH_PANDOC_GLOBAL}/filters/%: | ${PATH_LUA_ARGMAP}/%
 # Makes the required directories in the path
 #		Haven't noticed this happening: If you don't use order-only-prerequisites each modification (e.g. copying or creating a file) 
 #		in that directory will trigger the rule that depends on the directory-creation target again!
-	mkdir -p "$(@D)"
+	-mkdir -p "$(@D)"
 	ln -s $| $@
 
 # latex templates e.g. examples/example-template.latex need to be in conda folder:
 ${PATH_PANDOC_GLOBAL}/templates/%: | ${WORKSPACE}/%
-	mkdir -p "$(@D)"
+	-mkdir -p "$(@D)"
 	ln -s $| $@
 
 # Ensure lua dependencies available to site for client_argmap2mapjs
@@ -348,13 +348,13 @@ ${PATH_PANDOC_GLOBAL}/templates/%: | ${WORKSPACE}/%
 # Rule for argmap lua links to conda lua folder
 #   QUESTION: Do I need this one?
 ${PATH_LUA_GLOBAL}/%.lua: | ${PATH_LUA_ARGMAP}/%.lua
-	mkdir -p "$(@D)"
+	-mkdir -p "$(@D)"
 	ln -s $| $@
 
 # Currently no link
 # Rule for argmap lua links to conda pandoc folder
 # ${CONDA_PREFIX}/share/pandoc/%: | ${PATH_LUA_ARGMAP}/%
-# 	mkdir -p "$(@D)"
+# 	-mkdir -p "$(@D)"
 # 	ln -s $| $@
 
 #  2. Pandoc folder location can be printed (see src/lua/pandoc-hello.lua in branch X?) is location of markdown file, so might be able to do relative links from extensions
