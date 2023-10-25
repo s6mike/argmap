@@ -65,7 +65,6 @@ LINK_TARGETS_CONDA += ${PATH_PANDOC_GLOBAL}/templates/examples/example-template.
 # If PATH_PUBLIC is empty, its rule will match anything, so this ensure it always has a value:
 # Sets variable if not already defined
 PATH_PUBLIC ?= NULL
-# YQ := ${HOME}/.local/bin/yq
 
 # ###########
 
@@ -123,7 +122,7 @@ clean: site_clean
 # 	make all
 # 	netlify dev
 
-install: yq pandoc npm # lua
+install: ${PATH_FILE_YQ} pandoc npm # lua # replace npm with npm_audit based on ENV
 # 	-mkdir --parent "${WORKSPACE/test/output/mapjs-json}"
 # 	-mkdir --parent "${WORKSPACE/test/output/png}"
 # 	-mkdir --parent "${WORKSPACE/test/output/html}"
@@ -136,8 +135,8 @@ npm: ${PATH_DIR_MAPJS_ROOT}
 npm_audit: npm npm_audit_output.txt
 	-npm audit fix --prefix "${PATH_DIR_MAPJS_ROOT}" --legacy-peer-deps >npm_audit_output.txt
 
- # netlify version 2.1.3
- #	 User data directory: /opt/buildhome/.local/share/pandoc
+# netlify version 2.1.3
+#	 User data directory: /opt/buildhome/.local/share/pandoc
 # QUESTION: Check for existence?
 pandoc: 
 	-pandoc --version
@@ -151,20 +150,18 @@ pandoc:
 # -chmod +x ${PATH_FILE_YQ}/pandoc
 # If not using conda would need conda dependencies installed.
 
-
-yq: ${PATH_FILE_YQ}
-
+# QUESTION: Why doesn't $@ work for wget - uses yq instead of ./yq ?
 ${PATH_FILE_YQ}:
 # Test for ENV netlify
 # go install github.com/mikefarah/yq/v4@latest
 # mdkir -p ${INSTALL_PATH}
 	-wget -qO "${PATH_FILE_YQ}" https://github.com/mikefarah/yq/releases/download/v4.30.8/yq_linux_amd64
-	-chmod +x ${PATH_FILE_YQ}
+	-chmod +x "${PATH_FILE_YQ}"
 
 # Test for ENV not netlify
 #	 sudo wget -qO "$HOME/.local/bin/yq" https://github.com/mikefarah/yq/releases/download/v4.30.8/yq_linux_amd64
 # 	chmod u+x "$HOME/.local/bin/yq"
-	-${PATH_FILE_YQ} --version
+	-"${PATH_FILE_YQ}" --version
 
 # lua:
 # 	scripts/qa_rockspec.sh
