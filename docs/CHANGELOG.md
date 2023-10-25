@@ -6,6 +6,10 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
+## argmap 22.24.29
+
+- `makefile`: Update `yq` install to check whether already installed.
+
 ## argmap 22.24.28
 
 - `mapjs/package-lock.json`: Minor fixes following `npm audit`.
