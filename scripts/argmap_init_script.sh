@@ -4,15 +4,13 @@
 
 echo "Running ${BASH_SOURCE[0]}"
 
-export NETLIFY=${NETLIFY:-false}
-export ENV=${ENV:-vscode}
-export MODE=${MODE:-dev}
-
 # Needed for non-VSCode environments:
 # TODO should set to $HOME/local/argmap by default
 #   Add check whether $HOME/git_projects/argmap exists, then set as above instead
 #   Or use .env file?
 set -o allexport
+ENV=${ENV:-vscode}
+MODE=${MODE:-dev}
 # QUESTION: Change to PATH_DIR_ARGMAP_ROOT?
 WORKSPACE=${WORKSPACE:-$HOME/git_projects/argmap}
 PATH_DIR_SCRIPTS="$WORKSPACE/scripts"
