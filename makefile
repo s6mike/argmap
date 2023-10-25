@@ -132,10 +132,13 @@ install: yq pandoc npm # lua
 npm: ${PATH_DIR_MAPJS_ROOT}
 # Test for ENV netlify
 	npm install --prefix "${PATH_DIR_MAPJS_ROOT}"
+
+npm_audit: npm npm_audit_output.txt
 	-npm audit fix --prefix "${PATH_DIR_MAPJS_ROOT}" --legacy-peer-deps >npm_audit_output.txt
 
  # netlify version 2.1.3
  #	 User data directory: /opt/buildhome/.local/share/pandoc
+# QUESTION: Check for existence?
 pandoc: 
 	-pandoc --version
 # if this doesn't exist, create before installing pandoc, so that user data directory should be set automatically:

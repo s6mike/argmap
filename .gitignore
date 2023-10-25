@@ -27,6 +27,7 @@ testem/compiled
 pub
 lib
 npm-debug.log
+npm_audit_output.txt
 *-processed.yaml
 mapjs/lint_errors.txt
 

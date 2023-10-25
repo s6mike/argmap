@@ -6,6 +6,11 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
+## argmap 22.24.33
+
+- `makefile`: Don't call `npm audit` by default, and only when there's not already an audit output file.
+  - `.gitignore`: Ignore npm audit output file.
+
 ## argmap 22.24.32
 
 - `scripts/argmap_init_script.sh`:
