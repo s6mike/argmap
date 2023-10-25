@@ -6,6 +6,10 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
+## argmap 22.24.14
+
+- Install `netlify-cli` as dev dependency.
+
 ## argmap 22.24.13
 
 - `.gitignore`: Exclude netlify generated sitemap.

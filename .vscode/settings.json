@@ -173,5 +173,6 @@
     ],
     "deno.unstable": true,
     "deno.importMap": ".netlify/edge-functions-import-map.json",
-    "deno.path": "/home/s6mike/.config/netlify/deno-cli/deno"
+    "deno.path": "/home/s6mike/.config/netlify/deno-cli/deno",
+    "git.ignoreLimitWarning": true
 }

@@ -75,7 +75,7 @@
     "imports-loader": "^4.0.1",
     "jasmine": "^5.1.0",
     "jasmine-spec-reporter": "^7.0.0",
-    "netlify-cli": "^16.8.0",
+    "netlify-cli": "^16.9.2",
     "npm-check-updates": "^16.14.6",
     "sourcemap-lookup": "^0.0.5",
     "testcafe": "^3.3.0",
