@@ -6,6 +6,10 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
+## argmap 22.24.20
+
+- `scripts/argmap_init_script.sh`: Call `make site` directly for netlify, instead of from `netlify.toml` `make` command.
+
 ## argmap 22.24.19
 
 - `scripts/argmap_init_script.sh`: netlify skips test script.

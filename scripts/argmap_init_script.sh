@@ -144,5 +144,13 @@ PATH_OUTPUT_HTML_PUBLIC=$(getvar PATH_OUTPUT_HTML_PUBLIC)
 PATH_OUTPUT_MAPJS_PUBLIC=$(getvar PATH_OUTPUT_MAPJS_PUBLIC)
 set +o allexport
 
-# QUESTION: Better to define above variables as part of make call instead of exporting them?
-make all # --warn-undefined-variables, -d for debugging
+# Calling make site from here because environment vars seem to get lost otherwise
+case $ENV in
+netlify)
+  make site
+  ;;
+*)
+  # QUESTION: Better to define above variables as part of make call instead of exporting them?
+  make all # --warn-undefined-variables, -d for debugging
+  ;;
+esac

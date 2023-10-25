@@ -17,7 +17,7 @@
 
 [build]
   publish = "mapjs/public/" # The path to your static content folder
-  command = "./scripts/argmap_init_script.sh && make site" # Command to start your dev server
+  command = "./scripts/argmap_init_script.sh" # Command to start your dev server
 
 # sample dev block in the toml
 # note: each of these fields are OPTIONAL and should only be used if you need an override
@@ -30,7 +30,6 @@
   # TODO how do I open in odb browser by default?
   #   Maybe this?: https://cli.netlify.com/vscode/#add-vscode-launch-configurations
   autoLaunch = false # a Boolean value that determines if Netlify Dev launches the local server address in your browser
-  # command = "yarn start" # Command to start your dev server
   # publish = "mapjs/public/" # The path to your static content folder
   # command = "make site" # Command to start your dev server
   # envFiles = [".env.development.local", ".env.local", ".env.development", ".env"] # The env files to use, ordered by priority (left - highest, right - lowest)
