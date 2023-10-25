@@ -22,7 +22,7 @@ MODE ?= dev # default. Use make MODE=prod or make site for prod mode
 
 # Avoids collisions with filenames
 #		-- is convention for private targets
-.PHONY: all public --conda config prints clean # dev
+.PHONY: all config public --conda output_clean site_clean clean install pandoc yq prints site # dev
 
 # Stops intermediate files being deleted (e.g. environment-mapjs.yaml)
 .SECONDARY:
