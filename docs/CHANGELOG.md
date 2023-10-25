@@ -6,6 +6,10 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
+## argmap 22.24.19
+
+- `scripts/argmap_init_script.sh`: netlify skips test script.
+
 ## argmap 22.24.18
 
 - `makefile`: Update `make all` public and conda dependencies to be optional, not used by netlify.

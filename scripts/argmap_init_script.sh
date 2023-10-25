@@ -103,18 +103,26 @@ eval "$(pandoc --bash-completion)"
 # Didn't fix type: json import error, leaving for reference.
 # export NODE_OPTIONS="--experimental-modules --experimental-json-modules"
 
-source "$WORKSPACE/test/test_scripts/bash_aliases_argmap_test.sh"
+case $NETLIFY in
+
+true) ;;
+*)
+  source "$WORKSPACE/test/test_scripts/bash_aliases_argmap_test.sh"
+  ;;
+esac
 
 set -o allexport
 
 PATH_PUBLIC=$(getvar PATH_PUBLIC)
-PATH_TEST=$(getvar PATH_TEST)
-CONDA_PREFIX=$(getvar CONDA_PREFIX)
 PATH_INPUT_PUBLIC=$(getvar PATH_INPUT_PUBLIC)
 PATH_OUTPUT_PUBLIC=$(getvar PATH_OUTPUT_PUBLIC)
 PATH_LUA_LOCAL=$(getvar PATH_LUA_LOCAL)
 PATH_CONVERT_LOCAL=$(getvar PATH_CONVERT_LOCAL)
 PATH_PANDOC_LOCAL=$(getvar PATH_PANDOC_LOCAL)
+
+# TODO: Not needed by netlify:
+PATH_TEST=$(getvar PATH_TEST)
+CONDA_PREFIX=$(getvar CONDA_PREFIX)
 PATH_BIN_GLOBAL=$(getvar PATH_BIN_GLOBAL)
 PATH_PANDOC_GLOBAL=$(getvar PATH_PANDOC_GLOBAL)
 PATH_LUA_GLOBAL=$(getvar PATH_LUA_GLOBAL)
