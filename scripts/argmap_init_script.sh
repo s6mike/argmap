@@ -8,19 +8,6 @@ export NETLIFY=${NETLIFY:-false}
 export ENV=${ENV:-vscode}
 export MODE=${MODE:-dev}
 
-# shellcheck source=/home/s6mike/.bashrc
-case $ENV in
-
-netlify)
-  make install
-  ;;
-*)
-  source "$HOME/.bashrc"
-  # source=/home/s6mike/scripts/default_vscode_init_script.sh # Stops shellcheck lint error
-  # source "$HOME/scripts/default_vscode_init_script.sh"
-  ;;
-esac
-
 # Needed for non-VSCode environments:
 # TODO should set to $HOME/local/argmap by default
 #   Add check whether $HOME/git_projects/argmap exists, then set as above instead
@@ -34,6 +21,19 @@ PATH_FILE_YQ=${PATH_FILE_YQ:-yq}
 # shellcheck source=/home/s6mike/git_projects/argmap/scripts/argmap.env
 source "$PATH_DIR_SCRIPTS/argmap.env"
 set +o allexport
+
+# shellcheck source=/home/s6mike/.bashrc
+case $ENV in
+
+netlify)
+  make "${PATH_FILE_YQ}" pandoc
+  ;;
+*)
+  source "$HOME/.bashrc"
+  # source=/home/s6mike/scripts/default_vscode_init_script.sh # Stops shellcheck lint error
+  # source "$HOME/scripts/default_vscode_init_script.sh"
+  ;;
+esac
 
 # For trying stuff:
 #   source "$WORKSPACE/scripts/experiment.sh"
@@ -69,7 +69,15 @@ LUA_PATH=$(getvar LUA_PATH)
 # Not sure if this is needed:
 LUA_CPATH=$(getvar LUA_CPATH)
 PATH_TEST_LOG=$(getvar PATH_TEST_LOG)
+PATH_DIR_MAPJS_ROOT=$(getvar PATH_DIR_MAPJS_ROOT)
 set +o allexport
+
+case $ENV in
+netlify)
+  make install
+  ;;
+*) ;;
+esac
 
 # Covered by default init script
 # shellcheck source=/home/s6mike/scripts/bash_aliases.sh # Stops shellcheck lint error

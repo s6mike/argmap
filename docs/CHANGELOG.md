@@ -6,6 +6,12 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
+## argmap 22.24.32
+
+- `scripts/argmap_init_script.sh`:
+  - Export `PATH_DIR_MAPJS_ROOT` for `make install`.
+  - Move `make install` later for when npm location var is available, and only `make pandoc` and `yq` at start.
+
 ## argmap 22.24.31
 
 - `scripts/argmap_init_script.sh`: (missed one) Use `ENV` instead of `NETLIFY` to identify build environment, since `netlify-cli` doesn't seem to recognise `NETLIFY` env variable.
