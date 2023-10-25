@@ -103,9 +103,10 @@ eval "$(pandoc --bash-completion)"
 # Didn't fix type: json import error, leaving for reference.
 # export NODE_OPTIONS="--experimental-modules --experimental-json-modules"
 
-case $NETLIFY in
+# shellcheck source=/home/s6mike/git_projects/argmap/test/test_scripts/bash_aliases_argmap_test.sh
+case $ENV in
 
-true) ;;
+netlify) ;;
 *)
   source "$WORKSPACE/test/test_scripts/bash_aliases_argmap_test.sh"
   ;;
