@@ -6,6 +6,10 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
+## argmap 22.24.25
+
+- `scripts/argmap_init_script.sh`: Use `ENV` instead of `NETLIFY` to identify build environment, since `netlify-cli` doesn't seem to recognise `NETLIFY` env variable.
+
 ## argmap 22.24.24
 
 - `.gitignore`: Ignore `netlify-cli build` `yq` file.

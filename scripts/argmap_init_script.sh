@@ -9,9 +9,9 @@ export ENV=${ENV:-vscode}
 export MODE=${MODE:-dev}
 
 # shellcheck source=/home/s6mike/.bashrc
-case $NETLIFY in
+case $ENV in
 
-true)
+netlify)
   make install
   ;;
 *)
