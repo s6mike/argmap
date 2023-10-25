@@ -6,6 +6,10 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
+## argmap 22.24.28
+
+- `mapjs/package-lock.json`: Minor fixes following `npm audit`.
+
 ## argmap 22.24.27
 
 - `config/environment-conda-argmap.yaml`: Remove `expect` dependency, since not currently used for testing.
