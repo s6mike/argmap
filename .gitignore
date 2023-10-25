@@ -36,3 +36,5 @@ mapjs/lint_errors.txt
 .netlify
 
 mapjs/public/sitemap.xml
+# Used by netlify-cli build
+yq

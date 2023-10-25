@@ -6,6 +6,10 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
+## argmap 22.24.24
+
+- `.gitignore`: Ignore `netlify-cli build` `yq` file.
+
 ## argmap 22.24.23
 
 - `.vscode/settings.json`: Minor lua extension fix.
