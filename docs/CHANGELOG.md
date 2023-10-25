@@ -9,6 +9,11 @@
 ## argmap 22.24.22
 
 - `makefile`: Prefix all `ln -s` calls with `-` so errors from existing file fail silently.
+
+## argmap 22.24.21
+
+- `makefile`: Update `.PHONY` targets.
+
 ## argmap 22.24.20
 
 - `scripts/argmap_init_script.sh`: Call `make site` directly for netlify, instead of from `netlify.toml` `make` command.

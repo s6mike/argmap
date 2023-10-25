@@ -296,7 +296,7 @@ ${PATH_DIR_CONFIG_MAPJS}/${KEYWORD_PROCESSED}/%-${KEYWORD_PROCESSED}.yaml: ${PAT
 # This is static pattern rule, which restricts rule to match LINK_TARGETS_PUBLIC:
 $(LINK_TARGETS_PUBLIC_FOLDERS): ${PATH_PUBLIC}/%: | ${PATH_TEST}/%
 	-mkdir -p "$(@D)"
-	ln -s $| $@
+	-ln -s $| $@
 
 # Makes required folder if not present
 # 	Hope this isn't hostage to fortune! since make public/anything will create this folder in test and then symlink to it from public
@@ -309,17 +309,17 @@ $(LINK_TARGETS_PUBLIC_FOLDERS): ${PATH_PUBLIC}/%: | ${PATH_TEST}/%
 #	 TODO: Use netlify redirect instead
 ${PATH_PUBLIC}/index.html: | ${PATH_FILE_OUTPUT_EXAMPLE}
 	-mkdir -p "$(@D)"
-	ln -s $| $@
+	-ln -s $| $@
 
 # Rule for conda links to .local folder
 ${PATH_PROFILE_LOCAL}/%: | ${CONDA_PREFIX}/%
 	-mkdir -p "$(@D)"
-	ln -s $| $@
+	-ln -s $| $@
 
 # For calling lua functions from shell (within conda env)
 ${PATH_BIN_GLOBAL}/%: | ${PATH_LUA_ARGMAP}/%.lua
 	-mkdir -p "$(@D)"
-	ln -s $| $@
+	-ln -s $| $@
 
 # Adds .lua files to pandoc data-folder:
 
@@ -328,22 +328,22 @@ ${PATH_PANDOC_GLOBAL}/filters/%: | ${PATH_LUA_ARGMAP}/%
 #		Haven't noticed this happening: If you don't use order-only-prerequisites each modification (e.g. copying or creating a file) 
 #		in that directory will trigger the rule that depends on the directory-creation target again!
 	-mkdir -p "$(@D)"
-	ln -s $| $@
+	-ln -s $| $@
 
 # latex templates e.g. examples/example-template.latex need to be in conda folder:
 ${PATH_PANDOC_GLOBAL}/templates/%: | ${WORKSPACE}/%
 	-mkdir -p "$(@D)"
-	ln -s $| $@
+	-ln -s $| $@
 
 # Ensure lua dependencies available to site for client_argmap2mapjs
 # ${PATH_PUBLIC}/%: | ${PATH_LUA_ARGMAP}
-# 	ln -s $| $@
+# 	-ln -s $| $@
 
 # ${PATH_PUBLIC}/%: | ${WORKSPACE}/%
-# 	ln -s $| $@
+# 	-ln -s $| $@
 
-# ln -s "$PATH_DIR_ARGMAP_LUA" "$PATH_PUBLIC/lua"
-# ln -s $| "$PATH_PUBLIC/lua_modules"
+# -ln -s "$PATH_DIR_ARGMAP_LUA" "$PATH_PUBLIC/lua"
+# -ln -s $| "$PATH_PUBLIC/lua_modules"
 
 # For vscode pandoc extensions (1,2,3):
 
@@ -353,7 +353,7 @@ ${PATH_PANDOC_GLOBAL}/templates/%: | ${WORKSPACE}/%
 #   QUESTION: Do I need this one?
 ${PATH_LUA_GLOBAL}/%.lua: | ${PATH_LUA_ARGMAP}/%.lua
 	-mkdir -p "$(@D)"
-	ln -s $| $@
+	-ln -s $| $@
 
 # Currently no link
 # Rule for argmap lua links to conda pandoc folder
@@ -364,7 +364,7 @@ ${PATH_LUA_GLOBAL}/%.lua: | ${PATH_LUA_ARGMAP}/%.lua
 #  2. Pandoc folder location can be printed (see src/lua/pandoc-hello.lua in branch X?) is location of markdown file, so might be able to do relative links from extensions
 # rm /js
 # Currently mapjs/public/js is just a directory, so have commented out:
-# ln -s /home/s6mike/git_projects/argmap/mapjs/public/js /js
+# -ln -s /home/s6mike/git_projects/argmap/mapjs/public/js /js
 
 # 3. Install rockspec in global scope
 
