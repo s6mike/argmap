@@ -192,5 +192,4 @@ __npm_update() {
 export -f __build_mapjs __run_mapjs_legacy
 export -f __is_server_live webpack_server_halt webpack_server_start
 export -f webpack_install webpack_pack __check_npm_updates __npm_update
-export -f open_debug
-export -f testcafe_run # __test_mapjs_renders
+export -f testcafe_run

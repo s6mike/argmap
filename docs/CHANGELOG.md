@@ -6,6 +6,10 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
+## argmap 22.24.16
+
+- `scripts/bash_aliases_mapjs.sh`: Remove obsolete function export for `open-debug`.
+
 ## argmap 22.24.15
 
 - `netlify.toml`: Add `ENV = netlify` variable.
