@@ -117,10 +117,22 @@ clean: site_clean
 # Delete these last since it will stop config var lookups working
 	rm -f ${LIST_FILES_CONFIG_PROCESSED}
 
-install: yq pandoc # npm lua
+# dev:
+#		QUESTION: Check correct netlify site?
+# 	netlify build
+# 	make all
+# 	netlify dev
+
+install: yq pandoc npm # lua
 # 	-mkdir --parent "${WORKSPACE/test/output/mapjs-json}"
 # 	-mkdir --parent "${WORKSPACE/test/output/png}"
 # 	-mkdir --parent "${WORKSPACE/test/output/html}"
+
+# TODO how to check installed?
+npm: ${PATH_DIR_MAPJS_ROOT}
+# Test for ENV netlify
+	npm install --prefix "${PATH_DIR_MAPJS_ROOT}"
+	-npm audit fix --prefix "${PATH_DIR_MAPJS_ROOT}" --legacy-peer-deps >npm_audit_output.txt
 
  # netlify version 2.1.3
  #	 User data directory: /opt/buildhome/.local/share/pandoc
@@ -151,19 +163,6 @@ ${PATH_FILE_YQ}:
 # 	chmod u+x "$HOME/.local/bin/yq"
 	-${PATH_FILE_YQ} --version
 
-# npm:
-# 	npm install --prefix "$(getvar PATH_DIR_MAPJS_ROOT)"
-# 	npm audit fix --prefix "$(getvar PATH_DIR_MAPJS_ROOT)" --legacy-peer-deps >npm_audit_output.txt
-# # Running qa_rockspec will also install dependencies
-# Should be able to distinguish between dev and prod install with npm and thuse choose whether 
-# testcafe etc are installed.
-# So shouldn't need this:
-# # Dev tools
-# testcafe:
-# 	ifeq ($(MODE), dev)
-#     npm install -g testcafe
-#   endif
-
 # lua:
 # 	scripts/qa_rockspec.sh
 # # lualatex is a LaTeX based format, so in order to use it you have to install LaTeX, not just TeX. So you need at least the Ubuntu texlive-latex-base package.
@@ -181,9 +180,16 @@ ${PATH_FILE_YQ}:
 #   luarocks remove
 #   luarocks make --only-deps "$rockspec_file" YAML_LIBDIR="$CONDA_PREFIX/lib/"
 
-# dev:
-# 	make all
-# 	netlify dev
+# # Running qa_rockspec will also install dependencies
+# Should be able to distinguish between dev and prod install with npm and thuse choose whether 
+# testcafe etc are installed.
+# So shouldn't need this:
+# # Dev tools
+# testcafe:
+# 	ifeq ($(MODE), dev)
+#     npm install -g testcafe
+#   endif
+
 
 prints:
 	$(info PATH_PUBLIC:)

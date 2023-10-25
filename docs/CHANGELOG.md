@@ -6,6 +6,10 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
+## argmap 22.24.30
+
+- `makefile`: Add `npm install` to `make install`.
+
 ## argmap 22.24.29
 
 - `makefile`: Update `yq` install to check whether already installed.
