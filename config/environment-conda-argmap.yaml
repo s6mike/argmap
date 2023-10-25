@@ -12,7 +12,6 @@ dependencies:
   - anaconda/linux-64::yaml==0.2.5=h7b6447c_0
   - anaconda/linux-64::nodejs==16.13.1=hb931c9a_0
   - anaconda/linux-64::lua==5.3.4=h7b6447c_0
-  - expect
 variables:
   CONDA_ENV_ARGMAP: argmap
 prefix: /opt/miniconda3/envs/argmap

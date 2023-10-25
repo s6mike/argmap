@@ -6,6 +6,10 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
+## argmap 22.24.27
+
+- `config/environment-conda-argmap.yaml`: Remove `expect` dependency, since not currently used for testing.
+
 ## argmap 22.24.26
 
 - `.vscode/settings.json`: Add `Deno for VSCode` config settings (recommended by `netlify-cli`).
