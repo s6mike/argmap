@@ -6,6 +6,10 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
+## argmap 22.24.18
+
+- `makefile`: Update `make all` public and conda dependencies to be optional, not used by netlify.
+
 ## argmap 22.24.17
 
 - `makefile`: Prefix all `mkdir` calls with `-` so errors from existing file fail silently.

@@ -69,7 +69,11 @@ PATH_PUBLIC ?= NULL
 
 # ###########
 
-all: config public --conda
+all: config
+# Optional dependencies not used by netlify.
+ifneq (${ENV}, netlify)
+    all: public --conda
+endif
 
 config: ${LIST_FILES_CONFIG_PROCESSED}
 public: $(LINK_TARGETS_PUBLIC)
@@ -196,9 +200,9 @@ prints:
 site: MODE := prod
 site: ${PATH_FILE_MAPJS_HTML_DIST_TAGS} ${PATH_OUTPUT_JS}/main.js ${PATH_OUTPUT_JS}/main.js.map ${PATH_FILE_OUTPUT_EXAMPLE} ${PATH_FILE_OUTPUT_EXAMPLE2_COMPLEX}
 
-start: site
-start:
-	./scripts/argmap_init_script.sh
+# start: site
+# start:
+# 	./scripts/argmap_init_script.sh
 
 # Using the mapjs file `public/output/mapjs-json/example2-clearly-false-white-swan-v3.json`, plus associated html file renamed as index.html
 # - `netlify.toml`: Add redirect from `index.html` to `output/html/index.html`.
