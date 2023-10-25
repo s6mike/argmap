@@ -6,6 +6,10 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
+## argmap 22.24.23
+
+- `.vscode/settings.json`: Minor lua extension fix.
+
 ## argmap 22.24.22
 
 - `makefile`: Prefix all `ln -s` calls with `-` so errors from existing file fail silently.

@@ -1,178 +1,178 @@
 {
-    "debug.allowBreakpointsEverywhere": true,
-    "files.associations": {
-        "*.mup": "json",
-        "config": "plaintext"
-    },
-    "git.branchProtection": [
-        "master",
-        "argmap2mup-fix"
-    ],
+  "debug.allowBreakpointsEverywhere": true,
+  "files.associations": {
+    "*.mup": "json",
+    "config": "plaintext"
+  },
+  "git.branchProtection": [
+    "master",
+    "argmap2mup-fix"
+  ],
+  "bash": {
+    "path": "bash",
+    "icon": "terminal-bash",
+    "args": [
+      "--init-file",
+      "${workspaceFolder}/scripts/argmap_init_script.sh"
+    ]
+  },
+  "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.profiles.linux": {
     "bash": {
-        "path": "bash",
-        "icon": "terminal-bash",
-        "args": [
-            "--init-file",
-            "${workspaceFolder}/scripts/argmap_init_script.sh",
-        ]
+      "path": "bash",
+      "icon": "terminal-bash",
+      "args": [
+        "--init-file",
+        "${workspaceFolder}/scripts/argmap_init_script.sh"
+      ]
+    }
+  },
+  "emmet.excludeLanguages": [],
+  "emmet.includeLanguages": {
+    "markdown": "html"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "emmet.showExpandedAbbreviation": "never",
+  "cSpell.words": [
+    "Adzic",
+    "Argdown",
+    "argmap",
+    "argmap2lua",
+    "argmap2mup",
+    "argmap2tikz",
+    "argmapjs",
+    "argmh",
+    "argumend",
+    "Argview",
+    "asinum",
+    "Brunellus",
+    "ClientRects",
+    "Florinier",
+    "getvar",
+    "Gojko",
+    "libyaml",
+    "lyaml",
+    "mapjs",
+    "mindmup",
+    "MindMup",
+    "MindMup's",
+    "MPE",
+    "mup2argmap",
+    "pandoc-argmap",
+    "parisiensis",
+    "subidea",
+    "themecss",
+    "tinyyaml",
+    "undofunc",
+    "Vujnovic",
+    "Zell"
+  ],
+  "cSpell.ignoreWords": [
+    "Libes",
+    "Qcontainer",
+    "Ybuv",
+    "argm",
+    "argmaplua",
+    "argth",
+    "dleft",
+    "dright",
+    "mappack",
+    "muplua",
+    "tikzlua"
+  ],
+  "argdown.configFile": "argdown.config.json",
+  "argdown.preview.lockMenu": true,
+  "lua.targetVersion": "5.3",
+  "lua.luacheckPath": "",
+  "lua.debug.settings.luaVersion": "lua53",
+  "lua.debug.settings.conda_env.argmap": "argmap",
+  "lua.debug.settings.argmap.path.src": "${workspaceFolder}/src",
+  // Looks like setting can have maximum of 5 dots, since this one failed when adding another:
+  "lua.debug.settings.argmap.path.src-lua": "${config:lua.debug.settings.argmap.path.src}/lua",
+  "lua.debug.settings.argmap.path.src-template-main": "${config:lua.debug.settings.argmap.path.src}/layouts/templates/pandoc-mapjs-main-html5.html",
+  "lua.debug.settings.system_root": "/opt/miniconda3/envs/${config:lua.debug.settings.conda_env.argmap}",
+  "lua.debug.settings.env.path": "/home/s6mike/.local/bin:${config:lua.debug.settings.system_root}/bin:/opt/miniconda3/condabin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games",
+  "lua.debug.settings.path": "${config:lua.debug.settings.argmap.path.src-lua}/?.lua;${workspaceFolder}/lua_modules/share/lua/5.3/?.lua;${workspaceFolder}/lua_modules/share/lua/5.3/?/init.lua;${config:lua.debug.settings.system_root}/share/lua/5.3/?.lua;${config:lua.debug.settings.system_root}/share/lua/5.3/?/init.lua;${config:lua.debug.settings.system_root}/lib/lua/5.3/?.lua;${config:lua.debug.settings.system_root}/lib/lua/5.3/?/init.lua;./?.lua;./?/init.lua;",
+  "lua.debug.settings.cpath": "${workspaceFolder}/lua_modules/lib/lua/5.3/?.so;${config:lua.debug.settings.system_root}/lib/lua/5.3/?.so;${config:lua.debug.settings.system_root}/lib/lua/5.3/loadall.so;./?.so;",
+  "Lua.runtime.version": "Lua 5.3",
+  "Lua.misc.parameters": [
+    "--develop=true",
+    "--dbgport=11413"
+  ],
+  "Lua.workspace.library": [
+    // "/home/s6mike/.vscode/extensions/tomblind.local-lua-debugger-vscode-0.3.3/debugger/?.lua",
+    "${config:lua.debug.settings.argmap.path.src-lua}/?.lua",
+    "${config:lua.debug.settings.system_root}/share/lua/5.3/?/init.lua",
+    "${config:lua.debug.settings.system_root}/lib/lua/5.3/?.lua",
+    "${config:lua.debug.settings.system_root}/lib/lua/5.3/?/init.lua",
+    "${config:lua.debug.settings.system_root}/lib/lua/5.3/?.so",
+    "${config:lua.debug.settings.system_root}/lib/lua/5.3/loadall.so"
+  ],
+  // https://stackoverflow.com/questions/48661253/how-to-pass-variables-to-pandoc-for-use-in-html-template:
+  //  "pandoc.htmlOptString": "-s -f gfm -t html5 --template=pandoc-template.html"
+  // TODO: Try template
+  // For opening on server:
+  "pandoc.htmlOptString": "-o /home/s6mike/git_projects/argmap/test/output/html/vscode-pandoc-output.html --include-after-body /home/s6mike/git_projects/argmap/src/layouts/includes/webpack-dist-tags.html --metadata=css:/mapjs-default-styles.css --metadata=lang:en --lua-filter=pandoc-argmap.lua --data-dir=/opt/miniconda3/envs/argmap/share/pandoc",
+  // For opening in local browser (need to use --allow-file-access-from-files to stop CORS issues, and symlink js and json dependencies):
+  // "pandoc.htmlOptString": "--include-after-body /home/s6mike/git_projects/argmap/src/layouts/includes/webpack-dist-tags.html --metadata=css:/home/s6mike/git_projects/argmap/mapjs/public/mapjs-default-styles.css --metadata=lang:en --lua-filter=pandoc-argmap.lua --data-dir=/opt/miniconda3/envs/argmap/share/pandoc",
+  "pandoc.pdfOptString": "--lua-filter pandoc-argmap.lua --pdf-engine lualatex --template examples/example-template.latex --data-dir=/opt/miniconda3/envs/argmap/share/pandoc",
+  "pandoc.epubOptString": "--lua-filter pandoc-argmap.lua --data-dir=/opt/miniconda3/envs/argmap/share/pandoc",
+  "pandoc.docbookOptString": "--lua-filter pandoc-argmap.lua --data-dir=/opt/miniconda3/envs/argmap/share/pandoc",
+  "pandoc.asciidocOptString": "--lua-filter pandoc-argmap.lua --data-dir=/opt/miniconda3/envs/argmap/share/pandoc",
+  "pandoc.executable": "/opt/miniconda3/envs/argmap/bin/pandoc",
+  "markdown-preview-enhanced.latexEngine": "lualatex",
+  "markdown-preview-enhanced.usePandocParser": true,
+  "markdown-preview-enhanced.enableScriptExecution": true,
+  "markdown-preview-enhanced.pandocArguments": [
+    "--template=/home/s6mike/git_projects/argmap/src/layouts/templates/pandoc-mapjs-main-html5.html", // Variables don't work in this field
+    "--lua-filter=/home/s6mike/git_projects/argmap/src/lua/pandoc-hello.lua", // Variables don't work in this field
+    // "--lua-filter=/home/s6mike/git_projects/argmap/src/lua/pandoc-argmap.lua", // Variables don't work in this field
+    "--data-dir=/opt/miniconda3/envs/argmap/share/pandoc", // Don't think variable is working in this field either
+    // "--include-after-body /home/s6mike/git_projects/argmap/src/layouts/includes/webpack-dist-tags.html",
+    "--metadata=css:/home/s6mike/git_projects/argmap/mapjs/public/mapjs-default-styles.css"
+    // "--output=/home/s6mike/git_projects/argmap/test/output/html/test.html",
+  ],
+  "launch": {
+    "env": {
+      "PATH": "${config:lua.debug.settings.env.path}",
+      "LUA_PATH": "${config:lua.debug.settings.path}",
+      "LUA_CPATH": "${config:lua.debug.settings.cpath}"
     },
-    "terminal.integrated.copyOnSelection": true,
-    "terminal.integrated.profiles.linux": {
-        "bash": {
-            "path": "bash",
-            "icon": "terminal-bash",
-            "args": [
-                "--init-file",
-                "${workspaceFolder}/scripts/argmap_init_script.sh",
-            ]
-        },
-    },
-    "emmet.excludeLanguages": [],
-    "emmet.includeLanguages": {
-        "markdown": "html"
-    },
-    "emmet.triggerExpansionOnTab": true,
-    "emmet.showExpandedAbbreviation": "never",
-    "cSpell.words": [
-      "Adzic",
-      "Argdown",
-      "argmap",
-      "argmap2lua",
-      "argmap2mup",
-      "argmap2tikz",
-      "argmapjs",
-      "argmh",
-      "argumend",
-      "Argview",
-      "asinum",
-      "Brunellus",
-      "ClientRects",
-      "Florinier",
-      "getvar",
-      "Gojko",
-      "libyaml",
-      "lyaml",
-      "mapjs",
-      "mindmup",
-      "MindMup",
-      "MindMup's",
-      "MPE",
-      "mup2argmap",
-      "pandoc-argmap",
-      "parisiensis",
-      "subidea",
-      "themecss",
-      "tinyyaml",
-      "undofunc",
-      "Vujnovic",
-      "Zell"
-    ],
-    "cSpell.ignoreWords": [
-        "Libes",
-        "Qcontainer",
-        "Ybuv",
-        "argm",
-        "argmaplua",
-        "argth",
-        "dleft",
-        "dright",
-        "mappack",
-        "muplua",
-        "tikzlua"
-    ],
-    "argdown.configFile": "argdown.config.json",
-    "argdown.preview.lockMenu": true,
-    "lua.targetVersion": "5.3",
-    "lua.luacheckPath": "",
-    "lua.debug.settings.luaVersion": "5.3",
-    "lua.debug.settings.conda_env.argmap": "argmap",
-    "lua.debug.settings.argmap.path.src": "${workspaceFolder}/src",
-    // Looks like setting can have maximum of 5 dots, since this one failed when adding another:
-    "lua.debug.settings.argmap.path.src-lua": "${config:lua.debug.settings.argmap.path.src}/lua",
-    "lua.debug.settings.argmap.path.src-template-main": "${config:lua.debug.settings.argmap.path.src}/layouts/templates/pandoc-mapjs-main-html5.html",
-    "lua.debug.settings.system_root": "/opt/miniconda3/envs/${config:lua.debug.settings.conda_env.argmap}",
-    "lua.debug.settings.env.path": "/home/s6mike/.local/bin:${config:lua.debug.settings.system_root}/bin:/opt/miniconda3/condabin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games",
-    "lua.debug.settings.path": "${config:lua.debug.settings.argmap.path.src-lua}/?.lua;${workspaceFolder}/lua_modules/share/lua/5.3/?.lua;${workspaceFolder}/lua_modules/share/lua/5.3/?/init.lua;${config:lua.debug.settings.system_root}/share/lua/5.3/?.lua;${config:lua.debug.settings.system_root}/share/lua/5.3/?/init.lua;${config:lua.debug.settings.system_root}/lib/lua/5.3/?.lua;${config:lua.debug.settings.system_root}/lib/lua/5.3/?/init.lua;./?.lua;./?/init.lua;",
-    "lua.debug.settings.cpath": "${workspaceFolder}/lua_modules/lib/lua/5.3/?.so;${config:lua.debug.settings.system_root}/lib/lua/5.3/?.so;${config:lua.debug.settings.system_root}/lib/lua/5.3/loadall.so;./?.so;",
-    "Lua.runtime.version": "Lua 5.3",
-    "Lua.misc.parameters": [
-        "--develop=true",
-        "--dbgport=11413"
-    ],
-    "Lua.workspace.library": [
-        // "/home/s6mike/.vscode/extensions/tomblind.local-lua-debugger-vscode-0.3.3/debugger/?.lua",
-        "${config:lua.debug.settings.argmap.path.src-lua}/?.lua",
-        "${config:lua.debug.settings.system_root}/share/lua/5.3/?/init.lua",
-        "${config:lua.debug.settings.system_root}/lib/lua/5.3/?.lua",
-        "${config:lua.debug.settings.system_root}/lib/lua/5.3/?/init.lua",
-        "${config:lua.debug.settings.system_root}/lib/lua/5.3/?.so",
-        "${config:lua.debug.settings.system_root}/lib/lua/5.3/loadall.so",
-    ],
-    // https://stackoverflow.com/questions/48661253/how-to-pass-variables-to-pandoc-for-use-in-html-template:
-    //  "pandoc.htmlOptString": "-s -f gfm -t html5 --template=pandoc-template.html"
-    // TODO: Try template
-    // For opening on server:
-    "pandoc.htmlOptString": "-o /home/s6mike/git_projects/argmap/test/output/html/vscode-pandoc-output.html --include-after-body /home/s6mike/git_projects/argmap/src/layouts/includes/webpack-dist-tags.html --metadata=css:/mapjs-default-styles.css --metadata=lang:en --lua-filter=pandoc-argmap.lua --data-dir=/opt/miniconda3/envs/argmap/share/pandoc",
-    // For opening in local browser (need to use --allow-file-access-from-files to stop CORS issues, and symlink js and json dependencies):
-    // "pandoc.htmlOptString": "--include-after-body /home/s6mike/git_projects/argmap/src/layouts/includes/webpack-dist-tags.html --metadata=css:/home/s6mike/git_projects/argmap/mapjs/public/mapjs-default-styles.css --metadata=lang:en --lua-filter=pandoc-argmap.lua --data-dir=/opt/miniconda3/envs/argmap/share/pandoc",
-    "pandoc.pdfOptString": "--lua-filter pandoc-argmap.lua --pdf-engine lualatex --template examples/example-template.latex --data-dir=/opt/miniconda3/envs/argmap/share/pandoc",
-    "pandoc.epubOptString": "--lua-filter pandoc-argmap.lua --data-dir=/opt/miniconda3/envs/argmap/share/pandoc",
-    "pandoc.docbookOptString": "--lua-filter pandoc-argmap.lua --data-dir=/opt/miniconda3/envs/argmap/share/pandoc",
-    "pandoc.asciidocOptString": "--lua-filter pandoc-argmap.lua --data-dir=/opt/miniconda3/envs/argmap/share/pandoc",
-    "pandoc.executable": "/opt/miniconda3/envs/argmap/bin/pandoc",
-    "markdown-preview-enhanced.latexEngine": "lualatex",
-    "markdown-preview-enhanced.usePandocParser": true,
-    "markdown-preview-enhanced.enableScriptExecution": true,
-    "markdown-preview-enhanced.pandocArguments": [
-        "--template=/home/s6mike/git_projects/argmap/src/layouts/templates/pandoc-mapjs-main-html5.html", // Variables don't work in this field
-        "--lua-filter=/home/s6mike/git_projects/argmap/src/lua/pandoc-hello.lua", // Variables don't work in this field
-        // "--lua-filter=/home/s6mike/git_projects/argmap/src/lua/pandoc-argmap.lua", // Variables don't work in this field
-        "--data-dir=/opt/miniconda3/envs/argmap/share/pandoc", // Don't think variable is working in this field either
-        // "--include-after-body /home/s6mike/git_projects/argmap/src/layouts/includes/webpack-dist-tags.html",
-        "--metadata=css:/home/s6mike/git_projects/argmap/mapjs/public/mapjs-default-styles.css"
-        // "--output=/home/s6mike/git_projects/argmap/test/output/html/test.html",
-    ],
-    "launch": {
-        "env": {
-            "PATH": "${config:lua.debug.settings.env.path}",
-            "LUA_PATH": "${config:lua.debug.settings.path}",
-            "LUA_CPATH": "${config:lua.debug.settings.cpath}",
-        },
-        "stopOnEntry": false,
-        "configurations": [],
-        "compounds": []
-    },
-    "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": true,
-    "markdown-preview-enhanced.breakOnSingleNewLine": false,
-    "markdown-preview-enhanced.frontMatterRenderingOption": "table",
-    "markdown-preview-enhanced.hideDefaultVSCodeMarkdownPreviewButtons": false,
-    "Lua.runtime.path": [
-        "?.lua",
-        "?/init.lua",
-        "${config:lua.debug.settings.argmap.path.src-lua}/?.lua"
-    ],
-    "Lua.diagnostics.globals": [
-        "pandoc",
-        "FORMAT",
-        "PANDOC_STATE",
-        "Logger",
-        "DIR_MAPJS_JSON",
-        "PATH_DIR_PUBLIC_MAPJS_JSON",
-    ],
-    // Used by launch.json
-    "env.PATH_DIR_MAPJS_ROOT": "/mapjs",
-    "env.path_public": "${workspaceFolder}/mapjs/public",
-    "editor.formatOnSaveMode": "modificationsIfAvailable",
-    "editor.formatOnSave": true,
-    "editor.formatOnPaste": true,
-    "Lua.format.enable": false,
-    "Lua.completion.displayContext": 1,
-    "deno.enable": true,
-    "deno.enablePaths": [
-      "netlify/edge-functions"
-    ],
-    "deno.unstable": true,
-    "deno.importMap": ".netlify/edge-functions-import-map.json",
-    "deno.path": "/home/s6mike/.config/netlify/deno-cli/deno",
-    "git.ignoreLimitWarning": true
+    "stopOnEntry": false,
+    "configurations": [],
+    "compounds": []
+  },
+  "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": true,
+  "markdown-preview-enhanced.breakOnSingleNewLine": false,
+  "markdown-preview-enhanced.frontMatterRenderingOption": "table",
+  "markdown-preview-enhanced.hideDefaultVSCodeMarkdownPreviewButtons": false,
+  "Lua.runtime.path": [
+    "?.lua",
+    "?/init.lua",
+    "${config:lua.debug.settings.argmap.path.src-lua}/?.lua"
+  ],
+  "Lua.diagnostics.globals": [
+    "pandoc",
+    "FORMAT",
+    "PANDOC_STATE",
+    "Logger",
+    "DIR_MAPJS_JSON",
+    "PATH_DIR_PUBLIC_MAPJS_JSON"
+  ],
+  // Used by launch.json
+  "env.PATH_DIR_MAPJS_ROOT": "/mapjs",
+  "env.path_public": "${workspaceFolder}/mapjs/public",
+  "editor.formatOnSaveMode": "modificationsIfAvailable",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "Lua.format.enable": false,
+  "Lua.completion.displayContext": 1,
+  "deno.enable": true,
+  "deno.enablePaths": [
+    "netlify/edge-functions"
+  ],
+  "deno.unstable": true,
+  "deno.importMap": ".netlify/edge-functions-import-map.json",
+  "deno.path": "/home/s6mike/.config/netlify/deno-cli/deno",
+  "git.ignoreLimitWarning": true
 }
