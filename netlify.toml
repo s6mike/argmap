@@ -9,6 +9,7 @@
   GO_VERSION = "1.20"
   # INSTALL_PATH = "/bin/bash"
   MODE = "prod"
+  ENV = "netlify"
   NETLIFY_BUILD_DEBUG = "false"
   PATH_DIR_SCRIPTS = "scripts"
   PATH_FILE_YQ = "./yq"

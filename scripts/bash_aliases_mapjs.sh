@@ -6,10 +6,9 @@ echo "Running ${BASH_SOURCE[0]}"
 
 # Functions beginning with __ are for other scripts. They are not considered part of a public API, and therefore updates may change them without warning.
 
-# TODO might more sense to detect env=vscode or build=dev
-case $NETLIFY in
+case $ENV in
 
-true) ;;
+netlify) ;;
 *)
   # shellcheck source=/home/s6mike/scripts/default_vscode_init_script.sh # Stops shellcheck lint error
   source "$HOME/scripts/default_vscode_init_script.sh"

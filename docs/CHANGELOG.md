@@ -6,6 +6,13 @@
   - Add note about linking/using templates (html and latex) with pandoc.
   - Add references to argmap specs spreadsheet?
 
+## argmap 22.24.15
+
+- `netlify.toml`: Add `ENV = netlify` variable.
+- `scripts/`:
+  - `argmap_init_script.sh`: Set `ENV = vscode` default value.
+  - `bash_aliases_mapjs.sh`: Use `ENV` to skip non-netlify commands.
+
 ## argmap 22.24.14
 
 - Install `netlify-cli` as dev dependency.

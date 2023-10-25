@@ -5,6 +5,7 @@
 echo "Running ${BASH_SOURCE[0]}"
 
 export NETLIFY=${NETLIFY:-false}
+export ENV=${ENV:-vscode}
 export MODE=${MODE:-dev}
 
 # shellcheck source=/home/s6mike/.bashrc
