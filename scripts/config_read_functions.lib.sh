@@ -70,6 +70,8 @@ __getvar_from_yaml() { # __getvar_from_yaml (-el) PATH_FILE_CONFIG_MAPJS $PATH_F
   set -f
   # shellcheck disable=SC2068 # Quoting ${files[@]} stops it expanding
   result=$("$PATH_FILE_YQ" "${yq_flags[@]}" ".$variable_name $query_main $query_opts" ${yaml_source[@]} | "$PATH_FILE_YQ" "${query_extra[@]}")
+  result=$(normalise_if_path "$result")
+
   # TODO
   #   Check if result is a list. If so, do delist part.
 
@@ -175,6 +177,17 @@ __getvar_yaml_any() { # gvy
   set +f
 }
 
+normalise_if_path() {
+  result="$1"
+  if [[ $1 == *"/"* ]]; then
+    # Removes /./ etc from paths
+    # realpath -m /home/s6mike/git_projects/argmap/mapjs/../mapjs/config/processed/config-mapjs-paths-processed.yaml
+    result=$(realpath -m "$1")
+  fi
+
+  echo "$result"
+}
+
 # This looks up variables.
 #   It can pass on -opts to __getvar_yaml_any, but this doesn't happen if value stored in an env variable
 #   So results can be unpredictable.
@@ -189,8 +202,9 @@ getvar() { # gq PATH_FILE_CONFIG_MAPJS
     # TODO cache with env variable?
     #   export "$variable_name"="$result"
   fi
+  result=$(normalise_if_path "$result")
   __check_exit_status $? "$result" "$variable_name not found"
 }
 
 export -f __check_exit_status checkvar_exists __getvar_from_yaml __getvar_yaml_any __yaml2env getvar process_all_config_inputs
-export -f log preprocess_config count_characters
+export -f log preprocess_config count_characters normalise_if_path

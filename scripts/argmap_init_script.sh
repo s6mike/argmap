@@ -149,6 +149,8 @@ PATH_FILE_MAPJS_HTML_DIST_TAGS=$(getvar PATH_FILE_MAPJS_HTML_DIST_TAGS)
 # For cleaning html output
 PATH_OUTPUT_HTML_PUBLIC=$(getvar PATH_OUTPUT_HTML_PUBLIC)
 PATH_OUTPUT_MAPJS_PUBLIC=$(getvar PATH_OUTPUT_MAPJS_PUBLIC)
+# QUESTION: Do I need to export this?
+PATH_FILE_CONFIG_MAPJS_PATHS_PROCESSED=$(getvar PATH_FILE_CONFIG_MAPJS_PATHS_PROCESSED)
 set +o allexport
 
 # Calling make site from here because environment vars seem to get lost otherwise

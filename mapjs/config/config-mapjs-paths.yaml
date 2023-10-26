@@ -10,21 +10,26 @@
 
 # Use ${variable} for referencing other yaml variables, since this is compatible with both bash and pandoc templates.
 
+# TODO make all these relative to mapjs folder, then argmap can adapt them.
 ## Config files
 # Moved to config-argmap-paths to simplify initialisation:
-#   PATH_DIR_CONFIG_MAPJS: ${PATH_DIR_MAPJS_ROOT}/${DIR_CONFIG}
-PATH_FILE_ENV_MAPJS: ${PATH_DIR_CONFIG_MAPJS}/environment-mapjs.yaml
-PATH_FILE_ENV_MAPJS_DEFAULTS: ${PATH_DIR_CONFIG_MAPJS}/environment-mapjs-defaults.yaml
-PATH_FILE_CONFIG_MAPJS: ${PATH_DIR_CONFIG_MAPJS}/config-mapjs.yaml
-PATH_FILE_CONFIG_MAPJS_PATHS: ${PATH_DIR_CONFIG_MAPJS}/config-mapjs-paths.yaml # This file
-PATH_DIR_CONFIG_MAPJS_PROCESSED: ${PATH_DIR_CONFIG_MAPJS}/${KEYWORD_PROCESSED}
-PATH_FILE_CONFIG_MAPJS_PATHS_PROCESSED: ${PATH_DIR_CONFIG_MAPJS_PROCESSED}/config-mapjs-paths-processed.yaml
-PATH_FILE_CONFIG_MAPJS_PROCESSED: ${PATH_DIR_CONFIG_MAPJS_PROCESSED}/config-mapjs-processed.yaml
+#   PATH_CONFIG: ${PATH_DIR_MAPJS_ROOT}/${DIR_CONFIG}
+PATH_MAPJS_ROOT: .
+KEYWORD_PROCESSED_MAPJS: processed
+PATH_CONFIG_MAPJS: ${PATH_MAPJS_ROOT}/config
+PATH_CONFIG_MAPJS_PROCESSED: ${PATH_CONFIG_MAPJS}/${KEYWORD_PROCESSED_MAPJS}
+
+PATH_FILE_ENV_MAPJS: ${PATH_CONFIG_MAPJS}/environment-mapjs.yaml
+PATH_FILE_ENV_MAPJS_DEFAULTS: ${PATH_CONFIG_MAPJS}/environment-mapjs-defaults.yaml
+PATH_FILE_CONFIG_MAPJS: ${PATH_CONFIG_MAPJS}/config-mapjs.yaml
+PATH_FILE_CONFIG_MAPJS_PATHS: ${PATH_CONFIG_MAPJS}/config-mapjs-paths.yaml # This file
+PATH_FILE_CONFIG_MAPJS_PATHS_PROCESSED: ${PATH_CONFIG_MAPJS_PROCESSED}/config-mapjs-paths-${KEYWORD_PROCESSED_MAPJS}.yaml
+PATH_FILE_CONFIG_MAPJS_PROCESSED: ${PATH_CONFIG_MAPJS_PROCESSED}/config-mapjs-${KEYWORD_PROCESSED_MAPJS}.yaml
 # Moved to config-argmap-paths to simplify initialisation:
-# PATH_FILE_ENV_MAPJS_PROCESSED: ${PATH_DIR_CONFIG_MAPJS_PROCESSED}/environment-mapjs-processed.yaml
+# PATH_FILE_ENV_MAPJS_PROCESSED: ${PATH_DIR_CONFIG_MAPJS_PROCESSED}/environment-mapjs-${KEYWORD_PROCESSED_MAPJS}.yaml
 ## For html links, use relative paths (to test/output folder) - more portable
 DIR_MAPJS_JSON: mapjs-json
-PATH_DIR_MAPJS_SRC_JS: ${PATH_DIR_MAPJS_ROOT}/src
+PATH_DIR_MAPJS_SRC_JS: ${PATH_MAPJS_ROOT}/src
 PATH_FILE_MAPJS_HTML_DIST_TAGS: ${PATH_DIR_INCLUDES}/webpack-dist-tags.html
 # TODO: Rename PATH_DIR_PUBLIC_MAPJS_JSON to PATH_DIR_MAPJS_JSON_LOCAL
 PATH_DIR_PUBLIC_MAPJS_JSON: ${PATH_OUTPUT_LOCAL}/${DIR_MAPJS_JSON}
@@ -54,5 +59,8 @@ PATH_REPLAY_SCRIPT_EDIT_LINK_EXISTING_ALL_ATTRIBUTES: ${PATH_DIR_ARGMAP_ROOT}/te
 ## TODO: update mapjs recordings?
 PATH_REPLAY_SCRIPT_BUTTON_EDITLINK_ERROR: ${PATH_DIR_ARGMAP_ROOT}/test/devtools-recordings/mapjs-button-editlink-menu-error.json
 PATH_REPLAY_SCRIPT_MOUSE_PAST_EDITLINK: ${PATH_DIR_ARGMAP_ROOT}/test/devtools-recordings/mapjs-mouse-past-linkEditWidget-after-link-click.json
+
+# DEPRECATED
+PATH_DIR_CONFIG_MAPJS_PROCESSED: ${PATH_CONFIG_MAPJS}/${KEYWORD_PROCESSED_MAPJS}
 
 ...
