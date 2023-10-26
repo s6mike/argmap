@@ -182,7 +182,8 @@ normalise_if_path() {
   if [[ $1 == *"/"* ]]; then
     # Removes /./ etc from paths
     # realpath -m /home/s6mike/git_projects/argmap/mapjs/../mapjs/config/processed/config-mapjs-paths-processed.yaml
-    result=$(realpath -m "$1")
+    base_path=${PATH_MAPJS:-$PATH_DIR_ARGMAP_ROOT}
+    result=$(realpath --canonicalize-missing --relative-base="$base_path" "$1")
   fi
 
   echo "$result"
