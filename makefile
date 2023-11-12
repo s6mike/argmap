@@ -270,14 +270,16 @@ ${PATH_FILE_YQ}:
 #		Running qa_rockspec will also install dependencies
 lua_modules/: ${PATH_BIN_GLOBAL}/luarocks
 #	TODO: split up this script into separate make actions:
-	scripts/qa_rockspec.sh
+# scripts/qa_rockspec.sh
 
-# 	rockspec_file=$(_find_rockspec) # Gets absolute path
-# __test luarocks lint "$(__find_rockspec)"
-
+# Gets absolute path:
+	rockspec_file=$(__find_rockspec)
+	echo "*** Checking: ${rockspec_file} ***"
+	luarocks lint "${rockspec_file}"
 #   luarocks make --only-deps "$rockspec_file" YAML_LIBDIR="$CONDA_PREFIX/lib/"
+# luarocks --tree lua_modules make --only-deps argmap-4.13.22-9.rockspec # YAML_LIBDIR="$CONDA_PREFIX/lib/"
+	luarocks --tree lua_modules --lua-dir="$(brew --prefix)/opt/lua@5.3" --lua-version=5.3 make --only-deps "${rockspec_file}"
 
-# # Running qa_rockspec will also install dependencies
 # Should be able to distinguish between dev and prod install with npm and thuse choose whether 
 # testcafe etc are installed.
 # So shouldn't need this:
